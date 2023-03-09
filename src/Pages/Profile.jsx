@@ -7,8 +7,8 @@ const Profile = () => {
   return (
     <>
       <User/>
-      <Admin/>
       <Contributor/>
+      <Admin/>
     </>
   )
 }

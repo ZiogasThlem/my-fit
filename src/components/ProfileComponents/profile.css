@@ -1,0 +1,18 @@
+.Contributor ul,
+.Admin ul,
+.User ul {
+    list-style-type: none
+}
+.Contributor li,
+.Admin li,
+.User li {
+    display: inline-block;
+        margin: 0 5%;
+}
+.Contributor button,
+.Admin button,
+.User button {
+    font-size: 35px;
+    padding: 25px;
+    margin: 25px;
+}

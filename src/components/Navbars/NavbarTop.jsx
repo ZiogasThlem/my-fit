@@ -1,15 +1,16 @@
+import { NavLink } from 'react-router-dom'
 import './navbar.css'
 
 const NavbarTop = () => {
   const user = 'Larry'
 
   return (
-    <nav>
+    <nav className='NavbarTop'>
       {user != null && 
         <span>
           <p>MyFit 💪</p>
-          <p>MyFit 💪</p>
-          <p>MyFit 💪</p>
+          <NavLink to="/menu">Menu</NavLink>
+          <button>Logout 😭</button>
         </span>
       }
     </nav>

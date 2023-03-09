@@ -2,8 +2,9 @@ import './navbar.css'
 
 const NavbarBottom = () => {
   return (
-    
-      <footer>Copyright© MyFit 2023</footer>
+      <footer className='NavbarBottom'>
+        <span>Copyright© MyFit 2023</span>
+      </footer>
 
   )
 }

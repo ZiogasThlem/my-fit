@@ -1,9 +1,9 @@
-import React from 'react'
+import './profile.css'
 
 const Admin = () => {
     const isAdmin = false
     return (
-        <>
+        <div className='Admin'>
             { isAdmin &&
             <ul>
                 <li><button>A1</button></li>
@@ -11,7 +11,7 @@ const Admin = () => {
                 <li><button>A3</button></li>
                 <li><button>A4</button></li>
             </ul>}
-        </>
+        </div>
   )
 }
 

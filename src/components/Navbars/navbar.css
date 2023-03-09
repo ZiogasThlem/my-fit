@@ -1,10 +1,17 @@
-p{
+.NavbarTop {
+    background-color: yellow;
+    display: flex;
+    justify-content: space-around;
+}
+.NavbarTop p{
     font-size: 15px;
     display: inline-block;
     padding: 0 5em;
 }
-footer{
+.NavbarBottom span{
+    background-color: yellow;
+    width: 100%;
     position: absolute;
     bottom: 0;
-    right: 0;
+    padding: .5% 0;
 }

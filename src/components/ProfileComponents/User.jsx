@@ -1,13 +1,15 @@
-import React from 'react'
+import './profile.css'
 
 const User = () => {
   return (
-    <ul>
-        <li><button>U1</button></li>
-        <li><button>U2</button></li>
-        <li><button>U3</button></li>
-        <li><button>U4</button></li>
-    </ul>
+    <div className='User'>
+      <ul>
+          <li><button>🦵</button></li>
+          <li><button>💪</button></li>
+          <li><button>🏃‍♂️</button></li>
+          <li><button>🚴‍♀️</button></li>
+      </ul>
+    </div>
   )
 }
 
