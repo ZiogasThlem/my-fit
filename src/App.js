@@ -4,21 +4,21 @@ import Login from './Pages/Login';
 import Menu from './Pages/Menu';
 import Profile from './Pages/Profile';
 import Register from './Pages/Register';
-import Navbar_top from './components/Navbar_top';
-import Navbar_bottom from './components/Navbar_bottom';
+import NavbarTop from './components/Navbars/NavbarTop';
+import NavbarBottom from './components/Navbars/NavbarBottom';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar_top />
+        <NavbarTop />
         <Routes>
           <Route path="/" element={ <Login />} /> 
           <Route path="/register" element={ <Register />} /> 
           <Route path="/menu" element={ <Menu />} /> 
           <Route path="/profile" element={ <Profile />} /> 
         </Routes>
-        <Navbar_bottom />
+        <NavbarBottom />
       </div>
     </BrowserRouter>
   );
