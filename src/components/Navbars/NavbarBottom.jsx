@@ -1,9 +1,9 @@
-import React from 'react'
+import './navbar.css'
 
 const NavbarBottom = () => {
   return (
     
-      <p>Copyright© MyFit 2023</p>
+      <footer>Copyright© MyFit 2023</footer>
 
   )
 }

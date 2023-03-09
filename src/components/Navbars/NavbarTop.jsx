@@ -1,8 +1,19 @@
-import React from 'react'
+import './navbar.css'
 
 const NavbarTop = () => {
+  const user = 'Larry'
+
   return (
-    <div>Navbar_top</div>
+    <nav>
+      {user != null && 
+        <span>
+          <p>MyFit 💪</p>
+          <p>MyFit 💪</p>
+          <p>MyFit 💪</p>
+        </span>
+      }
+    </nav>
+    
   )
 }
 

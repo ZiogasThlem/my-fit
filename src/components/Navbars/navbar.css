@@ -1,0 +1,10 @@
+p{
+    font-size: 15px;
+    display: inline-block;
+    padding: 0 5em;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

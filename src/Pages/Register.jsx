@@ -1,9 +1,13 @@
 import React from 'react'
 import RegisterForm from '../components/RegisterComponents/RegisterForm'
+import RegisterHeader from '../components/RegisterComponents/RegisterHeader'
 
 const Register = () => {
   return (
-    <RegisterForm/>
+    <>
+      <RegisterHeader />
+      <RegisterForm />
+    </>
   )
 }
 
