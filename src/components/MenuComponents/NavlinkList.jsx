@@ -7,6 +7,7 @@ const NavlinkList = () => {
         <li><NavLink to="/profile">Profile</NavLink></li>
         <li><NavLink to="/login">Programs</NavLink></li>
         <li><NavLink to="/register">Workouts</NavLink></li>
+        <li><NavLink to="/goal">Goal</NavLink></li>
     </ul>
   )
 }
