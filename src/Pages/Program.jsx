@@ -10,7 +10,7 @@ const Program = () => {
             <li>program3</li>
             <li>program4</li>
         </ul>
-        <button><NavLink to={'/workout'}>workouts</NavLink></button>
+        <NavLink to={'/workout'}>workouts</NavLink>
     </div>
   )
 }

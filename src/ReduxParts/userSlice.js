@@ -4,15 +4,14 @@ export const userSlice = createSlice({
     
     name: 'user',
     initialState: {
-        value: 'larry'
+        value: 'Larry'
     },
     reducers: {
         printUser: state => {
             console.log(state.value);
         },
         printUserTwice: state => {
-            state.value += "*"
-            console.log(state.value + ' ' + state.value);
+            console.log(state.value.repeat(2));
         }
     }
 })
