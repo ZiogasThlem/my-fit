@@ -5,9 +5,8 @@ const NavlinkList = () => {
   return (
     <ul>
         <li><NavLink to="/profile">Profile</NavLink></li>
-        <li><NavLink to="/login">Programs</NavLink></li>
-        <li><NavLink to="/register">Workouts</NavLink></li>
         <li><NavLink to="/goal">Goal</NavLink></li>
+        <li><NavLink to="/program">Programs</NavLink></li>
     </ul>
   )
 }
