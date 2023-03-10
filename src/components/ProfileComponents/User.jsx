@@ -1,6 +1,6 @@
 import { printUser, printUserTwice } from '../../ReduxParts/userSlice'
-import './profile.css'
 import { useSelector, useDispatch } from 'react-redux'
+import './profile.css'
 
 const User = () => {
 
@@ -15,7 +15,7 @@ const User = () => {
           <li><button
           aria-label="Show User Twice" onClick={()=>dispatch(printUserTwice())}
           >show user</button></li>
-          <li><button>💪</button></li>
+          <li><button className="btn btn-danger">lel</button></li>
           <li><button>🏃‍♂️</button></li>
           <li><button>🚴‍♀️</button></li>
       </ul>

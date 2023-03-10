@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoginForm = () => {
   return (
-    <form>
+    <form className ='input-group-lg'>
         <input type="text" name="username" placeholder='mr stronk'/>
         <input type="text" name="password" placeholder='********'/>
         <button type='submit'>Login</button>
