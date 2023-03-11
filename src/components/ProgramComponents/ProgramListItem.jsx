@@ -1,9 +1,11 @@
 import React from 'react'
+import WorkoutChoice from '../WorkoutComponents/WorkoutChoice'
 
 const ProgramListItem = () => {
   return (
-    <div>
-        lel
+    <div id = "program">
+      <header>Workout List</header>
+      <WorkoutChoice/>
     </div>
   )
 }

@@ -10,7 +10,7 @@ const NavbarTop = () => {
         <span>
           <p>MyFit 💪</p>
           <NavLink to="/menu">Menu</NavLink>
-          <button>Logout 😭</button>
+          <button className='btn btn-dark'>Logout 😭</button>
         </span>
       }
     </nav>

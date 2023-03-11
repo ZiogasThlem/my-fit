@@ -6,7 +6,6 @@ const Program = () => {
   return (
     <div>
         <ProgramChoice />
-        <NavLink to={'/workout'}>workouts</NavLink>
     </div>
   )
 }
