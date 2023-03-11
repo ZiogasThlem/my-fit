@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { completeGoal,anounceGoal } from '../../ReduxParts/goalSlice'
+import { completeGoal,anounceGoal, doSomeProgress } from '../../ReduxParts/goalSlice'
 
 const ActiveGoal = () => {
 
@@ -14,8 +14,12 @@ const ActiveGoal = () => {
         onClick={()=>dispatch(completeGoal())}
         >Complete Goal</button>
         <button aria-label='Anounce Goal'
+        onClick={()=>dispatch(doSomeProgress())}
+        >Make Progress for Goal</button>
+        <button aria-label='Anounce Goal'
         onClick={()=>dispatch(anounceGoal())}
         >Anounce Goal</button>
+
     </div>
   )
 }
