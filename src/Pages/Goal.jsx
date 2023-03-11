@@ -6,7 +6,7 @@ const Goal = () => {
   return (
     <div>
         <ActiveGoal />
-        <GoalProgressBar done="50"/>
+        <GoalProgressBar />
     </div>
   )
 }

@@ -14,7 +14,8 @@ export const goalSlice = createSlice({
             console.log(state.value);
         },
         doSomeProgress: state => {
-            state.percentage < 100 ? state.percentage += 10 : state.value = true
+            if (state.percentage + 10 <= 100) state.percentage += 10
+            else state.value = true
             console.log(`${state.goalName} is at ${state.percentage}%`);
             if (state.value) console.log(state.goalName + ' is ' + state.value);
         },
