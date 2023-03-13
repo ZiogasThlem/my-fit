@@ -1,21 +1,24 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import './exer.css'
 
 const Exercise = () => {
 
-  const navigate = useNavigate();
-
   return (
-    <div>
-        <ul>
-            <li>exercise1<button>+</button></li>
-            <li>exercise2<button>+</button></li>
-            <li>exercise3<button>+</button></li>
-            <li>exercise4<button>+</button></li>
-            <li>exercise5<button>+</button></li>
-        </ul>
-        <button onClick={() => navigate(-1)}>Back</button>
-    </div>
+    <>
+      <h2>Hoverable Dropdown</h2>
+      <p>Move the mouse over the button to open the dropdown menu.</p>
+      <div className="dropdown">
+        <p className="dropbtn">Dropdown</p>
+        <div className="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </>
   )
 }
 

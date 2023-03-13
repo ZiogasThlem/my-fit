@@ -1,17 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux'
 import './profile.css'
 
 const Contributor = () => {
-    const isContributor = false
+    
+    const user = useSelector(state => state.user.value)
+    const isContributor = true
 
+
+    const editWorkout = workout => {
+        //workout = new_workout
+        console.log("workout");
+    }
     return (
         <div className='Contributor'>
-        {isContributor &&
-        <ul>
-            <li><button>C1</button></li>
-            <li><button>C2</button></li>
-            <li><button>C3</button></li>
-            <li><button>C4</button></li>
-        </ul>}
+        {isContributor && <button
+        onClick={() => editWorkout()}
+        >Edit Workout</button>}
         </div>
     )
 }

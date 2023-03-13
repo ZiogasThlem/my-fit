@@ -12,7 +12,5 @@
 .Contributor button,
 .Admin button,
 #User button {
-    font-size: 35px;
-    padding: 25px;
     margin: 25px;
 }

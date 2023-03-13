@@ -4,7 +4,7 @@ import WorkoutChoice from '../WorkoutComponents/WorkoutChoice'
 const ProgramListItem = () => {
   return (
     <div id = "program">
-      <header>Workout List</header>
+      <header>Program</header>
       <WorkoutChoice/>
     </div>
   )

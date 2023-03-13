@@ -4,7 +4,7 @@ import ExcersiceList from '../ExcersiceComponents/ExcersiceList'
 const WorkoutListItem = () => {
   return (
     <div>
-      <header>ExcersiceList</header>
+      <header>Workout</header>
       <ExcersiceList />
     </div>
   )

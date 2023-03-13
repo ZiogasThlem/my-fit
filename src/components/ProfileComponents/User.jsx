@@ -19,9 +19,6 @@ const User = () => {
           <button
           aria-label="Show User" onClick={()=>userDispatch(printUser())}
           >Show user</button>
-          <button
-          aria-label="Show User Twice" onClick={()=>userDispatch(printUserTwice())}
-          >Show User Twicer</button>
           <button className="btn btn-danger"
           aria-label="Add Workout Run" onClick={()=>programDispatch(addWorkout(w))}
           >🏃‍♂️</button>
