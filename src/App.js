@@ -3,13 +3,13 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './Pages/Login';
 import Menu from './Pages/Menu';
 import Profile from './Pages/Profile';
-import Register from './Pages/Register';
 import NavbarTop from './components/Navbars/NavbarTop';
 import NavbarBottom from './components/Navbars/NavbarBottom';
 import Goal from './Pages/Goal';
 import Workout from './Pages/Workout';
 import Program from './Pages/Program';
 import Exercise from './Pages/Exercise';
+import KeyCloakRoutes from './Routing/KeyCloakRoutes'
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
         <NavbarTop />
         <Routes>
           <Route path="/login" element={ <Login />} /> 
-          <Route path="/register" element={ <Register />} /> 
           <Route path="/menu" element={ <Menu />} /> 
           <Route path="/goal" element={ <Goal />} /> 
           <Route path="/profile" element={ <Profile />} /> 

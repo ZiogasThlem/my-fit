@@ -1,12 +1,11 @@
-import React from 'react'
+import keycloak from "../../keycloak"
 
 const LoginForm = () => {
+
+  const handleLogin = () => keycloak.login()
+
   return (
-    <form className ='input-group-lg'>
-        <input type="text" name="username" placeholder='mr stronk'/>
-        <input type="text" name="password" placeholder='********'/>
-        <button type='submit'>Login</button>
-    </form>
+        <button onClick={handleLogin}>Login</button>
   )
 }
 
