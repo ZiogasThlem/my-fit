@@ -9,13 +9,10 @@ export const userSlice = createSlice({
     reducers: {
         printUser: state => {
             console.log(state.value);
-        },
-        printUserTwice: state => {
-            console.log(state.value.repeat(2));
         }
     }
 })
 
-export const { printUser, printUserTwice } = userSlice.actions
+export const { printUser } = userSlice.actions
 
 export default userSlice.reducer

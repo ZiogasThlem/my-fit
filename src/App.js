@@ -8,8 +8,8 @@ import NavbarBottom from './components/Navbars/NavbarBottom';
 import Goal from './Pages/Goal';
 import Workout from './Pages/Workout';
 import Program from './Pages/Program';
-import Exercise from './Pages/Exercise';
-import KeyCloakRoutes from './Routing/KeyCloakRoutes'
+import KeycloakRoutes from './Routing/KeyCloakRoutes';
+import { ROLES } from './consts/roles';
 
 function App() {
   return (
@@ -17,13 +17,25 @@ function App() {
       <div className="App">
         <NavbarTop />
         <Routes>
-          <Route path="/login" element={ <Login />} /> 
-          <Route path="/menu" element={ <Menu />} /> 
-          <Route path="/goal" element={ <Goal />} /> 
-          <Route path="/profile" element={ <Profile />} /> 
-          <Route path="/workout" element= { <Workout />} />
+          <Route path="/" element={ <Login />} /> 
+          <Route path="/menu" element={ 
+            <KeycloakRoutes role={ROLES.User}>
+              <Menu />
+            </KeycloakRoutes>
+          } /> 
+          <Route path="/goal" element={ 
+            <KeycloakRoutes role={ROLES.User || ROLES.Contributor || ROLES.Administrator}>
+              <Goal />
+            </KeycloakRoutes>
+          }/> 
+          <Route path="/profile" element={ 
+            <KeycloakRoutes role={ROLES.Contributor || ROLES.Administrator}>
+              <Profile />
+            </KeycloakRoutes>
+        }/> 
           <Route path="/program" element= { <Program />} />
-          <Route path="/exercise" element= { <Exercise />} />
+          <Route path="/workout" element= { <Workout />} />
+          <Route path="*" element={<h1>Nothing here</h1>} />
         </Routes>
         <NavbarBottom />
       </div>

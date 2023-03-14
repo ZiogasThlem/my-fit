@@ -13,6 +13,7 @@ export const programSlice = createSlice({
             state.workouts.push(workout)
             state.count += 1
             console.log(JSON.stringify(state.workouts));
+            state.workouts.forEach( w => console.log(w))
         },
         completeWorkout: (state) => {
             state.workouts.pop();
