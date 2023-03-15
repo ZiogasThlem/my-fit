@@ -1,8 +1,9 @@
 import React from 'react'
 
-const ExersiceListItem = () => {
+const ExersiceListItem = ({exercise}) => {
+
   return (
-    <li>Exersice<button className='btn btn-success'>+</button></li>
+    <li>{exercise}<button className='btn btn-success'>+</button></li>
   )
 }
 

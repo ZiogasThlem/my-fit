@@ -19,8 +19,9 @@ export const programSlice = createSlice({
             if (state.workouts.length === 0) return
             state.workouts.pop();
             console.log(JSON.stringify(state.workouts));
-            if (state.count - 1 > 0) state.count -= 1
-            else console.log("Complete!");
+            state.count -= 1
+            if (state.count === 0) console.log("Complete!")
+            
         } // doesnt rly work yet
     }
 })

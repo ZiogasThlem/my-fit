@@ -1,15 +1,16 @@
 import React from 'react'
 import ExersiceListItem from './ExersiceListItem'
 
-const ExcersiceList = () => {
+const ExcersiceList = ({exersices}) => {
   
+  const exersiceList = exersices.map((exersice, index=exersices.indexOf(exersice)) => 
+    <ExersiceListItem key={index} exercise={exersice} />
+    )
+
   return (
-        <ul>
-            <ExersiceListItem />
-            <ExersiceListItem />
-            <ExersiceListItem />
-            <ExersiceListItem />
-        </ul>
+        <ol>
+          {exersiceList}
+        </ol>
   )
 }
 

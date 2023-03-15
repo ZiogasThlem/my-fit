@@ -2,6 +2,7 @@ import React from "react";
 import WorkoutListItem from "./WorkoutListItem";
 
 const WorkoutChoice = () => {
+  
   return (
     <>
       <ul>
