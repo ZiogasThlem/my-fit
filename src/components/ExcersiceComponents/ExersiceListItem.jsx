@@ -1,9 +1,17 @@
 import React from 'react'
 
-const ExersiceListItem = ({exercise}) => {
+const ExersiceListItem = ({exercise, handleAdd}) => {
+
+  const onClick = exercise => {
+    handleAdd(exercise)
+  }
 
   return (
-    <li>{exercise}<button className='btn btn-success'>+</button></li>
+
+      <li>{exercise}<button onClick={onClick} 
+        className='btn btn-success'
+        > + </button></li>
+
   )
 }
 

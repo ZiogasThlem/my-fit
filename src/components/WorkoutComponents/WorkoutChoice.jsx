@@ -1,17 +1,19 @@
 import React from "react";
 import WorkoutListItem from "./WorkoutListItem";
 
-const WorkoutChoice = () => {
+const WorkoutChoice = ({workouts}) => {
+
+  const wokoutList = workouts.map((workout) => 
+    <WorkoutListItem key={workouts.indexOf(workout)} workout={workout} />
+  )
+
   
   return (
-    <>
+    
       <ul>
-        <WorkoutListItem />
-        <WorkoutListItem />
-        <WorkoutListItem />
-        <WorkoutListItem />
+        {wokoutList}
       </ul>
-    </>
+    
     // <div
     //   id="carouselExampleControls"
     //   className="carousel slide"

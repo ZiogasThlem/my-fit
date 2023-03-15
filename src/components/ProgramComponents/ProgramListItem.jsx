@@ -1,11 +1,14 @@
 import React from 'react'
 import WorkoutChoice from '../WorkoutComponents/WorkoutChoice'
 
-const ProgramListItem = () => {
+const ProgramListItem = ({program}) => {
+
+  const workouts = ['legs','arms', 'back', 'chest']
+
   return (
     <div id = "program">
-      <header>Program</header>
-      <WorkoutChoice/>
+      <header>{program}</header>
+      <WorkoutChoice workouts={workouts}/>
     </div>
   )
 }

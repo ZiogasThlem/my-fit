@@ -1,11 +1,15 @@
 import React from 'react'
 import ExcersiceList from '../ExcersiceComponents/ExcersiceList'
 
-const WorkoutListItem = () => {
-  const exersices = ['1','2','3']
+const WorkoutListItem = ({workout}) => {
+
+
+  const exersices = ['bench','deadlift','squat','pullup']
+
+
   return (
     <div>
-      <header>Workout</header>
+      <span>{workout}</span>
       <ExcersiceList exersices={exersices}/>
     </div>
   )
