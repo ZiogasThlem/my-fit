@@ -10,12 +10,13 @@ export const programSlice = createSlice({
     reducers: {
         addWorkout: (state, workout) => {
 
-            state.workouts.push(workout)
+            if (!workout.payload) return
+            state.workouts.push(workout.payload)
             state.count += 1
             console.log(JSON.stringify(state.workouts));
-            state.workouts.forEach( w => console.log(w))
         },
-        completeWorkout: (state) => {
+        completeWorkout: (state, workout) => {
+            if (state.workouts.length === 0) return
             state.workouts.pop();
             console.log(JSON.stringify(state.workouts));
             if (state.count - 1 > 0) state.count -= 1

@@ -9,7 +9,8 @@ const ActiveGoal = () => {
 
   return (
     <div>
-        <label>{goal.goalName}</label>
+        {!goal.value && <h1>{goal.goalName} is not done</h1>}
+        {goal.value && <h1>{goal.goalName} is done</h1>}
         <button aria-label='Complete Goal'
         onClick={()=>dispatch(completeGoal())}
         >Complete Goal</button>
@@ -19,7 +20,6 @@ const ActiveGoal = () => {
         <button aria-label='Anounce Goal'
         onClick={()=>dispatch(anounceGoal())}
         >Anounce Goal</button>
-
     </div>
   )
 }

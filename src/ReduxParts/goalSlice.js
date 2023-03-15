@@ -4,7 +4,7 @@ export const goalSlice = createSlice({
     name: 'goal',
     initialState: {
         goalName: 'do you even lift',
-        percentage:0,
+        percentage: 0,
         value: false
     },
     reducers: {
