@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { completeGoal,anounceGoal, doSomeProgress } from '../../ReduxParts/goalSlice'
+import { completeGoal, doSomeProgress, subtractFromGoal } from '../../ReduxParts/goalSlice'
 
 const ActiveGoal = () => {
 
@@ -9,17 +9,20 @@ const ActiveGoal = () => {
 
   return (
     <div>
-        {!goal.value && <h1>{goal.goalName} is not done</h1>}
-        {goal.value && <h1>{goal.goalName} is done</h1>}
-        <button aria-label='Complete Goal'
+        {!goal.isComplete && <h1>{goal.goalName} is not done</h1>}
+        {goal.isComplete && <h1>{goal.goalName} is done</h1>}
+        {goal.percentage === 100.0 && <button aria-label='Complete Goal'
         onClick={()=>dispatch(completeGoal())}
-        >Complete Goal</button>
+        >Complete Goal</button> }
+        {goal.percentage > 0 && <h1>{goal.percentage}%</h1>}
+        <br></br>
         <button aria-label='Anounce Goal'
         onClick={()=>dispatch(doSomeProgress())}
-        >Make Progress for Goal</button>
+        >add to goal</button>
         <button aria-label='Anounce Goal'
-        onClick={()=>dispatch(anounceGoal())}
-        >Anounce Goal</button>
+        onClick={()=>dispatch(subtractFromGoal())}
+        >subtract to goal</button>
+
     </div>
   )
 }

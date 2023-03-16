@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ExersiceListItem from './ExersiceListItem'
+import ExerciseListItem from './ExerciseListItem'
 
 const ExcerciseList = ({exercises}) => {
   
@@ -12,9 +12,9 @@ const ExcerciseList = ({exercises}) => {
     console.log(exerciseArray);
   }
 
-  const exerciseList = exercises.map((exercise, index=exercises.indexOf(exercise)) =>
-    <ExersiceListItem handleAdd={handleAdd}
-    key={index} exercise={exercise} />
+  const exerciseList = exercises.map((exercise, index = exercises.indexOf(exercise)) =>
+    <ExerciseListItem handleAdd={handleAdd}
+                      key={index} exercise={exercise} />
     )
 
   return (

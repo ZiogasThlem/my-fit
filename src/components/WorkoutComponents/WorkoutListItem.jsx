@@ -1,16 +1,16 @@
 import React from 'react'
-import ExcerciseList from '../ExcersiceComponents/ExcerciseList'
+import ExcerciseList from '../ExcerciseComponents/ExcerciseList'
 
 const WorkoutListItem = ({workout}) => {
 
 
-  const exersices = ['bench','deadlift','squat','pullup']
+  const exercises = ['bench','deadlift','squat','pullup']
 
 
   return (
     <div>
       <span>{workout}</span>
-      <ExcerciseList exersices={exersices}/>
+      <ExcerciseList exercises={exercises}/>
     </div>
   )
 }

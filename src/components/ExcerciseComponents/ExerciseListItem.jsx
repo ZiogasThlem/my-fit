@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ExersiceListItem = ({exercise, handleAdd}) => {
+const ExerciseListItem = ({exercise, handleAdd}) => {
 
   const onClick = exercise => {
     handleAdd(exercise.target.value)
@@ -15,4 +15,4 @@ const ExersiceListItem = ({exercise, handleAdd}) => {
   )
 }
 
-export default ExersiceListItem
+export default ExerciseListItem
