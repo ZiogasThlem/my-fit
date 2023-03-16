@@ -7,10 +7,7 @@ const GoalProgressBar = () => {
 
   return (
     <>
-      {goal.percentage > 40 &&
-      <div className='bar'>
-      50%
-      </div>}
+      <h1>programs competed: {goal.completedPrograms} </h1>
     </>
     
   )
