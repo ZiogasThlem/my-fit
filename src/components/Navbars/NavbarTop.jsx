@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 const NavbarTop = () => {
   const user = useSelector(state => state.user)
-  const [username , setUsername] = useState(user.value)
+  const [username , setUsername] = useState('')
 
   useEffect(()=>{
     try {

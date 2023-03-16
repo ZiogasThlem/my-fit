@@ -3,14 +3,16 @@ import './profile.css'
 
 const Contributor = () => {
     
-    const user = useSelector(state => state.user.value)
+    const user = useSelector(state => state.user.username)
+    const program = useSelector(state => state.program)
     const isContributor = true
 
 
+    // create state for workouts in a program
     const editWorkout = workout => {
-        //workout = new_workout
-        console.log("workout");
+        const new_workout = [...program.workouts, workout]
     }
+
     return (
         <div className='Contributor'>
         {isContributor && <button

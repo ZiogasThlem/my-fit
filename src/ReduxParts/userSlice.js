@@ -4,11 +4,13 @@ export const userSlice = createSlice({
     
     name: 'user',
     initialState: {
-        value: ''
+        username: '',
+        goals: []
     },
     reducers: {
-        printUser: state => {
-            console.log(state.value);
+        printUser: (state, name) => {
+            state.value = name
+            console.log(name.payload);
         }
     }
 })
