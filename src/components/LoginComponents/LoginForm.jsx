@@ -2,10 +2,18 @@ import keycloak from "../../keycloak"
 
 const LoginForm = () => {
 
-  const handleLogin = () => keycloak.login()
+  const handleLogin = async () => {
+    keycloak.login()
+  }
+  const handleRegister = () => {
+    keycloak.register()
+  }
 
   return (
-        <button onClick={handleLogin}>Login</button>
+    <>
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleRegister}>Register</button>
+    </>
   )
 }
 
