@@ -1,5 +1,5 @@
 import React from 'react'
-import ExcersiceList from '../ExcersiceComponents/ExcersiceList'
+import ExcerciseList from '../ExcersiceComponents/ExcerciseList'
 
 const WorkoutListItem = ({workout}) => {
 
@@ -10,7 +10,7 @@ const WorkoutListItem = ({workout}) => {
   return (
     <div>
       <span>{workout}</span>
-      <ExcersiceList exersices={exersices}/>
+      <ExcerciseList exersices={exersices}/>
     </div>
   )
 }

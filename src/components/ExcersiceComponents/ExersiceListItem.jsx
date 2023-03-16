@@ -3,14 +3,14 @@ import React from 'react'
 const ExersiceListItem = ({exercise, handleAdd}) => {
 
   const onClick = exercise => {
-    handleAdd(exercise)
+    handleAdd(exercise.target.value)
   }
 
   return (
 
-      <li>{exercise}<button onClick={onClick} 
-        className='btn btn-success'
-        > + </button></li>
+    <button onClick={onClick} 
+      className='btn btn-success'><li>{exercise}</li>
+    </button>
 
   )
 }

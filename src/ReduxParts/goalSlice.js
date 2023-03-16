@@ -4,23 +4,25 @@ export const goalSlice = createSlice({
     name: 'goal',
     initialState: {
         goalName: 'do you even lift',
-        percentage: 0,
-        value: false
+        programs: [],
+        completedPrograms: 0,
+        percentage: 0.0,
+        isComplete: false
     },
     reducers: {
         completeGoal: state => {
-            if (!state.value) state.value = true
-            else state.value = false
-            console.log(state.value);
+            if (!state.isComplete) state.isComplete = true
+            else state.isComplete = false
+            console.log(state.isComplete);
         },
         doSomeProgress: state => {
-            if (state.percentage + 10 <= 100) state.percentage += 10
-            else state.value = true
+            if (state.percentage + 10.0 <= 100) state.percentage += 10.0
+            else state.isComplete = true
             console.log(`${state.goalName} is at ${state.percentage}%`);
-            if (state.value) console.log(state.goalName + ' is ' + state.value);
+            if (state.isComplete) console.log(state.goalName + ' is ' + state.isComplete);
         },
         anounceGoal: state => {
-            console.log(state.goalName + ' is ' + state.value);
+            console.log(state.goalName + ' is ' + state.isComplete);
         }
     }
 })
