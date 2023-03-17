@@ -1,0 +1,34 @@
+{
+    "goal":{
+        "name":"some goal name",
+        "start_date":"goal start date",
+        "end_date":"goal end date",
+        "total_programs":"programs total",
+        "completed_ptograms":"programs completed boolean",
+        "goal_completed":"goal completed boolean",
+        "programList":[]
+
+    },
+    "program":{
+        "name":"some program name",
+        "category":"some program category",
+        "completed":"program boolean",
+        "workoutList":[]
+    },
+    "workout":{
+        "name":"name value",
+        "type":"some workout type",
+        "completed":"workout completed boolean",
+        "exerciseList":[]
+    },
+    "exercise":{
+        "name":"name value",
+        "description":"some exercise description",
+        "completed":"exercise completed boolean",
+        "target_muscle_group":"target muscle group",
+        "repetitions":"repetitions integer",
+        "image":"some img exercise",
+        "video":"some video link"        
+    }
+
+}

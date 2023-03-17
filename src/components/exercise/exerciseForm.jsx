@@ -1,5 +1,7 @@
 const ExerciseForm = ({forAdding})=>{
     
+
+    
     return(
         <>
         <h1>Add or update exercise</h1>
