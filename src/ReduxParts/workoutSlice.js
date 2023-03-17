@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const workoutSlice = createSlice({
     name: 'workout',
     initialState: {
+        workoutName: '',
         exercises: [], 
         count: 0,
         isComplete: false

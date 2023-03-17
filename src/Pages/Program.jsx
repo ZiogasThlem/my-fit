@@ -8,7 +8,8 @@ const Program = () => {
 
   return (
     <div>
-        <ProgramChoice programs={programs}/>
+        <ProgramChoice programs={programs} />
+        // show only program name and navigate to page with program's id
     </div>
   )
 }

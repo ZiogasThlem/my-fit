@@ -6,7 +6,7 @@ import keycloak from '../keycloak'
 const Login = () => {
 
 
-  const handleClick = () => {
+  const handleTest = () => {
     console.log(keycloak.token)
     console.log(keycloak.tokenParsed)
     console.log(keycloak.authenticated)
@@ -16,7 +16,7 @@ const Login = () => {
     <>
       <LoginHeader/>
       <LoginForm/>
-      <button onClick={handleClick}>test</button>
+      <button onClick={handleTest}>test</button>
     </>
   )
 }

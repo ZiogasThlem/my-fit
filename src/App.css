@@ -1,12 +1,8 @@
-.bar {
-    border: 5px solid black;
-    background-color: green;
-    width: 50%;
-}
-
 #program {
+    display: flex;
     border: 5px solid black;
-    margin: 15% 0%;
+    margin: 1% 0%;
+    align-items: center;
 }
 body {
     position: relative;

@@ -3,6 +3,7 @@ import WorkoutChoice from '../WorkoutComponents/WorkoutChoice'
 
 const ProgramListItem = ({program}) => {
 
+  // to be changed to recieve from api
   const workouts = ['legs','arms', 'back', 'chest']
 
   return (

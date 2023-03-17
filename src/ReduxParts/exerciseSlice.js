@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const exersiceSlice = createSlice({
+export const exerciseSlice = createSlice({
     name: 'exersice',
     initialState: {
+        exerciseName: '',
         isComplete: false
     },
     reducers: {
@@ -13,5 +14,5 @@ export const exersiceSlice = createSlice({
     } 
 })
 
-export const { modifyExersice } = exersiceSlice.actions
-export default exersiceSlice.reducer
+export const { modifyExersice } = exerciseSlice.actions
+export default exerciseSlice.reducer

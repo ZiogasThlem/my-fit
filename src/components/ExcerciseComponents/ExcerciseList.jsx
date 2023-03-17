@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 import ExerciseListItem from './ExerciseListItem'
 
 const ExcerciseList = ({exercises}) => {
+
   
   const [exerciseArray, SetExerciseArray] = useState([])
 
@@ -10,11 +11,12 @@ const ExcerciseList = ({exercises}) => {
     temp_array.push(exercise)
     SetExerciseArray(temp_array)
     console.log(exerciseArray);
+  //doesnt work yet
   }
 
-  const exerciseList = exercises.map((exercise, index = exercises.indexOf(exercise)) =>
+  const exerciseList = exercises.map((exercise) =>
     <ExerciseListItem handleAdd={handleAdd}
-                      key={index} exercise={exercise} />
+     key={exercises.indexOf(exercise)} exercise={exercise} />
     )
 
   return (

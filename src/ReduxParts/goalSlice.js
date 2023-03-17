@@ -4,7 +4,7 @@ export const goalSlice = createSlice({
     name: 'goal',
     initialState: {
         goalName: ['do you even lift bro'],// 'leg day', 'power up', 'run Forest, run'],
-        programs: [],
+        programs: [], //array of workout objects
         completedPrograms: 0,
         percentage: 0.0,
         isComplete: false

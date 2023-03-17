@@ -1,10 +1,8 @@
-import React from 'react'
-
 const LoginHeader = () => {
 
   return (
     <>
-      <div>😎😎😎😎</div>
+      <h1>Welcome friend</h1>
     </>
   )
 }
