@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { client } from "../../api/client";
+
+
+const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 
 export const exerciseSlice = createSlice({
     name: 'exersice',
@@ -18,7 +22,12 @@ export const { modifyExersice } = exerciseSlice.actions
 
 
 
-export const {exerciseAdded, exerciseUpdated, }
+// export const {exerciseAdded, exerciseUpdated, }
+
+export const fetchExercises = createAsyncThunk('exercises/fetchExercises', async () => {
+    const response = await client.get(`${apiUrl}/exercise`)
+    return response.data
+  })
 
 // const initialState = [
 //     {

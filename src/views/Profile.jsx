@@ -5,9 +5,12 @@ import ExerciseForm from "../components/exercise/ExerciseForm";
 import ProgramForm from "../components/program/ProgramForm";
 import WorkoutForm from "../components/workout/WorkoutForm";
 
+
+
+
 const Profile = () =>{
     const contributor = true;
-    const isContributor = false;
+    const isContributor = true;
     const isAdmin = true;
     // const formProps = {
     //     programEdit: false,
@@ -45,9 +48,13 @@ const Profile = () =>{
     //set all the other values to false so to avoid rendering simultaneously different components
     const handleContributorClick = (displayForm,formProp)=>{
         for (let formProperty in displayForm){
+            if(formProperty===formProp)
+                continue
             displayForm[formProperty] = false;
         }
+        
         displayForm[formProp] = !displayForm[formProp];
+        
         return {...displayForm}
     }
 
