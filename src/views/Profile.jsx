@@ -1,12 +1,5 @@
-import ExerciseUpdate from "../components/exercise/ExerciseUpdate";
-import WorkoutUpdate from "../components/workout/WorkoutUpdate";
-import ProgramUpdate from "../components/program/ProgramUpdate";
-import ProgramAdd from "../components/program/ProgramAdd";
-import WorkoutAdd from "../components/workout/WorkoutAdd";
-import ExerciseAdd from "../components/exercise/ExerciseAdd";
-import WorkoutList from "../components/workout/WorkoutList";
-import WorkoutItem from "../components/workout/WorkoutItem";
-import ProgramList from "../components/program/ProgramList";
+
+import ProgramChoice from "../components/program/ProgramChoice";
 import { useEffect, useState } from "react";
 import ExerciseForm from "../components/exercise/ExerciseForm";
 import ProgramForm from "../components/program/ProgramForm";
@@ -14,7 +7,7 @@ import WorkoutForm from "../components/workout/WorkoutForm";
 
 const Profile = () =>{
     const contributor = true;
-    const isContributor = true;
+    const isContributor = false;
     const isAdmin = true;
     // const formProps = {
     //     programEdit: false,
@@ -32,6 +25,19 @@ const Profile = () =>{
         "workoutAdd": false,
         "exerciseAdd": false
     }
+
+    // const programs = [{
+    //     "name":"name value",
+    //     "type":"some workout type",
+    //     "completed":"workout completed boolean",
+    //     "exerciseList":[]
+    // },{
+    //     "name":"name value2",
+    //     "type":"some workout type2",
+    //     "completed":"workout completed boolean2",
+    //     "exerciseList":[]
+    // }]
+    const programs = [1,2,3]
     // let formProp = formProps.exerciseAdd
     
     const [displayForm, setDisplayForm] = useState(formProps);
@@ -76,7 +82,9 @@ const Profile = () =>{
         {displayForm.exerciseAdd && <ExerciseForm forAdding={true}></ExerciseForm>}
         </>
         }
-        {!isContributor && <ProgramList/>}
+
+        
+        {!isContributor && <ProgramChoice programs={programs}/>}
         </ul>
         
         </>

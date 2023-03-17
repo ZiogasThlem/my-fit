@@ -1,10 +1,11 @@
-import ProgramList from "../components/program/ProgramList"
+import ProgramChoice from "../components/program/ProgramChoice"
+
 const Program = ()=>{
     const isSelected = true
     return(
         <>
         <h1>Program</h1>
-        {isSelected && <ProgramList></ProgramList>}
+        {isSelected && <ProgramChoice></ProgramChoice>}
         </>
     )
 }
