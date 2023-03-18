@@ -1,27 +1,28 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-const apiUrl = process.env.API_URL
+const apiUrl = process.env.REACT_APP_API_URL;
+
 
 export const getProgram = createAsyncThunk(
-  'programs/getProgram',
-  async () => {
-    const response = await fetch(`${apiUrl}program`);
-    if (response.ok){
-        console.log('response ok');
+    'programs/getProgram',
+    async () => {
+        const requestUrl = `${apiUrl}/program`
+        console.log(requestUrl);
+        const response = await fetch(requestUrl);
+        console.log('response ok', response);
         const programs = await response.json();
-        return [programs];
-    }
+        return programs;
   }
 );
 
 
 export const programSlice = createSlice({
     name: 'programs',
-    initialState: [{name: 'one',complete: false},
-    {name: 'two',complete: false}],
+    initialState: [{id: 0,name: 'one',category: '',complete: false, workout:[], goal: []}],
     reducers: {
 
     }, extraReducers: {
         [getProgram.fulfilled]: (state, action) => {
+            console.log(action.payload.programs);
             return action.payload.programs
         }
     }

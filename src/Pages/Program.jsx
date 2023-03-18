@@ -9,15 +9,15 @@ const Program = () => {
 
   const dispatch = useDispatch()
   const program = useSelector(state => {
-    console.log(state.program);
-    state.programs
+    // console.log(state.program);
+    return state.programs
   })
 
-  const handleNewProgram = () => dispatch(getProgram)
+  const handleNewProgram = () => dispatch(getProgram())
   
-  useEffect(()=>
-  handleNewProgram()
-  ,[])
+    // useEffect(()=> {
+    //   dispatch(handleNewProgram())
+    //   },[dispatch])
 
 
   return (
@@ -26,7 +26,7 @@ const Program = () => {
     //     // show only program name and navigate to page with program's id */}
     // </div>
     <>
-    {program && <h1>{program.name}</h1>}
+    {program && <h1>{program[0].name}</h1>}
     <button onClick={handleNewProgram}>new</button>
     </>
   )
