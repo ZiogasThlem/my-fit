@@ -9,15 +9,15 @@ const Program = () => {
 
   const dispatch = useDispatch()
   const program = useSelector(state => {
-    // console.log(state.program);
-    return state.programs
+    console.log(state.program[0].id);
+    return state.program
   })
-
+    
   const handleNewProgram = () => dispatch(getProgram())
   
-    // useEffect(()=> {
-    //   dispatch(handleNewProgram())
-    //   },[dispatch])
+    useEffect(()=> {
+      handleNewProgram()
+      },[])
 
 
   return (
