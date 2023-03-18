@@ -4,12 +4,11 @@ import WorkoutChoice from '../components/WorkoutComponents/WorkoutChoice';
 
 const Workout = () => {
 
-  const navigate = useNavigate();
+  const workouts = ['legs','arms', 'back', 'chest']
 
   return (
     <div>
-        <WorkoutChoice/>
-        <button onClick={() => navigate(-1)}>Back</button>
+        <WorkoutChoice workouts={workouts}/>
     </div>
   )
 }

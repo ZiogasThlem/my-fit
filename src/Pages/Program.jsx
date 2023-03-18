@@ -1,16 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProgramChoice from '../components/ProgramComponents/ProgramChoice'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProgram } from '../ReduxParts/programSlice'
 
 const Program = () => {
 
-  const programs = ['stronk', 'fat', 'helth', 'ripd']
+  // const programs = ['stronk', 'fat', 'helth', 'ripd']
+
+  const dispatch = useDispatch()
+  const program = useSelector(state => {
+    console.log(state.program);
+    state.programs
+  })
+
+  const handleNewProgram = () => dispatch(getProgram)
+  
+  useEffect(()=>
+  handleNewProgram()
+  ,[])
 
 
   return (
-    <div>
-        <ProgramChoice programs={programs} />
-        // show only program name and navigate to page with program's id
-    </div>
+    // <div>
+    //     {/* <ProgramChoice programs={programs} />
+    //     // show only program name and navigate to page with program's id */}
+    // </div>
+    <>
+    {program && <h1>{program.name}</h1>}
+    <button onClick={handleNewProgram}>new</button>
+    </>
   )
 }
 

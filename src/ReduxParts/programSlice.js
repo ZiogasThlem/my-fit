@@ -1,29 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+const apiUrl = process.env.API_URL
+
+export const getProgram = createAsyncThunk(
+  'programs/getProgram',
+  async () => {
+    const response = await fetch(`${apiUrl}program`);
+    if (response.ok){
+        console.log('response ok');
+        const programs = await response.json();
+        return [programs];
+    }
+  }
+);
+
 
 export const programSlice = createSlice({
-    name: 'program',
-    initialState: {
-        programName: '',
-        workouts: [], 
-        count: 0,
-        isComplete: false
-    },
+    name: 'programs',
+    initialState: [{name: 'one',complete: false},
+    {name: 'two',complete: false}],
     reducers: {
-        addWorkout: (state, workout) => {
 
-            if (!workout.payload) return
-            state.workouts.push(workout.payload)
-            state.count += 1
-            console.log(JSON.stringify(state.workouts));
-        },
-        completeWorkout: (state, workout) => {
-            if (state.workouts.length === 0) return
-            state.workouts.pop();
-            console.log(JSON.stringify(state.workouts));
-            state.count -= 1
-            if (state.count === 0) console.log("Complete!")
-            
-        } // doesnt rly work yet
+    }, extraReducers: {
+        [getProgram.fulfilled]: (state, action) => {
+            return action.payload.programs
+        }
     }
 })
 
