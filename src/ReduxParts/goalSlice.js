@@ -1,14 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+const apiUrl = process.env.REACT_APP_API_URL;
+const requestUrl = `${apiUrl}/goal`
+const headerS = {'Content-Type': 'application/json'}
+
+export const getGoalsFromApi = createAsyncThunk(
+  'goals/getGoalFromApi',
+  async () => {
+    const response = await fetch(requestUrl);
+    const goals = await response.json();
+    return goals;
+  }
+);
 
 export const goalSlice = createSlice({
-    name: 'goal',
-    initialState: {
-        goalName: ['do you even lift bro'],// 'leg day', 'power up', 'run Forest, run'],
-        programs: [], //array of workout objects
-        completedPrograms: 0,
-        percentage: 0.0,
-        isComplete: false
-    },
+    name: 'goals',
+    initialState: [{
+        name: '',
+        profile: [],
+        program: [], 
+        completed_programs: 0,
+        total_programs: 0,
+        complete: false,
+        start_date: Date(),
+        end_date: Date()
+    }],
     reducers: {
         completeGoal: state => {
                 state.percentage = 0.0
@@ -26,7 +42,14 @@ export const goalSlice = createSlice({
             if (state.goalName.length - 1 < state.completedPrograms)
             state.completedPrograms = 0
         }
-    }
+    },
+    extraReducers: {
+      [getGoalsFromApi.fulfilled]: (state, action) => {
+          return action.payload
+      }
+  }
+
+
 })
 
 export const { completeGoal, doSomeProgress, subtractFromGoal, resetGoal } = goalSlice.actions

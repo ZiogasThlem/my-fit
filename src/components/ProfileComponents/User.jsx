@@ -1,7 +1,6 @@
 import { printUser, printUserTwice } from '../../ReduxParts/userSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import './profile.css'
-import { addWorkout, completeWorkout } from '../../ReduxParts/programSlice'
 import { useEffect, useState } from 'react'
 import keycloak from '../../keycloak'
 
@@ -30,13 +29,13 @@ const User = () => {
           aria-label="Show User" onClick={() =>
             userDispatch(printUser(keycloak.tokenParsed.preferred_username))}
           >Show user</button>
-          <button className="btn btn-danger"
+          {/* <button className="btn btn-danger"
           aria-label="Add Workout Run" onClick={()=>programDispatch(
             addWorkout(w[program.count]))}
           >🏃‍♂️</button>
           <button
           aria-label="Complete Workout Run" onClick={()=>programDispatch(completeWorkout(w))}
-          >🚴‍♀️</button>
+          >🚴‍♀️</button> */}
       </>
   )
 }

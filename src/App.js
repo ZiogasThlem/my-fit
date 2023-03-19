@@ -33,7 +33,11 @@ function App() {
               <Profile />
             </KeycloakRoutes>
         }/> 
-          <Route path="/program" element= { <Program />} />
+          <Route path="/program" element= {
+            <KeycloakRoutes role={ROLES.User}>
+                <Program />
+            </KeycloakRoutes>
+             } />
           <Route path="/workout" element= { <Workout />} />
           <Route path="*" element={<h1>Nothing here</h1>} />
         </Routes>

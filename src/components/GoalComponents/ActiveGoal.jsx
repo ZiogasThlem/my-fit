@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { completeGoal, doSomeProgress, resetGoal, subtractFromGoal } from '../../ReduxParts/goalSlice'
+import { completeGoal, doSomeProgress, getGoalsFromApi, resetGoal, subtractFromGoal } from '../../ReduxParts/goalSlice'
 import { NavLink } from 'react-router-dom'
 
 const ActiveGoal = () => {
 
-    const goal = useSelector(state => state.goal)
+    const goal = useSelector(state => state.goal) //array of goals
+    const names = goal.map( g => g.name)
     const dispatch = useDispatch()
-    const goalCount = goal.completedPrograms
-    const name = goal.completedPrograms < goal.goalName.length ?
-      goal.goalName[goalCount] : 'all goals are completed'
+
+    const handleNewGoal= () => dispatch(getGoalsFromApi())
+  
+    useEffect(()=> {
+      handleNewGoal()
+      },[])
+    // const goalCount = goal.completedPrograms
+    // const name = goal.completedPrograms < goal.goalName.length ?
+    //   goal.goalName[goalCount] : 'all goals are completed'
 
 
 
   return (
     <div>
-        {goal.percentage < 100.0 && <h1>{name}</h1>}
+      {goal && <h1>{goal[0].name}</h1>}
+      <button onClick={handleNewGoal}>
+        new
+      </button>
+        {/* {goal.percentage < 100.0 && <h1>{name}</h1>}
         {goal.percentage === 100.0  &&
           <>
             <h1>{name} is done</h1>
@@ -43,7 +54,7 @@ const ActiveGoal = () => {
             onClick={()=>dispatch(resetGoal())}
             >Or reset these goals</button>
         </div>
-        }
+        } */}
     </div>
   )
 }

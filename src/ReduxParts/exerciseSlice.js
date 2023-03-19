@@ -7,6 +7,7 @@ export const getExersiceAsync = createAsyncThunk(
   'exersice/getExersiceAsync', async () => {
     const response = await fetch(`${apiUrl}exercise`);
     if (response.ok){
+        console.log("ok");
         const exersice = await response.json();
         return exersice;
     }
@@ -20,11 +21,7 @@ const initialState2 = [
 export const exerciseSlice = createSlice({
     name: 'exersice',
     initialState: initialState2,
-    // : {
-    //     id: 0,
-    //     name: 'first',
-    //     complete: false
-    // },
+
     reducers: {
         modifyExersice: (state) => 
             state.complete ?
@@ -32,9 +29,8 @@ export const exerciseSlice = createSlice({
                 state.complete = true
     },
     extraReducers: {
-        [getExersiceAsync.fulfilled]: (state, action) => {
-            state.name = action.payload.name
-            state.complete = action.payload.complete
+        [getExersiceAsync.fulfilled]: (action) => {
+            return action.payload
         }
     }
 })

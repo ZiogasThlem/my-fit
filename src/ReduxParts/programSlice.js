@@ -1,13 +1,19 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 const apiUrl = process.env.REACT_APP_API_URL;
 const requestUrl = `${apiUrl}/program`
+const headerS = {'Content-Type': 'application/json'
+// ,'Access-Control-Allow-Origin': 'http://localhost:3000'
+}
+
 
 
 export const getProgram = createAsyncThunk(
     'programs/getProgram',
     async () => {
-        const response = await fetch(requestUrl);
-        console.log('response ok', response);
+        const response = await fetch(requestUrl, {
+          method: 'GET',
+          headers: headerS
+        });
         const programs = await response.json();
         return programs;
   }
@@ -24,13 +30,13 @@ export const addProgram = createAsyncThunk(
         },
         body: JSON.stringify(program),
       });
-      const program = await response.json();
+      const program = await response.json()
       return program;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message)
     }
   }
-);
+)
 
 export const completeProgram = createAsyncThunk(
   'program/completeProgram',
@@ -42,35 +48,32 @@ export const completeProgram = createAsyncThunk(
         body: JSON.stringify(program),
       });
       if (!response.ok) {
-        throw new Error('Unable to complete program');
+        throw new Error('Unable to complete program')
       }
-      const program = await response.json();
+      const program = await response.json()
       return program;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message)
     }
   }
-);
+)
 
 
 
 
 export const programSlice = createSlice({
     name: 'programs',
-    initialState: 
-        {id: 0,name: 'one',category: '',complete: false, workout:[], goal: []},
+    initialState: [
+        {id: 0,name: 'one',category: '',complete: false, workout:[], goal: []}
+    ],
     reducers: {
 
     },
     
     extraReducers: {
         [getProgram.fulfilled]: (state, action) => {
-            console.log(action.payload.category);
-            state.id = action.payload.id
-            state.name = action.payload.name
-            state.category = action.payload.category
-            state.workout = action.payload.workout
-            state.goal = action.payload.goal},
+            return action.payload
+        },
         [addProgram.fulfilled]: (state, action) => {
             state.push(action.payload.program)
         },
@@ -80,7 +83,6 @@ export const programSlice = createSlice({
             )
             state[index].complete = action.payload.program.complete
         }
-
     }
 })
 
