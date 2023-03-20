@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const apiUrl = process.env.REACT_APP_API_URL;
-const requestUrl = `${apiUrl}/goal`
+const requestUrl = `${apiUrl}goal`
 const headerS = {'Content-Type': 'application/json'}
 
 export const getGoalsFromApi = createAsyncThunk(
@@ -27,20 +27,7 @@ export const goalSlice = createSlice({
     }],
     reducers: {
         completeGoal: state => {
-                state.percentage = 0.0
-                state.isComplete = true
-                state.completedPrograms += 1
-        },
-        doSomeProgress: state => {
-            state.isComplete = false
-            if (state.percentage + 10.0 <= 100.0) state.percentage += 10.0
-        },
-        subtractFromGoal: state => {
-            if (state.percentage >= 10.0) state.percentage -= 10.0
-        },
-        resetGoal: state => {
-            if (state.goalName.length - 1 < state.completedPrograms)
-            state.completedPrograms = 0
+
         }
     },
     extraReducers: {
@@ -52,5 +39,5 @@ export const goalSlice = createSlice({
 
 })
 
-export const { completeGoal, doSomeProgress, subtractFromGoal, resetGoal } = goalSlice.actions
+export const { completeGoal } = goalSlice.actions
 export default goalSlice.reducer

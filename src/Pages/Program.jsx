@@ -11,6 +11,7 @@ const Program = () => {
   const program = useSelector(state => {
     return state.program
   })
+  // const names = program.map(p =>p.name)
 
 
   return (

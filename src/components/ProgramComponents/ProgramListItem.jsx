@@ -2,7 +2,7 @@ import React from 'react'
 import WorkoutChoice from '../WorkoutComponents/WorkoutChoice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const ProgramListItem = ({program}) => {
+const ProgramListItem = () => {
 
   // to be changed to recieve from api
   // const workouts = ['legs','arms', 'back', 'chest']
@@ -14,7 +14,6 @@ const ProgramListItem = ({program}) => {
 
   return (
     <div id = "program">
-      <header>{program}</header>
       <WorkoutChoice workouts={workout}/>
     </div>
   )

@@ -1,6 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 const apiUrl = process.env.REACT_APP_API_URL;
-const requestUrl = `${apiUrl}/program`
+const requestUrl = `${apiUrl}program`
 const headerS = {'Content-Type': 'application/json'
 // ,'Access-Control-Allow-Origin': 'http://localhost:3000'
 }

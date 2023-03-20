@@ -22,7 +22,8 @@ const ActiveGoal = () => {
 
   return (
     <div>
-      {goal && <h1>{goal[0].name}</h1>}
+      
+      {goal && <ul>{names}</ul>}
       <button onClick={handleNewGoal}>
         new
       </button>

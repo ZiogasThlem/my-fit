@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const apiUrl = process.env.REACT_APP_API_URL;
-const requestUrl = `${apiUrl}/workout`
+const requestUrl = `${apiUrl}workout`
 const headerS = {'Content-Type': 'application/json'}
 
 export const getWorkoutFromApi = createAsyncThunk(
