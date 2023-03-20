@@ -1,20 +1,21 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore} from "@reduxjs/toolkit";
+import exerciseReducer from './exercise/exerciseSlice.js';
+import thunkMiddleWare from "redux-thunk";
+import { applyMiddleware } from "@reduxjs/toolkit";
+import logger from 'redux-logger';
+import { composeWithDevTools } from "redux-devtools-extension";
+// import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 
 
-import { configureStore } from "@reduxjs/toolkit";
-import userReducer from './userSlice.js'
-import goalReducer from './goalSlice.js'
-import programReducer from './programSlice.js'
-import workoutReducer from './workoutSlice.js'
-import exerciseReducer from './exerciseSlice.js'
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleWare))
 
 export default configureStore({
 
     reducer: {
-        user: userReducer,
-        goal: goalReducer,
-        program: programReducer,
-        workout: workoutReducer,
         exercise: exerciseReducer
-    }
+        
+    },
+    
+    // middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(logger),
+    // composedEnhancer
 })

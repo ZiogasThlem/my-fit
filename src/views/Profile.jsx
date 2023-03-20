@@ -4,11 +4,16 @@ import { useEffect, useState } from "react";
 import ExerciseForm from "../components/exercise/ExerciseForm";
 import ProgramForm from "../components/program/ProgramForm";
 import WorkoutForm from "../components/workout/WorkoutForm";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllExercisesAsync } from "../ReduxParts/exercise/exerciseSlice";
 
 
 
 
 const Profile = () =>{
+    const dispatch = useDispatch();
+    
+    const exercises = useSelector(state=>state.exercise);
     const contributor = true;
     const isContributor = true;
     const isAdmin = true;
@@ -55,8 +60,14 @@ const Profile = () =>{
         
         displayForm[formProp] = !displayForm[formProp];
         
+        
+        // dispatch(getAllExercisesAsync());
         return {...displayForm}
     }
+
+    // useEffect(()=>{
+    //     dispatch(getAllExercisesAsync());
+    // },[dispatch]);
 
     return(
         <>
@@ -83,7 +94,7 @@ const Profile = () =>{
         {/* <button onClick={handleContributorClick(displayForm,"programAdd")}>Add a program</button> */}
         {displayForm.programEdit && <ProgramForm forAdding={false}></ProgramForm>}
         {displayForm.workoutEdit && <WorkoutForm forAdding={false}></WorkoutForm>}
-        {displayForm.exerciseEdit && <ExerciseForm forAdding={false}></ExerciseForm>}
+        {displayForm.exerciseEdit && <ExerciseForm forAdding={false} ></ExerciseForm>}
         {displayForm.programAdd && <ProgramForm forAdding={true}></ProgramForm>}
         {displayForm.workoutAdd && <WorkoutForm forAdding={true}></WorkoutForm>}
         {displayForm.exerciseAdd && <ExerciseForm forAdding={true}></ExerciseForm>}

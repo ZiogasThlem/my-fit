@@ -1,33 +1,114 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { client } from "../../api/client";
 
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 
+
+// export default function exercisesReducer(state=initialState, action){
+//     switch (action.type){
+
+//     }
+// }
+
+export const getAllExercisesAsync = createAsyncThunk(
+    'exercise/getAllExercisesAsync',
+    async ()=>{
+        const resp = await fetch(`${apiUrl}exercise`);
+        if(resp.ok){
+            const exercises = await resp.json();
+        //    console.log(exercises);
+            return exercises;
+        }
+    }
+)
+
+export const updateExerciseAsync = createAsyncThunk('exercise/updateExerciseAsync',
+
+)
+
 export const exerciseSlice = createSlice({
-    name: 'exersice',
-    initialState: {
-        exerciseName: '',
-        isComplete: false
-    },
+    name: 'exercise',
+    initialState: [{
+        // id:'',
+        // name: '',
+        // desc:'',
+        // tmg:'',
+        // repetitions:'',
+        // img:'',
+        // vid:'',
+        // complete: false,
+        // workout:[]
+        
+        name: '',
+        desc:'',
+        tmg:'',
+        repetitions:0,
+        img:'',
+        // vid:'v1',
+        complete: false,
+        // workout:[]
+    }],
     reducers: {
+        addExercise:(state, action)=>
+            {
+                const exercise = {
+                    name: action.payload.name,
+                    desc: action.payload.desc,
+                    tmg: action.payload.tmg,
+                    repetitions: action.payload.repetitions,
+                    img: action.payload.img,
+                    // vid: action.payload.vid,
+                    complete: false,
+                    workout:[]
+                };
+                
+                state.push(exercise);
+            }
+        ,
         modifyExersice: (state) => 
-            state.isComplete ?
-                state.isComplete = false :
-                state.isComplete = true
+                state.complete = !state.complete
+        ,
+        getAllExercises:(state, action)=>{
+            
+            return action.payload.exercise;
+            
+        }
+    },
+    extraReducers:{
+        [getAllExercisesAsync.fulfilled]:(state,action)=>{
+            return state=action.payload;
+            // console.log(action.payload);
+            // for(let exer of action.payload.exercise){
+            //     console.log("edooooooooooooo");
+            //     state.push(exer);
+            // }
+            // return {...state,
+            //     // exercise:action.payload.exercise};
+                
+            //     // name: action.payload.name,
+            //     // desc: action.payload.desc,
+            //     // tmg: action.payload.tmg,
+            //     // repetitions: action.payload.repetitions,
+            //     // img: action.payload.img,
+            //     // complete: action.payload.complete,
+            //     //     workout:action.payload.workout
+            //     exercise:action.payload.exercise
+            // };
+        }
     } 
 })
 
-export const { modifyExersice } = exerciseSlice.actions
+
 
 
 
 // export const {exerciseAdded, exerciseUpdated, }
 
-export const fetchExercises = createAsyncThunk('exercises/fetchExercises', async () => {
-    const response = await client.get(`${apiUrl}/exercise`)
-    return response.data
-  })
+// export const fetchExercises = createAsyncThunk('exercises/fetchExercises', async () => {
+//     const response = await client.get(`${apiUrl}/exercise`)
+//     return response.data
+//   })
 
 // const initialState = [
 //     {
@@ -50,12 +131,13 @@ export const fetchExercises = createAsyncThunk('exercises/fetchExercises', async
 //     }
 // ]
 
-const exercisesSlice = createSlice({
-    name: 'exercises',
-    initialState,
-    reducers:{
-        //actions
-    }
-})
+// const exercisesSlice = createSlice({
+//     name: 'exercises',
+//     initialState,
+//     reducers:{
+//         //actions
+//     }
+// })
 
-export default exerciseSlice.reducer
+export const {addExercise,modifyExersice, getAllExercises} = exerciseSlice.actions;
+export default exerciseSlice.reducer;

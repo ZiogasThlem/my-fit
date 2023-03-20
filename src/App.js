@@ -6,9 +6,14 @@ import Login from './views/Login'
 import Profile from './views/Profile'
 import Workout from './views/Workout';
 import Program from './views/Program';
+import { Provider} from 'react-redux';
+// import { Store } from '@reduxjs/toolkit';
+import store from './ReduxParts/store';
 
 function App() {
   return (
+    <Provider store={store}>
+
     <BrowserRouter>
     <div className="App">
       <Routes>
@@ -20,6 +25,7 @@ function App() {
       </Routes>  
     </div>
     </BrowserRouter>
+    </Provider>
   );
 }
 

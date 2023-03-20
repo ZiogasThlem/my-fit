@@ -9,7 +9,7 @@ const ExerciseListItem = ({exercise, handleAdd}) => {
   return (
 
     <button onClick={onClick} 
-      className='btn btn-success'><li>{exercise}</li>
+      className='btn btn-success'><li>{exercise.name}</li>
     </button>
 
   )
