@@ -4,7 +4,7 @@ import { client } from "../../api/client";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 
-
+const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 // export default function exercisesReducer(state=initialState, action){
 //     switch (action.type){
 
@@ -24,8 +24,24 @@ export const getAllExercisesAsync = createAsyncThunk(
 )
 
 export const updateExerciseAsync = createAsyncThunk('exercise/updateExerciseAsync',
+    async(payload)=>{
+        const resp = await fetch(`${apiUrl}exercise/${payload.id}`,{
+            method:'PATCH',
+            headers:{'Content-type': 'application/json',
+                'x-api-key':apiKey
+                },
+            body:JSON.stringify({desc:payload.desc})
+        });
+        if(resp.ok){
+            const exercise = await resp.json();
+            return exercise;
+        }
+    }
+    
+);
 
-)
+    
+
 
 export const exerciseSlice = createSlice({
     name: 'exercise',
@@ -95,6 +111,11 @@ export const exerciseSlice = createSlice({
             //     //     workout:action.payload.workout
             //     exercise:action.payload.exercise
             // };
+        },
+        [updateExerciseAsync.fulfilled]:(state,action)=>{
+            const index = state.findIndex((exerciseItem)=>exerciseItem.id===action.payload.exerciseItem.id);
+            console.log('Updated exercise with id', index);
+            state[index].desc=action.payload.exercise.desc;
         }
     } 
 })
