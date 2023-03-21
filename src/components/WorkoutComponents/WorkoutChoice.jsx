@@ -5,21 +5,22 @@ import { getWorkoutFromApi } from "../../ReduxParts/workoutSlice";
 
 const WorkoutChoice = ({workouts}) => {
 
-  const wokoutList = workouts.map((workout) => 
-    <WorkoutListItem key={workouts.indexOf(workout)} workout={workout} />
-  )
-
+  
   const workout = useSelector(state => state.workout)
   const names = workout.map(w => w.name)
   const dispatch = useDispatch()
 
   const handleWorkoutAdd = () => dispatch(getWorkoutFromApi())
-
-  // useEffect(()=>
-  //  handleWorkoutAdd()
-  // ,[]) //throws error
-
   
+  useEffect(()=> {
+   handleWorkoutAdd()
+  }
+   ,[]) //throws error
+   
+   const wokoutList = names.map((workout) => 
+     <WorkoutListItem key={names.indexOf(workout)} workout={workout} />
+   )
+   
   return (
     
       <ul>

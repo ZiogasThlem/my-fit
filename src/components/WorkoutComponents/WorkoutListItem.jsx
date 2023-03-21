@@ -3,13 +3,9 @@ import ExcerciseList from '../ExcerciseComponents/ExcerciseList'
 
 const WorkoutListItem = () => {
 
-
-  const exercises = ['bench','deadlift','squat','pullup']
-
-
   return (
     <div>
-      <ExcerciseList exercises={exercises}/>
+      <ExcerciseList/>
     </div>
   )
 }

@@ -39,7 +39,6 @@ export const workoutSlice = createSlice({
     },
     extraReducers: {
         [getWorkoutFromApi.fulfilled]: (state, action) => {
-            console.log(action.payload[0]);
             return action.payload
         }
     }

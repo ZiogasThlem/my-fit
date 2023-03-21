@@ -2,14 +2,20 @@ import React from 'react'
 
 const ExerciseListItem = ({exercise, handleAdd}) => {
 
-  const onClick = exercise => {
-    handleAdd(exercise.target.value)
-  }
+  // const onClick = event => {
+  //   event.preventDefault()
+  //   console.log(event.target.value);
+  //   handleAdd(event.target.value)
+  // }
+
+
 
   return (
 
-    <button onClick={onClick} 
-      className='btn btn-success'><li>{exercise}</li>
+    <button 
+      className='btn btn-success' 
+      exercise={exercise}>
+        {exercise}
     </button>
 
   )

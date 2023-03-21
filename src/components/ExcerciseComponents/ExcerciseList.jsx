@@ -1,23 +1,40 @@
-import React, { useId, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ExerciseListItem from './ExerciseListItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { getExerciseAsync } from '../../ReduxParts/exerciseSlice'
 
-const ExcerciseList = ({exercises}) => {
+const ExcerciseList = () => {
 
   
-  const [exerciseArray, SetExerciseArray] = useState([])
+  // const [exerciseArray, SetExerciseArray] = useState([])
 
-  const handleAdd = exercise => {
-    const temp_array = exerciseArray
-    temp_array.push(exercise)
-    SetExerciseArray(temp_array)
-    console.log(exerciseArray);
-  //doesnt work yet
-  }
+  // const handleAdd = exercise => {
+  //   const temp_array = [...exerciseArray,exercise]
+  //   SetExerciseArray(temp_array)
+  //   console.log(exerciseArray);
+  // //doesnt work yet
+  // }
 
-  const exerciseList = exercises.map((exercise) =>
-    <ExerciseListItem handleAdd={handleAdd}
-     key={exercises.indexOf(exercise)} exercise={exercise} />
+
+  const exercisess = useSelector(state => state.exercise)
+  const dispatch = useDispatch()
+  const names = exercisess.map(e=> e.name)
+
+  const handleGetExercises = () => dispatch(getExerciseAsync())
+
+
+  useEffect(()=> {
+    handleGetExercises()
+  },[])
+
+
+  const exerciseList = names.map((exercise) =>
+    <ExerciseListItem 
+    //handleAdd={handleAdd}
+     key={names.indexOf(exercise)} exercise={exercise} />
     )
+  
+
 
   return (
         <ul>

@@ -1,39 +1,38 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
-const apiUrl = process.env.API_URL
+const apiUrl = process.env.REACT_APP_API_URL
 
 
-export const getExersiceAsync = createAsyncThunk(
-  'exersice/getExersiceAsync', async () => {
+export const getExerciseAsync = createAsyncThunk(
+  'exercise/getExerciseAsync', async () => {
     const response = await fetch(`${apiUrl}exercise`);
-    if (response.ok){
-        console.log("ok");
-        const exersice = await response.json();
-        return exersice;
+    const exercise = await response.json();
+    return exercise;
     }
-  }
 );
 
 const initialState2 = [ 
-    { name: 'exercise1', desc: 'none', complete: true }
+    { id: 0, name: 'exercise1', desc: 'none',
+    tmg:'', repetitions: 0, img: '', vid: '',
+    workout: [], complete: true }
 ]
 
 export const exerciseSlice = createSlice({
-    name: 'exersice',
+    name: 'exercise',
     initialState: initialState2,
 
     reducers: {
-        modifyExersice: (state) => 
+        modifyExercise: (state) => 
             state.complete ?
                 state.complete = false :
                 state.complete = true
     },
     extraReducers: {
-        [getExersiceAsync.fulfilled]: (action) => {
-            return action.payload
+        [getExerciseAsync.fulfilled]: (state, action) => {
+        return action.payload
         }
     }
 })
 
-export const { modifyExersice } = exerciseSlice.actions
+export const { modifyExercise } = exerciseSlice.actions
 export default exerciseSlice.reducer

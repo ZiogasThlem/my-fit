@@ -10,10 +10,7 @@ const headerS = {'Content-Type': 'application/json'
 export const getProgram = createAsyncThunk(
     'programs/getProgram',
     async () => {
-        const response = await fetch(requestUrl, {
-          method: 'GET',
-          headers: headerS
-        });
+        const response = await fetch(requestUrl);
         const programs = await response.json();
         return programs;
   }
