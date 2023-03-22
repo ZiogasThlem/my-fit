@@ -22,7 +22,7 @@ const ExerciseListItem = ({exercise, handleAdd}) => {
     'exerciseTmg': [exercise.tmg, 'Muscle group', 'tmg'],
     'exerciseRepetitions':[exercise.repetitions, 'Repetitions', 'repetitions'],
     'exerciseImg': [exercise.img, 'Image', 'img'],
-    'exerciseVid': [exercise.vid, 'Video', 'vid'],
+    'exerciseVid': [exercise.video, 'Video', 'vid'],
     'exerciseComplete': [exercise.complete, 'Completed', 'complete'],
      'exerciseWorkout': [exercise.workout, 'Workouts', 'workout']
 

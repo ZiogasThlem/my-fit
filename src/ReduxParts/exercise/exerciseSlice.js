@@ -45,8 +45,57 @@ export const updateExerciseAsync = createAsyncThunk('exercise/updateExerciseAsyn
     
 );
 
-    
+export const addExerciseAsync = createAsyncThunk('exercise/addExerciseAsync',
+    async(payload)=>{
+        const resp = await fetch(`${apiUrl}exercise`,{
+            method: 'POST',
+            headers:{'Content-type': 'application/json',
+            'x-api-key':apiKey
+            },
+            
+            body:JSON.stringify(payload.exercisePayload)
+        });
+        if(resp.ok){
+            const exercise = await resp.json();
+            
+            console.log('Exercise successfully added');
+            return exercise
+        }
+    }
+);
 
+export const deleteExerciseAsync = createAsyncThunk('exercise/deteleExerciseAsync',
+    async(payload)=>{
+        const resp = await fetch(`${apiUrl}exercise/${payload.id}`,{
+            method: 'DELETE',
+            headers:{'Content-type': 'application/json',
+            'x-api-key':apiKey
+        },
+    });
+        if(resp.ok){
+            const id=payload.id
+            console.log(id);
+            return id;
+        }
+        return false;
+    }
+
+)
+
+export const getExerciseByIdAsync = createAsyncThunk('exercise/getExerciseByIdAsync',
+    async(payload)=>{
+        const resp = await fetch(`${apiUrl}exercise/${payload.id}`,{
+            method:'GET',
+            headers:{'Content-type':'application/json',
+            'x-api-key':apiKey
+        }
+        });
+        if(resp.ok){
+            const exercise = await resp.json();
+            return exercise;
+        }
+    }
+)
 
 export const exerciseSlice = createSlice({
     name: 'exercise',
@@ -71,22 +120,7 @@ export const exerciseSlice = createSlice({
         workout:''
     }],
     reducers: {
-        addExercise:(state, action)=>
-            {
-                const exercise = {
-                    name: action.payload.name,
-                    desc: action.payload.desc,
-                    tmg: action.payload.tmg,
-                    repetitions: action.payload.repetitions,
-                    img: action.payload.img,
-                    // vid: action.payload.vid,
-                    complete: false,
-                    workout:''
-                };
-                
-                state.push(exercise);
-            }
-        ,
+        
         modifyExersice: (state) => 
                 state.complete = !state.complete
         ,
@@ -123,7 +157,60 @@ export const exerciseSlice = createSlice({
             console.log('Updated exercise with id', index);
             console.log(action.payload);
             state[index]=exercise;
+        },
+
+        [addExerciseAsync.fulfilled]:(state,action)=>{
+                console.log(action.payload);
+                // const exercise = {
+                //     name: action.payload.name,
+                //     desc: action.payload.desc,
+                //     tmg: action.payload.tmg,
+                //     repetitions: action.payload.repetitions,
+                //     img: action.payload.img,
+                //     vid: action.payload.vid,
+                //     complete: false,
+                //     workout:''
+                // };
+                const exercise = action.payload;
+                state.push(exercise);
+        },
+        [deleteExerciseAsync.fulfilled]:(state,action)=>{
+            if(action.payload!=false){
+                const id = action.payload
+                // console.log(id);
+                // console.log(state);
+                const index = state.findIndex((exerciseItem)=>exerciseItem.id===id);
+                // console.log(index);
+                // if(window.confirm(`Your index is${index} and id is ${id}`))
+                //delete state[index];
+                const stateLeft = [...state.slice(0,index)];
+                const stateRight = [...state.slice(index+1,state.length)]
+                state = []
+                stateRight.forEach((exercise)=>{stateLeft.push(exercise)})
+                state = [...stateLeft];
+                
+                console.log('Successfully deleted');
+                // console.log(state);
+                return state;
+            }
+            if(action.payload==false){
+                console.log('Sth went wrong');
+                return
+            }
+        },
+        [getExerciseByIdAsync.fulfilled]:(state,action)=>{
+            console.log(action.payload);
+            console.log(action.payload.exercise);
+            console.log(state);
+            // state.exercise = []
+            // state.push(action.payload)
+            // state.push(action.payload)
+            // state={};
+            // state=action.payload;
+            console.log(state);
+            return action.payload;
         }
+
     } 
 })
 

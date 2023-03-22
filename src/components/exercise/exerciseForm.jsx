@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-import { addExercise, getAllExercisesAsync } from '../../ReduxParts/exercise/exerciseSlice';
+import {  addExerciseAsync, getAllExercisesAsync } from '../../ReduxParts/exercise/exerciseSlice';
 import ExerciseListItem from './ExerciseListItem';
 
 const exerciseNameConfig = {
@@ -26,16 +26,23 @@ const ExerciseForm = ({forAdding, item})=>{
     
     const onSubmit = (values)=>{
         setLoading(true)
-        if(values)
-            dispatch(addExercise({
+        
+        if(values){
+            const exercisePayload = {
                 name:values.name,
                 desc:values.desc,
                 tmg:values.tmg,
                 repetitions:values.repetitions,
                 img:values.img,
                 complete:false,
-                // workout:[]
-            }));
+                video:values.vid,
+                workout:''
+            }
+            console.log(exercisePayload);
+            dispatch(addExerciseAsync(
+                {exercisePayload}
+            ))
+        }
         setLoading(false)
     };
 
@@ -57,6 +64,10 @@ const ExerciseForm = ({forAdding, item})=>{
             <input type="number" id='repetitions-input' {...register('repetitions',exerciseRepetitionsConfig)}/>
             <label htmlFor='img-input'>Exercise's image link:</label>
             <input type="text" id='img-input' {...register('img',exerciseNameConfig)}/>
+            <label htmlFor='img-input'>Exercise's video link:</label>
+            <input type="text" id='img-input' {...register('vid',exerciseNameConfig)}/>
+            <label htmlFor='img-input'>Exercise's workouts:</label>
+            <input type="text" id='img-input' {...register('workout', exerciseNameConfig)}/>
             {/* <input type="text" id='img-input'/> add to workout(first get all workouts and make the contributor to select the workout) */}
             <button type="submit" id='add-exercise-button' disabled={loading}>Add</button>
             </form>

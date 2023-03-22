@@ -9,6 +9,7 @@ import Program from './views/Program';
 import { Provider} from 'react-redux';
 // import { Store } from '@reduxjs/toolkit';
 import store from './ReduxParts/store';
+import Test from './components/tests/Test';
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
 
     <BrowserRouter>
     <div className="App">
+        
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/goals" element={<Goals/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/workout" element={<Workout/>}/>
         <Route path="/program" element={<Program/>}/>
