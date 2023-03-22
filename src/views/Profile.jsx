@@ -92,11 +92,11 @@ const Profile = () =>{
         <button onClick={()=>setDisplayForm(handleContributorClick(displayForm,"workoutAdd"))}>Add workout</button>
         <button onClick={()=>setDisplayForm(handleContributorClick(displayForm,"exerciseAdd"))}>Add exercise</button>
         {/* <button onClick={handleContributorClick(displayForm,"programAdd")}>Add a program</button> */}
-        {displayForm.programEdit && <ProgramForm forAdding={false}></ProgramForm>}
-        {displayForm.workoutEdit && <WorkoutForm forAdding={false}></WorkoutForm>}
+        {/* {displayForm.programEdit && <ProgramForm forAdding={false}></ProgramForm>}
+        {displayForm.workoutEdit && <WorkoutForm forAdding={false}></WorkoutForm>} */}
         {displayForm.exerciseEdit && <ExerciseForm forAdding={false} ></ExerciseForm>}
-        {displayForm.programAdd && <ProgramForm forAdding={true}></ProgramForm>}
-        {displayForm.workoutAdd && <WorkoutForm forAdding={true}></WorkoutForm>}
+        {/* {displayForm.programAdd && <ProgramForm forAdding={true}></ProgramForm>} */}
+        {/* {displayForm.workoutAdd && <WorkoutForm forAdding={true}></WorkoutForm>} */}
         {displayForm.exerciseAdd && <ExerciseForm forAdding={true}></ExerciseForm>}
         </>
         }

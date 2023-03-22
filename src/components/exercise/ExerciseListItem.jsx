@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux';
-import { updateExerciseAsync } from '../../ReduxParts/exercise/exerciseSlice';
+import { deleteExerciseAsync, updateExerciseAsync } from '../../ReduxParts/exercise/exerciseSlice';
 
 const ExerciseListItem = ({exercise, handleAdd}) => {
   console.log(exercise);
@@ -62,6 +62,14 @@ const ExerciseListItem = ({exercise, handleAdd}) => {
     }
     setToEdit(false)
   }
+
+  function handleDeleteButtonClick(){
+    console.log('Deleted');
+    const id = exercise.id;
+    dispatch(deleteExerciseAsync({id}))
+  }
+
+
   
   const exerciseAttributeList=[]
   const attribute={}
@@ -114,7 +122,7 @@ const ExerciseListItem = ({exercise, handleAdd}) => {
     <>
     {exerciseAttributeList }
     {toEdit&&
-    <div key={`exercise${exercise.id}Attributes${index}`}>
+    <div key={`exercise${exercise.id}Attributes${index++}`}>
       <button key={`button_${exercise.id}`} type='submit' value={'Save'} /*onClick={()=>{setToEdit(false),checkbox.current.checked=false}}*/>
         Save
       </button>
@@ -124,6 +132,8 @@ const ExerciseListItem = ({exercise, handleAdd}) => {
     <br></br>
     {/* {toEdit&& <button type='submit'>Save</button>} */}
     </form>
+
+    {!toEdit&&<div key={`deleteButton${exercise.id}`}><button onClick={handleDeleteButtonClick}>Delete</button></div>}
     {/* {toEdit&& <>test</>} */}
     {/* <button onClick={onClick}>
     </button> */}

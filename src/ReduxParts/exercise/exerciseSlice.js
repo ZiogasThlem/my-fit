@@ -154,7 +154,7 @@ export const exerciseSlice = createSlice({
         [updateExerciseAsync.fulfilled]:(state,action)=>{
             const exercise = action.payload;
             const index = state.findIndex((exerciseItem)=>exerciseItem.id===action.payload.id);
-            console.log('Updated exercise with id', index);
+            console.log('Updated exercise with index', index);
             console.log(action.payload);
             state[index]=exercise;
         },
