@@ -1,9 +1,9 @@
 
 import ProgramChoice from "../components/program/ProgramChoice";
 import { useEffect, useState } from "react";
-import ExerciseForm from "../components/exercise/ExerciseForm";
-import ProgramForm from "../components/program/ProgramForm";
-import WorkoutForm from "../components/workout/WorkoutForm";
+import ExerciseForm from "../components/exercise/exerciseForm";
+import ProgramForm from "../components/program/programForm";
+import WorkoutForm from "../components/workout/workoutForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllExercisesAsync } from "../ReduxParts/exercise/exerciseSlice";
 
