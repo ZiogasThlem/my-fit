@@ -66,7 +66,7 @@ const ExerciseForm = ({forAdding, item})=>{
         <h1>Edit exercise</h1>
         {/* {console.log(exercises)} */}
         {/* {console.log(item)} */}
-            {exercises.map((exercise,index)=>{ return <ExerciseListItem key={index} exercise={exercise}/>})}
+            {exercises.map((exercise,index)=>{ return <ExerciseListItem key={`exercise${index}`} exercise={exercise}/>})}
         {/* <button>Save</button> */}
         </>}
         </>

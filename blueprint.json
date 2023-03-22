@@ -56,7 +56,12 @@
             "desc":"Push-ups work your chest and arms.",
             "tmg":"Chest and Arms",
             "repetitions":10,
-            "img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg","vid":"https://www.youtube.com/watch?v=IODxDxX7oi4","complete":false,"workout":1},{"id":2,"name":"Push-ups2","desc":"Push-ups work your chest and arms.2","tmg":"Chest and Arms2","repetitions":12,"img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg","vid":"https://www.youtube.com/watch?v=IODxDxX7oi4",
+            "img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg",
+            "vid":"https://www.youtube.com/watch?v=IODxDxX7oi4",
+            "complete":false,
+            "workout":1
+        },
+            {"id":2,"name":"Push-ups2","desc":"Push-ups work your chest and arms.2","tmg":"Chest and Arms2","repetitions":12,"img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg","vid":"https://www.youtube.com/watch?v=IODxDxX7oi4",
             "complete":true,
             "workout":1
             }

@@ -25,12 +25,17 @@ export const getAllExercisesAsync = createAsyncThunk(
 
 export const updateExerciseAsync = createAsyncThunk('exercise/updateExerciseAsync',
     async(payload)=>{
+        
         const resp = await fetch(`${apiUrl}exercise/${payload.id}`,{
             method:'PATCH',
             headers:{'Content-type': 'application/json',
                 'x-api-key':apiKey
                 },
-            body:JSON.stringify({desc:payload.desc})
+            
+            body:JSON.stringify(
+                // desc:payload.desc
+                payload.exercisePayload
+            )
         });
         if(resp.ok){
             const exercise = await resp.json();
@@ -61,9 +66,9 @@ export const exerciseSlice = createSlice({
         tmg:'',
         repetitions:0,
         img:'',
-        // vid:'v1',
+        vid:'',
         complete: false,
-        // workout:[]
+        workout:''
     }],
     reducers: {
         addExercise:(state, action)=>
@@ -76,7 +81,7 @@ export const exerciseSlice = createSlice({
                     img: action.payload.img,
                     // vid: action.payload.vid,
                     complete: false,
-                    workout:[]
+                    workout:''
                 };
                 
                 state.push(exercise);
@@ -113,9 +118,11 @@ export const exerciseSlice = createSlice({
             // };
         },
         [updateExerciseAsync.fulfilled]:(state,action)=>{
-            const index = state.findIndex((exerciseItem)=>exerciseItem.id===action.payload.exerciseItem.id);
+            const exercise = action.payload;
+            const index = state.findIndex((exerciseItem)=>exerciseItem.id===action.payload.id);
             console.log('Updated exercise with id', index);
-            state[index].desc=action.payload.exercise.desc;
+            console.log(action.payload);
+            state[index]=exercise;
         }
     } 
 })
