@@ -156,6 +156,7 @@ const ExcerciseDisplay=({exercise,forAdding})=>{
         </div>}
         {/* for deleting */}
         {!forViewing && !forAdding && !forEditing && exerciseToEditAttributesList}
+        {/* render the form */}
         {!forViewing && (forAdding || forEditing)&&
         <div key={`form${id}`}>
             <form onSubmit={handleSubmit(onSubmit)}>

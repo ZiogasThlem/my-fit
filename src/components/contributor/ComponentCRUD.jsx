@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import dispatchCruncher from "../../ReduxParts/dispatchCruncher";
 import exerciseSlice, { addExerciseAsync, deleteExerciseAsync, updateExerciseAsync } from "../../ReduxParts/exercise/exerciseSlice"
 
 
-
+//item is the object from state
+//forAdding is boolean(adding an item and tehn fetch to the API)
+//itemType is (exercise or workout or program or goal)
+//itemStructure is the structure of an item plus some types to use them for CRUD
 const ComponentCRUD=({item,forAdding, itemType, itemStructure})=>{
     // console.log(item.id);
     const isContributor = true;
@@ -28,13 +32,13 @@ console.log(ID);
 
     // useEffect(()=>{
 
-        if(itemType='exercise'){
+        if(itemType=='exercise'){
             // let items = useSelector((state)=>state.exercise)
             keyValue='exercise';
-        }else if(itemType='workout'){
+        }else if(itemType=='workout'){
             // let items = useSelector((state)=>state.workout)
             keyValue='workout';
-        }else if(itemType='program'){
+        }else if(itemType=='program'){
             // let items = useSelector((state)=>state.program)
             keyValue='program';
             
@@ -61,12 +65,13 @@ console.log(ID);
     }
 
 
-    const onSubmit = (values,item)=>{
+    const onSubmit = (values)=>{
        
         console.log(values);
         const itemPayload = {
         }
         
+        //struct the payload
         for (let itemStructureKey in itemStructure){
             const itemPayLoadKey = itemStructure[itemStructureKey][2];
             itemPayload[itemPayLoadKey] = values[itemPayLoadKey];
@@ -75,24 +80,27 @@ console.log(ID);
         //save
         if(!forAdding && forEditing){
             console.log('pressed save button');
-            console.log(itemPayload);
+            // dispatch(updateExerciseAsync({id:ID , itemPayload}))
             
-            
-            dispatch(updateExerciseAsync({id:ID , itemPayload}))
+            dispatchCruncher(dispatch,itemPayload,ID,itemType,'patch')
         }
         //add
         if(forAdding && !forEditing){
             console.log('pressed add button');
             console.log(itemPayload);
-            dispatch(addExerciseAsync(
-                {itemPayload}
-            ))
+
+            // dispatch(addExerciseAsync(
+            //     {itemPayload}
+            // ))
+            dispatchCruncher(dispatch,itemPayload,ID,itemType,'post')
+            
         }
         //delete
         if(!forAdding && !forEditing){
             console.log('pressed delete button');
             console.log(item);
-            dispatch(deleteExerciseAsync({id}))
+            // dispatch(deleteExerciseAsync({id:ID}))
+            dispatchCruncher(dispatch,itemPayload,ID,itemType,'delete')
         }
         
     }
@@ -130,7 +138,7 @@ console.log(ID);
         const inputDefaultValue = forAdding?inputNullValue:inputValue;
         const labelName = itemStructure[itemStructureKey][1];
         const inputRegisterName = itemStructure[itemStructureKey][2];
-        
+        //struct the form
         itemToEditAttributesList.push(
             <div key={`exercise${ID}_${index++}`}>
                 <label>
