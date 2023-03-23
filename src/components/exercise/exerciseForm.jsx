@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import {  addExerciseAsync, getAllExercisesAsync } from '../../ReduxParts/exercise/exerciseSlice';
 import ExerciseListItem from './ExerciseListItem';
 import ExcerciseDisplay from './ExerciseDisplay';
+import ComponentCRUD from '../contributor/ComponentCRUD';
 
 const exerciseNameConfig = {
     required: true,
@@ -12,16 +13,22 @@ const exerciseNameConfig = {
 const exerciseRepetitionsConfig={
     required:true
 }
-const ExerciseForm = ({forAdding, item})=>{
+const ExerciseForm = ({forAdding, itemType})=>{
     const dispatch = useDispatch();
+    const [type,setType]=useState('exercise');
     useEffect(()=>{
-        if(!forAdding)
+        
+        if(!forAdding){
+            
             dispatch(getAllExercisesAsync());
+            setLoaded(true);
+        }
     },[dispatch]);
 
     const [value, setValue] = useState('');
     const {register,handleSubmit, formState:{errors}} = useForm();
     const [loading, setLoading] = useState(false);
+    const [loaded,setLoaded] = useState(false);
     const exercises = useSelector(state=>{    
         return state.exercise});
     
@@ -38,44 +45,44 @@ const ExerciseForm = ({forAdding, item})=>{
     const exercise = exercises[0];
     const exerciseStructure={
         //value, attribute name to user, attribute name to handle
-        'exerciseName': [exercise.name, 'Name', 'name'],
-        'exerciseDesc': [exercise.desc, 'Description', 'desc'],
-        'exerciseTmg': [exercise.tmg, 'Muscle group', 'tmg'],
-        'exerciseRepetitions':[exercise.repetitions, 'Repetitions', 'repetitions'],
-        'exerciseImg': [exercise.img, 'Image', 'img'],
-        'exerciseVid': [exercise.video, 'Video', 'vid'],
-        'exerciseComplete': [exercise.complete, 'Completed', 'complete'],
-        'exerciseWorkout': [exercise.workout, 'Workouts', 'workout']
+        'exerciseName': [exercise.name, 'Name', 'name', 'text'],
+        'exerciseDesc': [exercise.desc, 'Description', 'desc', 'text'],
+        'exerciseTmg': [exercise.tmg, 'Muscle group', 'tmg', 'text'],
+        'exerciseRepetitions':[exercise.repetitions, 'Repetitions', 'repetitions', 'number'],
+        'exerciseImg': [exercise.img, 'Image', 'img', 'text'],
+        'exerciseVid': [exercise.vid, 'Video', 'vid', 'text'],
+        'exerciseComplete': [exercise.complete, 'Completed', 'complete', 'text'],
+        'exerciseWorkout': [exercise.workout, 'Workouts', 'workout', 'text']
     
     }
-
-    const onSubmit = (values)=>{
-        setLoading(true)
+    
+    // const onSubmit = (values)=>{
+    //     setLoading(true)
         
-        if(values){
-            // const exercisePayload = {
-            //     name:values.name,
-            //     desc:values.desc,
-            //     tmg:values.tmg,
-            //     repetitions:values.repetitions,
-            //     img:values.img,
-            //     complete:false,
-            //     video:values.vid,
-            //     workout:''
-            // }
-            const exercisePayload = {
-            }
-            for (let exerciseStructureKey in exerciseStructure){
-                const exercisePayLoadKey = exerciseStructure[exerciseStructureKey][2];
-                exercisePayload[exercisePayLoadKey] = values[exercisePayLoadKey];
-              }
-            console.log(exercisePayload);
-            dispatch(addExerciseAsync(
-                {exercisePayload}
-            ))
-        }
-        setLoading(false)
-    };
+    //     if(values){
+    //         // const exercisePayload = {
+    //         //     name:values.name,
+    //         //     desc:values.desc,
+    //         //     tmg:values.tmg,
+    //         //     repetitions:values.repetitions,
+    //         //     img:values.img,
+    //         //     complete:false,
+    //         //     video:values.vid,
+    //         //     workout:''
+    //         // }
+    //         const exercisePayload = {
+    //         }
+    //         for (let exerciseStructureKey in exerciseStructure){
+    //             const exercisePayLoadKey = exerciseStructure[exerciseStructureKey][2];
+    //             exercisePayload[exercisePayLoadKey] = values[exercisePayLoadKey];
+    //           }
+    //         console.log(exercisePayload);
+    //         dispatch(addExerciseAsync(
+    //             {exercisePayload}
+    //         ))
+    //     }
+    //     setLoading(false)
+    // };
 
     
 
@@ -118,11 +125,13 @@ const ExerciseForm = ({forAdding, item})=>{
         } */}
 
         {forAdding &&<>
-            <ExcerciseDisplay forAdding={forAdding} exercise={exercise}/>
+            {/* <ExcerciseDisplay forAdding={forAdding} exercise={exercise}/> */}
+            <ComponentCRUD forAdding={forAdding} item={exercise} itemType={type} itemStructure={exerciseStructure}/>
         </>}
-        {!forAdding &&<>
+        {!forAdding && loaded &&<>
             <h1>Edit exercise</h1>
-            {exercises.map((exercise,index)=>{return <ExcerciseDisplay key={`exercise${index}`} exercise={exercise} forAdding={forAdding}/>})}
+            {/* {exercises.map((exercise,index)=>{return <ExcerciseDisplay key={`exercise${index}`} exercise={exercise} forAdding={forAdding}/>})} */}
+            {exercises.map((exercise,index)=>{return <ComponentCRUD key={`exercise${index}`} item={exercise} forAdding={forAdding} itemType={type} itemStructure={exerciseStructure}/>})}
         </>}
         
 

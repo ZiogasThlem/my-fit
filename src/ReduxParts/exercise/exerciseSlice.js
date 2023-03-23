@@ -34,7 +34,7 @@ export const updateExerciseAsync = createAsyncThunk('exercise/updateExerciseAsyn
             
             body:JSON.stringify(
                 // desc:payload.desc
-                payload.exercisePayload
+                payload.itemPayload
             )
         });
         if(resp.ok){
@@ -53,7 +53,7 @@ export const addExerciseAsync = createAsyncThunk('exercise/addExerciseAsync',
             'x-api-key':apiKey
             },
             
-            body:JSON.stringify(payload.exercisePayload)
+            body:JSON.stringify(payload.itemPayload)
         });
         if(resp.ok){
             const exercise = await resp.json();
