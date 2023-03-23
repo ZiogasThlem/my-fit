@@ -2,15 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { client } from "../../api/client";
 
 
-const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-
-const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
+// const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
+// const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 // export default function exercisesReducer(state=initialState, action){
 //     switch (action.type){
 
 //     }
 // }
 
+const apiUrl = process.env.REACT_APP_API_URL
 export const getAllExercisesAsync = createAsyncThunk(
     'exercise/getAllExercisesAsync',
     async ()=>{

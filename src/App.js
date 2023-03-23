@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Goals from './views/Goals'
@@ -9,6 +8,8 @@ import Program from './views/Program';
 import { Provider} from 'react-redux';
 // import { Store } from '@reduxjs/toolkit';
 import store from './ReduxParts/store';
+import KeycloakRoutes from './Routing/KeycloakRoutes';
+import { ROLES } from './consts/roles';
 
 function App() {
   return (
