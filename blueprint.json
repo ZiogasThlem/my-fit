@@ -22,14 +22,7 @@
             }
         ],
     "program":[
-        {
-            "id":1,
-            "name":"Biceps",
-            "category":"Strengthen",
-            "complete":false,
-            "workout":[1,2],
-            "goal":[1]
-            }
+        {"id":1,"name":"Biceps","category":"Strengthen","complete":false,"workout":[1,2],"goal":[1]}
         ],
     "workout":[
         {

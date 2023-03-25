@@ -1,5 +1,6 @@
 import { configureStore} from "@reduxjs/toolkit";
 import exerciseReducer from './exercise/exerciseSlice.js';
+import workoutReducer from './workout/workoutSlice.js'
 import thunkMiddleWare from "redux-thunk";
 import { applyMiddleware } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
@@ -12,7 +13,8 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleWare))
 export default configureStore({
 
     reducer: {
-        exercise: exerciseReducer
+        exercise: exerciseReducer,
+        workout:workoutReducer
         
     },
     

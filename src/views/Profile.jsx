@@ -12,8 +12,10 @@ import { getAllExercisesAsync } from "../ReduxParts/exercise/exerciseSlice";
 
 const Profile = () =>{
     const dispatch = useDispatch();
-    
-    const exercises = useSelector(state=>state.exercise);
+    // const workouts = useSelector(state=>{    
+    //     return state.workout
+    // });
+    // const exercises = useSelector(state=>state.exercise);
     const contributor = true;
     const isContributor = true;
     const isAdmin = true;
@@ -92,12 +94,12 @@ const Profile = () =>{
         <button onClick={()=>setDisplayForm(handleContributorClick(displayForm,"workoutAdd"))}>Add workout</button>
         <button onClick={()=>setDisplayForm(handleContributorClick(displayForm,"exerciseAdd"))}>Add exercise</button>
         {/* <button onClick={handleContributorClick(displayForm,"programAdd")}>Add a program</button> */}
-        {/* {displayForm.programEdit && <ProgramForm forAdding={false}></ProgramForm>}
-        {displayForm.workoutEdit && <WorkoutForm forAdding={false}></WorkoutForm>} */}
-        {displayForm.exerciseEdit && <ExerciseForm forAdding={false} ></ExerciseForm>}
+        {/* {displayForm.programEdit && <ProgramForm forAdding={false}></ProgramForm>*/}
+        {displayForm.workoutEdit && <WorkoutForm forAdding={false}></WorkoutForm>} 
+        {displayForm.exerciseEdit && <ExerciseForm forAdding={false} isContributor={isContributor}></ExerciseForm>}
         {/* {displayForm.programAdd && <ProgramForm forAdding={true}></ProgramForm>} */}
-        {/* {displayForm.workoutAdd && <WorkoutForm forAdding={true}></WorkoutForm>} */}
-        {displayForm.exerciseAdd && <ExerciseForm forAdding={true}></ExerciseForm>}
+        {displayForm.workoutAdd && <WorkoutForm forAdding={true}></WorkoutForm>}
+        {displayForm.exerciseAdd && <ExerciseForm forAdding={true} isContributor={isContributor}></ExerciseForm>}
         </>
         }
 

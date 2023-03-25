@@ -1,9 +1,8 @@
 import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-import {  addExerciseAsync, getAllExercisesAsync } from '../../ReduxParts/exercise/exerciseSlice';
-import ExerciseListItem from './ExerciseListItem';
-import ExcerciseDisplay from './ExerciseDisplay';
+import { getAllExercisesAsync } from '../../ReduxParts/exercise/exerciseSlice';
+
 import ComponentCRUD from '../contributor/ComponentCRUD';
 
 const exerciseNameConfig = {
@@ -13,7 +12,7 @@ const exerciseNameConfig = {
 const exerciseRepetitionsConfig={
     required:true
 }
-const ExerciseForm = ({forAdding, itemType})=>{
+const ExerciseForm = ({forAdding, itemType, isContributor})=>{
     const dispatch = useDispatch();
     const [type,setType]=useState('exercise');
     useEffect(()=>{
@@ -45,14 +44,14 @@ const ExerciseForm = ({forAdding, itemType})=>{
     const exercise = exercises[0];
     const exerciseStructure={
         //value, attribute name to user, attribute name to handle
-        'exerciseName': [exercise.name, 'Name', 'name', 'text'],
-        'exerciseDesc': [exercise.desc, 'Description', 'desc', 'text'],
-        'exerciseTmg': [exercise.tmg, 'Muscle group', 'tmg', 'text'],
-        'exerciseRepetitions':[exercise.repetitions, 'Repetitions', 'repetitions', 'number'],
-        'exerciseImg': [exercise.img, 'Image', 'img', 'text'],
-        'exerciseVid': [exercise.vid, 'Video', 'vid', 'text'],
-        'exerciseComplete': [exercise.complete, 'Completed', 'complete', 'text'],
-        'exerciseWorkout': [exercise.workout, 'Workouts', 'workout', 'text']
+        'exerciseName': ['Name', 'name', 'text'],
+        'exerciseDesc': ['Description', 'desc', 'text'],
+        'exerciseTmg': ['Muscle group', 'tmg', 'text'],
+        'exerciseRepetitions':['Repetitions', 'repetitions', 'number'],
+        'exerciseImg': ['Image', 'img', 'text'],
+        'exerciseVid': ['Video', 'vid', 'text'],
+        'exerciseComplete': ['Completed', 'complete', 'text'],
+        
     
     }
     
@@ -126,7 +125,7 @@ const ExerciseForm = ({forAdding, itemType})=>{
 
         {forAdding &&<>
             {/* <ExcerciseDisplay forAdding={forAdding} exercise={exercise}/> */}
-            <ComponentCRUD forAdding={forAdding} item={exercise} itemType={type} itemStructure={exerciseStructure}/>
+            <ComponentCRUD forAdding={forAdding}  itemType={type} itemStructure={exerciseStructure}/>
         </>}
         {!forAdding && loaded &&<>
             <h1>Edit exercise</h1>

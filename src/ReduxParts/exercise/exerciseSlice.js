@@ -3,7 +3,6 @@ import { client } from "../../api/client";
 
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-
 const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 // export default function exercisesReducer(state=initialState, action){
 //     switch (action.type){
@@ -109,7 +108,7 @@ export const exerciseSlice = createSlice({
         // vid:'',
         // complete: false,
         // workout:[]
-        
+        id:0,
         name: '',
         desc:'',
         tmg:'',
@@ -128,6 +127,17 @@ export const exerciseSlice = createSlice({
             
             return action.payload.exercise;
             
+        },
+        getExercisesById:(state,action)=>{
+            console.log(action.payload);
+            const selectedExercises = [];
+            for(let idToSelect of action.payload){
+                const index = state.findIndex((exerciseItem)=>exerciseItem.id===idToSelect);
+                selectedExercises.push(state[index])
+            }
+            console.log(selectedExercises);
+            state={...state,...selectedExercises};
+            // return selectedExercises;
         }
     },
     extraReducers:{
@@ -208,7 +218,7 @@ export const exerciseSlice = createSlice({
             // state={};
             // state=action.payload;
             console.log(state);
-            return action.payload;
+            return state = action.payload;
         }
 
     } 
@@ -254,5 +264,5 @@ export const exerciseSlice = createSlice({
 //     }
 // })
 
-export const {addExercise,modifyExersice, getAllExercises} = exerciseSlice.actions;
+export const {addExercise,modifyExersice, getAllExercises, getExercisesById} = exerciseSlice.actions;
 export default exerciseSlice.reducer;
