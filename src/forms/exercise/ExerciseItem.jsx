@@ -1,51 +1,13 @@
 const ExerciseItem = ({exercise})=>{
     return(
         <>
-        <div>
-            <label>
-                Name:{exercise.name}
-            </label>
-        </div>
-        <div>
-            <label>
-                Description:{`${exercise.desc}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Muscle Group:{`${exercise.tmg}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Repetitions:{`${exercise.repetitions}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Image:{`${exercise.img}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Video:{`${exercise.vid}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Video:{`${exercise.vid}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Complete:{`${exercise.complete}`}
-            </label>
-        </div>
-        <div>
-            <label>
-                Workouts:{`${exercise.workout}`}
-            </label>
-        </div>
+        <td>{`${exercise.name}`}</td>
+        <td>{`${exercise.desc}`}</td>
+        <td>{`${exercise.tmg}`}</td>
+        <td>{`${exercise.repetitions}`}</td>
+        <td>{`${exercise.img}`}</td>
+        <td>{`${exercise.vid}`}</td>
+        
         </>
     )
 }

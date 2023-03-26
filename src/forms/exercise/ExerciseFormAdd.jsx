@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { addExercise } from "../../reduxParts/reducers/exerciseSlice";
 
 const ExerciseFormAdd=(exerciseStructure)=>{
+  const navigate= useNavigate()
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: '' });
     const handleSubmit =(event)=>{
-        event.preventDefault();
+        // event.preventDefault();
         console.log(formData);
         dispatch(addExercise(formData))
         // setFormData({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: '' });
     }
+
+    const handleBack = ()=>{
+      navigate('/exercises');
+    }
     return(
         <>
+        
             <form onSubmit={handleSubmit}>
+                           
       <label>
         Name:
         <input
@@ -25,6 +33,7 @@ const ExerciseFormAdd=(exerciseStructure)=>{
           }
         />
       </label>
+      
       <label>
         Description:
         <textarea
@@ -76,6 +85,7 @@ const ExerciseFormAdd=(exerciseStructure)=>{
       </label>
       <button type="submit">Add Exercise</button>
     </form>
+    <button onClick={handleBack}>Back</button>
         </>
     )
 }

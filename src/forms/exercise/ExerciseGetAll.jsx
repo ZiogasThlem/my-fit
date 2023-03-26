@@ -1,51 +1,104 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExercises } from "../../reduxParts/reducers/exerciseSlice";
+import { deleteExercise, fetchExercises } from "../../reduxParts/reducers/exerciseSlice";
 import ExerciseItem from "./ExerciseItem";
+import {useNavigate} from 'react-router-dom'
 
 const ExerciseGetAll = ()=>{
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {exercise, status} = useSelector((state)=>state.exercises);
-    // const {workout, status: bbb} = useSelector((state)=>state.items);
-    const [exercisesFetched,setExercisesFetched] =useState([])
-    const [loaded,setLoaded]=useState(false)
-    
-    useEffect(()=>{
-        if(!loaded){
-            
-                dispatch(fetchExercises());
-                
-                console.log(exercise);
-        
+    const {exercises:exercisesFetched,status} = useSelector(state=>
+        {   console.log(state);
+            return state.exercise
         }
+        );
+    const [exercises,setExercises]=useState();
+    const [loaded,setLoaded]=useState(false);
+    const [deleted,setDeleted]=useState(false);
+
+    useEffect(()=>{
+        dispatch(fetchExercises())
     },[dispatch])
 
-    useEffect(() => {
-        if(status === "succeeded")
-            setExercisesFetched(exercise)
-    }, [status])
-
+    useEffect(()=>{
+        if(status==='succeeded'){
+            setExercises(exercisesFetched);
+        }
+    },[status])
+    useEffect(()=>{
+        if(deleted){
+            setDeleted(false);
+            dispatch(fetchExercises())
+        }
+    },[deleted,dispatch])
+    useEffect(()=>{
+        if(exercises!=exercisesFetched){
+            setExercises(exercisesFetched);
+        }
+    },[exercises])
     const handleGetAll = (event)=>{
         // dispatch(fetchExercises());
-            console.log(exercise);
+            // dispatch(fetchExercises())
             // setExercisesFetched([...exercise]);
-            setLoaded(true)
+        setLoaded(true)
             
+    }
+    const handleEdit = (id)=>{
+        console.log(id);
+        navigate(`/exercise/update/${id}`)
+    }
+
+    const handleDelete = (id)=>{
+        console.log(id);
+        dispatch(deleteExercise(id))
+        setDeleted(true)
+        // dispatch(fetchExercises())
+    }
+
+    const handleAdd = ()=>{
+        navigate('/exercise/add');
     }
 
     const date = String(new Date());
     return(
         <>
-        <button onClick={handleGetAll}>Get All Exercises</button>
+        <button onClick={handleGetAll}>Show All Exercises</button>
+        <button onClick={handleAdd}>Add an exercise</button>
+        <table>
+            <thead>
+                <tr>
+
+                
+                <th>Name</th>
+                <th>Description</th>
+                <th>Muscle Group</th>
+                <th>Repetitions</th>
+                <th>Image</th>
+                <th>Video</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
         {loaded&& <>
-            {exercisesFetched.map((exercise,index)=>{
+
+            { exercises.map((exercise,index)=>{
                 return(
-                    <div key={`${date}_${index}`}>
+                    
+                        <tr key={`${date}_${index}`}>
                         <ExerciseItem exercise={exercise}/>
-                    </div>
+                        <td><button onClick={()=>{handleEdit(exercise.id)}}>Edit</button></td>
+                        <td><button onClick={()=>{handleDelete(exercise.id)}}>Delete</button></td>
+                        </tr>
+                    
                 )
             })}
         </>}
+        
+        </tbody>
+        </table>
+
         </>
     )
 }

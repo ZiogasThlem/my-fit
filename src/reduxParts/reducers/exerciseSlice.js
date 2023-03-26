@@ -1,8 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 
+const exercisesAdapter = createEntityAdapter();
+
+// const exercisesAdapter = createEntityAdapter({
+//     selectId:(exercise)=>exercise.id
+// });
 /**
  * export const selectItemsByIds = createAsyncThunk(
   'items/selectItemsByIds',
@@ -62,33 +67,83 @@ export const updateExercise = createAsyncThunk("exercise/updateExercise", async 
 });
 
 export const deleteExercise = createAsyncThunk("exercise/deleteExercise", async (id) => {
-  const response = await fetch(`${apiUrl}exercise${id}`, {
+  const response = await fetch(`${apiUrl}exercise/${id}`, {
     method: "DELETE",
+    headers:{
+        "Content-Type": "application/json",
+      'x-api-key':apiKey
+    }
   });
   const data = await response.json();
-  return data;
+  return id;
 });
 
-const initialState = {
-  exercise:{
-    exercise: [],
-    status: "idle",
-    error: null,
-  }
+
+
+
+// const initialState = exercisesAdapter.getInitialState( {
+//     exercises:[],
+//     status: "idle",
+//     error: null,
+  
+// })
   // exercise: [],
   // status: "idle",
   // error: null,
-};
+
+
+// export const {
+//     selectAll: selectAllAexercises,
+//     selectById: selectExerciseById,
+//     selectIds: selectExerciseIds,
+//   } = booksAdapter.getSelectors((state) => state.exercise);
 
 const exerciseSlice = createSlice({
-  name: "exercise",
-  initialState,
+  name: "exercises",
+//   initialState :exercisesAdapter.getInitialState(
+//     {
+            
+//             exercises:[],
+//             status:'idle',
+//             error:null
+        
+//     }
+//   ),
+  initialState :
+    {
+            exercise:{},
+            exercises:[],
+            selectedExercises:[],
+            status:'idle',
+            error:null
+        
+    }
+  ,
   reducers:{
     selectExercisesByIds :(state, action) =>{
-      console.log(action.payload);
-      console.log(state.exercise.exercise);
-       return state.exercise.exercise.filter((exercise) => action.payload.includes(exercise.id))
+    //   console.log(action.payload);
+    //   console.log(state.exercises);
+    //    return state.exercises.filter((exercise) => action.payload.includes(exercise.id))
+        const selectedIds = action.payload;
+      return selectedIds.reduce((selectedEntities, id) => {
+        if (state[id]) {
+          selectedEntities[id] = state[id];
+        }
+        return selectedEntities;
+      }, {});
+      },
+      selectExerciseById:(state, action) =>{
+        console.log(action);
+        console.log(state);
+        const id = action.payload;
+        if(state.exercises!=undefined){
+            console.log(state.exercises.find((item) => item.id === Number(id)));
+            state.exercise = {...state.exercises.find((item) => item.id === Number(id))}
+            return state;
+        }
       }
+    // selectExerciseById:exercisesAdapter.getSelectors().selectById,
+    
   }
       
   
@@ -101,7 +156,9 @@ const exerciseSlice = createSlice({
       })
       .addCase(fetchExercises.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.exercise = action.payload;
+        console.log(state.exercises);
+        console.log(action.payload);
+        state.exercises = action.payload;
       })
       .addCase(fetchExercises.rejected, (state, action) => {
         state.status = "failed";
@@ -123,31 +180,37 @@ const exerciseSlice = createSlice({
       //   state.error = action.error.message;
       // })
       .addCase(addExercise.fulfilled, (state, action) => {
-        state.exercise.push(action.payload);
+        state.exercises.push(action.payload);
       })
       .addCase(updateExercise.fulfilled, (state, action) => {
-        const index = state.exercise.findIndex((item) => item.id === action.payload.id);
+        console.log(action.payload);
+        console.log(state.exercises);
+        const index = state.exercises.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          state.exercise[index] = action.payload;
+          state.exercises[index] = action.payload;
         }
       })
       .addCase(deleteExercise.fulfilled, (state, action) => {
-        state.exercise = state.exercise.filter((item) => item.id !== action.payload);
+        console.log(action);
+        console.log(action.payload);
+        state.exercises = state.exercises.filter((item) => item.id !== Number(action.payload));
+        return state;
       })
       .addCase(selectExercisesByIds, (state,ids) =>{
-        return state.exercise.exercise.filter((exercise) => ids.includes(exercise.id))});
+        return state.exercises.filter((exercise) => ids.includes(exercise.id))
+    });
   },
 });
 
-export const selectExerciseById = (state, id) => state.exercise.exercise.find((item) => item.id === id);
+// export const selectExerciseById = (state, id) => state.exercises.find((item) => item.id === id);
 
 // export const selectExercisesByIds = (state, ids) =>
 //   state.exercise.exercise.filter((exercise) => ids.includes(exercise.id));
 
-export const selectExercisesStatus = (state) => state.exercise.status;
+export const selectExercisesStatus = (state) => state.exercises.status;
 
-export const selectExercisesError = (state) => state.exercise.error;
+export const selectExercisesError = (state) => state.exercises.error;
 
-export const{ selectExercisesByIds} =exerciseSlice.actions;
+export const{selectExercisesByIds, selectExerciseById} =exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

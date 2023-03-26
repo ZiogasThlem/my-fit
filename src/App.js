@@ -10,10 +10,11 @@ import { Provider} from 'react-redux';
 // import { Store } from '@reduxjs/toolkit';
 import store from './reduxParts/store';
 import Exercise from './views/Exercise';
-import ExerciseFormAdd from './forms/exercise/ExerciseFormAdd';
+
 import ExerciseGetAll from './forms/exercise/ExerciseGetAll';
-import ExerciseListFormUpdate from './forms/exercise/ExerciseListFormUpdate';
-import WorkoutListFormUpdate from './forms/workout/WorkoutListFormUpdate';
+import ExerciseEdit from './forms/exercise/ExerciseEdit';
+import ExerciseFormAdd from './forms/exercise/ExerciseFormAdd';
+
 
 
 function App() {
@@ -31,10 +32,14 @@ function App() {
         <Route path="/workout" element={<Workout/>}/>
         <Route path="/program" element={<Program/>}/>
         <Route path="/exercise" element={<Exercise/>}/>
-        <Route path="/exerciseAdd" element={<ExerciseFormAdd/>}/>
-        <Route path="/exerciseGetAll" element={<ExerciseGetAll/>}/>
-        <Route path="/exerciseUpdate" element={<ExerciseListFormUpdate/>}/>
-        <Route path="/workoutUpdate" element={<WorkoutListFormUpdate/>}/>
+        <Route path="/exercises" element={<ExerciseGetAll/>}/>
+        <Route path="/exercise/add" element={<ExerciseFormAdd/>}/>
+        <Route path="/exercise/update/:id" element={<ExerciseEdit/>}/>
+        
+        {/* <Route path="/exerciseAdd" element={<ExerciseFormAdd/>}/>
+        <Route path="/exercise/update" element={<ExerciseListFormUpdate/>}/>
+        <Route path="/exercise/update/:id" element={<ExerciseItemUpdate/>}/>
+        <Route path="/workout/update" element={<WorkoutListFormUpdate/>}/> */}
       </Routes>  
     </div>
     </BrowserRouter>
