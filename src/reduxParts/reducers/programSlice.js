@@ -172,7 +172,7 @@ const programSlice = createSlice({
       })
       .addCase(updateProgram.fulfilled, (state, action) => {
         const index = state.programs.findIndex((item) => item.id === action.payload.id);
-        if (index !== -1) {selectprogramById
+        if (index !== -1) {
           state.programs[index] = action.payload;
         }
       })

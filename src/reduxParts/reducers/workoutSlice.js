@@ -172,7 +172,7 @@ const workoutSlice = createSlice({
       })
       .addCase(updateWorkout.fulfilled, (state, action) => {
         const index = state.workouts.findIndex((item) => item.id === action.payload.id);
-        if (index !== -1) {selectworkoutById
+        if (index !== -1) {
           state.workouts[index] = action.payload;
         }
       })

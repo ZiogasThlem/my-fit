@@ -13,11 +13,17 @@ const Login = () =>{
       const handleRegister = () => {
         keycloak.register()
       }
+
+      const handleToken = () => {
+        console.log(keycloak.tokenParsed);
+      }
+
     
       return (
         <>
           <button onClick={handleLogin}>Login</button>
           <button onClick={handleRegister}>Register</button>
+          <button onClick={handleToken}>Token</button>
         </>
       )
     }
