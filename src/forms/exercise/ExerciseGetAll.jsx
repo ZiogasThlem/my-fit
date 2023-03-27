@@ -1,4 +1,4 @@
-
+import './exercise-style.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExercise, fetchExercises } from "../../reduxParts/reducers/exerciseSlice";
@@ -65,7 +65,7 @@ const ExerciseGetAll = ()=>{
 
     const date = String(new Date());
     return(
-        <>
+        <main className='GetAll'>
         <button onClick={handleGetAll}>Show All Exercises</button>
         <button onClick={handleAdd}>Add an exercise</button>
         <button onClick={handleSome}>Get some exercises</button>
@@ -103,7 +103,7 @@ const ExerciseGetAll = ()=>{
         </tbody>
         </table>
 
-        </>
+        </main>
     )
 }
 export default ExerciseGetAll

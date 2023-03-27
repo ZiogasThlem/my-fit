@@ -5,9 +5,8 @@
 .App nav {
   width: 100%;
     text-align: center;
-    background-color: #282c34;
+    background-image: linear-gradient(black 30%,rgb(59, 59, 59),grey,rgb(184, 184, 184),white);
     vertical-align:bottom;
-    
     height:80px;
     padding-top: 10px;
 }
@@ -17,15 +16,18 @@
   font-size: 18px;
   margin: 20px;
   vertical-align:bottom;
-  line-height:normal;  
+  line-height:normal;
+  margin-bottom: 3%;
 }
 
 .App nav a {
   color: white;
+  text-decoration: none;
 }
 
 .App nav a:hover {
-  color: grey;
+  text-decoration: underline;
+  color: black;
 }
 
 .App .logo{
@@ -45,6 +47,10 @@
   font-size: 14px;
   margin: 4px 2px;
   border-radius: 4px;
+}
+
+.App button :hover{
+  background: grey;
 }
 
 .App td{

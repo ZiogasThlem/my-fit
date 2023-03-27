@@ -1,0 +1,10 @@
+.GetAll th,
+.GetAll td{
+    border: 1px solid black;
+}
+
+.exercise-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
