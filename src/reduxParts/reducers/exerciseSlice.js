@@ -3,7 +3,7 @@ import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 import { removeObjectsById } from "../../helpers/removeObjectsByid";
 import keycloak from "../../keycloak";
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
+
 
 const exercisesAdapter = createEntityAdapter();
 
@@ -132,7 +132,7 @@ const exerciseSlice = createSlice({
         console.log(selectedIds);
         console.log(state.exercises);
         const exercisesToHandle = state.exercises;
-        if(exercisesToHandle!=undefined){
+        if(exercisesToHandle!==undefined){
           state.selectedExercises = filterArrayByIds(exercisesToHandle,selectedIds);
       }
       console.log(state.selectedExercises);
@@ -150,7 +150,7 @@ const exerciseSlice = createSlice({
         const selectedIds=action.payload;
         console.log(selectedIds);
         const exercisesToHandle = state.exercises;
-        if(exercisesToHandle!=undefined && selectedIds!=undefined){
+        if(exercisesToHandle!==undefined && selectedIds!=undefined){
           state.exercisesNotIncluded = removeObjectsById(state.exercises,selectedIds)
           console.log(state.exercisesNotIncluded);
         }
@@ -160,7 +160,7 @@ const exerciseSlice = createSlice({
         console.log(action);
         console.log(state);
         const id = action.payload;
-        if(state.exercises!=undefined){
+        if(state.exercises !== undefined){
             console.log(state.exercises.find((item) => item.id === Number(id)));
             state.exercise = {...state.exercises.find((item) => item.id === Number(id))}
             return state;

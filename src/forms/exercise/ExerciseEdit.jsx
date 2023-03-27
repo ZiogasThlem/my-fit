@@ -8,7 +8,7 @@ const ExerciseEdit = ()=>{
     const navigate = useNavigate()
     const {id}=useParams();
     const [loaded,setLoaded]=useState(false);
-    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: '' });
+    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: 0, tmg: '', img: '', vid: '' });
     // console.log(formData);
     // const books = useSelector((state) => selectByIds(state.books, bookIds));
     const exercise = useSelector((state) => {
@@ -45,7 +45,7 @@ const ExerciseEdit = ()=>{
         event.preventDefault();
         console.log('Submit button Clicked');
         // setFormData(formData)
-        const itemPayload= {id:exercise.id,name: formData.name, desc: formData.desc, repetitions: formData.repetitions, tmg: formData.tmg, img: formData.img, vid: formData.vid };
+        const itemPayload= {id:exercise.id,name: formData.name, desc: formData.desc, repetitions: formData.repetitions, tmg: formData.tmg, img: formData.img, vid: formData.vid, workout: exercise.workout };
         dispatch(updateExercise(itemPayload));
     }
 
@@ -105,8 +105,8 @@ const ExerciseEdit = ()=>{
                 <label>
                     Repetitions:
                     <input
-                        type="text"
-                        value={formData.repetitions ||''}
+                        type="number"
+                        value={formData.repetitions ||0}
                         // defaultValue={exercise.repetitions}
                         onChange={(event) =>
                         setFormData({ ...formData, repetitions: event.target.value })

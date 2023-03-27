@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/too
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
+
 
 const programsAdapter = createEntityAdapter();
 
@@ -46,7 +46,7 @@ export const addProgram = createAsyncThunk("program/addProgram", async (program)
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      
     },
     body: JSON.stringify(program),
   });
@@ -59,7 +59,7 @@ export const updateProgram = createAsyncThunk("program/updateProgram", async (pr
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      
     },
     body: JSON.stringify(program),
   });
@@ -72,7 +72,7 @@ export const deleteProgram = createAsyncThunk("program/deleteProgram", async (id
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      
     },
   });
   const data = await response.json();
@@ -172,7 +172,7 @@ const programSlice = createSlice({
       })
       .addCase(updateProgram.fulfilled, (state, action) => {
         const index = state.programs.findIndex((item) => item.id === action.payload.id);
-        if (index !== -1) {selectprogramById
+        if (index !== -1) {
           state.programs[index] = action.payload;
         }
       })

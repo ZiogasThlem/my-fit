@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/too
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
+
 
 const workoutsAdapter = createEntityAdapter();
 
@@ -46,7 +46,7 @@ export const addWorkout = createAsyncThunk("workout/addWorkout", async (workout)
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+   
     },
     body: JSON.stringify(workout),
   });
@@ -59,7 +59,7 @@ export const updateWorkout = createAsyncThunk("workout/updateWorkout", async (wo
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      
     },
     body: JSON.stringify(workout),
   });
@@ -72,7 +72,7 @@ export const deleteWorkout = createAsyncThunk("workout/deleteWorkout", async (id
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+  
     },
   });
   const data = await response.json();
@@ -172,7 +172,7 @@ const workoutSlice = createSlice({
       })
       .addCase(updateWorkout.fulfilled, (state, action) => {
         const index = state.workouts.findIndex((item) => item.id === action.payload.id);
-        if (index !== -1) {selectworkoutById
+        if (index !== -1) {
           state.workouts[index] = action.payload;
         }
       })
