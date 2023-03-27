@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+.App nav {
+  background-color: #282c34;
+}
+
+.App nav li {
+  text-decoration: none;
+  display: inline-block;
+  padding: 20px;
+}
+
+.App nav a {
+  color: white;
+}
+
+.App nav a:hover {
+  color: grey;
+}
