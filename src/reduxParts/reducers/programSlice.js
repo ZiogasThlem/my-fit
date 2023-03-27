@@ -184,7 +184,7 @@ const programSlice = createSlice({
   },
 });
 
-// export const selectprogramById = (state, id) => state.program.program.find((item) => item.id === id);
+export const selectprogramById = (state, id) => state.program.program.find((item) => item.id === id);
 
 // export const selectprogramsByIds = (state, ids) =>
 //   state.program.program.filter((program) => ids.includes(program.id));
