@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Goals from './views/Goals'
@@ -21,6 +20,7 @@ import WorkoutEdit from './forms/workout/WorkoutEdit';
 import ProgramFormAdd from './forms/program/ProgramFormAdd';
 import ProgramGetAll from './forms/program/ProgramGetAll';
 import ProgramEdit from './forms/program/ProgramEdit';
+import Navbar from './views/navbar';
 
 
 
@@ -30,8 +30,9 @@ function App() {
 
     <BrowserRouter>
     <div className="App">
-        
+    <Navbar /> {/* Add Navbar component here */}
       <Routes>
+       
         <Route path="/" element={<Login/>}/>
         <Route path="/goals" element={<Goals/>}/>
         <Route path="/login" element={<Login/>}/>
