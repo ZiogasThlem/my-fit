@@ -140,30 +140,8 @@ const ExerciseEdit = ()=>{
                     
                 </label>
             </div>
-            <div>
-                <label>
-                    Complete:
-                    <input
-                        type="text"
-                        value={formData.complete ||''}
-                        // defaultValue={exercise.complete}
-                        onChange={(event) =>
-                        setFormData({ ...formData, complete: event.target.value })
-                    }/>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Workouts:
-                    <input
-                        type="text"
-                        value={formData.workout ||''}
-                        // defaultValue={exercise.workout}
-                        onChange={(event) =>
-                        setFormData({ ...formData, workout: event.target.value })
-                    }/>
-                </label>
-            </div>
+            
+            
             <button type="submit">Save</button>
         </form>
     }

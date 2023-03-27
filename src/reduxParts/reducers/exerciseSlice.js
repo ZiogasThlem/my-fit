@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { filterArrayByIds } from "../../helpers/filterArrayByIds";
+import { removeObjectsById } from "../../helpers/removeObjectsByid";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
@@ -114,6 +116,7 @@ const exerciseSlice = createSlice({
             exercise:{},
             exercises:[],
             selectedExercises:[],
+            exercisesNotIncluded:[],
             status:'idle',
             error:null
         
@@ -125,12 +128,33 @@ const exerciseSlice = createSlice({
     //   console.log(state.exercises);
     //    return state.exercises.filter((exercise) => action.payload.includes(exercise.id))
         const selectedIds = action.payload;
-      return selectedIds.reduce((selectedEntities, id) => {
-        if (state[id]) {
-          selectedEntities[id] = state[id];
+        // const selectedIds = [24,25];
+        console.log(selectedIds);
+        console.log(state.exercises);
+        const exercisesToHandle = state.exercises;
+        if(exercisesToHandle!=undefined){
+          state.selectedExercises = filterArrayByIds(exercisesToHandle,selectedIds);
+      }
+      console.log(state.selectedExercises);
+        return state;
+        
+        // return selectedIds.reduce((selectedEntities, id) => {
+      //   if (state[id]) {
+      //     selectedEntities[id] = state[id];
+      //   }
+      //   return selectedEntities;
+      // }, {});
+
+      },
+      selectTheRestErxercises : (state,action)=>{
+        const selectedIds=action.payload;
+        console.log(selectedIds);
+        const exercisesToHandle = state.exercises;
+        if(exercisesToHandle!=undefined && selectedIds!=undefined){
+          state.exercisesNotIncluded = removeObjectsById(state.exercises,selectedIds)
+          console.log(state.exercisesNotIncluded);
         }
-        return selectedEntities;
-      }, {});
+        return state;
       },
       selectExerciseById:(state, action) =>{
         console.log(action);
@@ -197,6 +221,7 @@ const exerciseSlice = createSlice({
         return state;
       })
       .addCase(selectExercisesByIds, (state,ids) =>{
+        console.log('mpika ston builder');
         return state.exercises.filter((exercise) => ids.includes(exercise.id))
     });
   },
@@ -211,6 +236,6 @@ export const selectExercisesStatus = (state) => state.exercises.status;
 
 export const selectExercisesError = (state) => state.exercises.error;
 
-export const{selectExercisesByIds, selectExerciseById} =exerciseSlice.actions;
+export const{selectExercisesByIds, selectExerciseById, selectTheRestErxercises} =exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

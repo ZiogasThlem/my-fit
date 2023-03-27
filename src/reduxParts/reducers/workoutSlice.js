@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
@@ -67,11 +68,15 @@ export const updateWorkout = createAsyncThunk("workout/updateWorkout", async (wo
 });
 
 export const deleteWorkout = createAsyncThunk("workout/deleteWorkout", async (id) => {
-  const response = await fetch(`${apiUrl}workout${id}`, {
+  const response = await fetch(`${apiUrl}workout/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      'x-api-key':apiKey
+    },
   });
   const data = await response.json();
-  return data;
+  return id;
 });
 
 
@@ -96,22 +101,38 @@ export const deleteWorkout = createAsyncThunk("workout/deleteWorkout", async (id
 
 const workoutSlice = createSlice({
   name: "workout",
-  initialState :workoutsAdapter.getInitialState(
+  initialState :
     {
-        workout:{
+        workout:{},
         workouts:[],
+        selectedWorkouts:[],
         status:'idle',
         error:null
         }
-    }
-  ),
+    
+  ,
   reducers:{
     selectWorkoutsByIds :(state, action) =>{
       console.log(action.payload);
       console.log(state.workout);
-       return state.workout.workouts.filter((workout) => action.payload.includes(workout.id))
+      const selectedIds = action.payload;
+      const workoutsToHandle = state.workouts;
+      if(workoutsToHandle!=undefined){
+        state.selectedWorkouts = filterArrayByIds(workoutsToHandle,selectedIds)
+      }
+    //    return state.workout.workouts.filter((workout) => action.payload.includes(workout.id))
+      return state;
       },
-    selectWorkoutById:workoutsAdapter.getSelectors().selectById,
+      selectWorkoutById:(state, action) =>{
+        console.log(action);
+        console.log(state);
+        const id = action.payload;
+        if(state.workouts!=undefined){
+            console.log(state.workouts.find((item) => item.id === Number(id)));
+            state.workout = {...state.workouts.find((item) => item.id === Number(id))}
+            return state;
+        }
+      }
     
   }
       
@@ -125,7 +146,7 @@ const workoutSlice = createSlice({
       })
       .addCase(fetchWorkouts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.workout = action.payload;
+        state.workouts = action.payload;
       })
       .addCase(fetchWorkouts.rejected, (state, action) => {
         state.status = "failed";
@@ -147,19 +168,19 @@ const workoutSlice = createSlice({
       //   state.error = action.error.message;
       // })
       .addCase(addWorkout.fulfilled, (state, action) => {
-        state.workout.push(action.payload);
+        state.workouts.push(action.payload);
       })
       .addCase(updateWorkout.fulfilled, (state, action) => {
-        const index = state.workout.findIndex((item) => item.id === action.payload.id);
+        const index = state.workouts.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {selectworkoutById
-          state.workout[index] = action.payload;
+          state.workouts[index] = action.payload;
         }
       })
       .addCase(deleteWorkout.fulfilled, (state, action) => {
-        state.workout = state.workout.filter((item) => item.id !== action.payload);
+        state.workouts = state.workouts.filter((item) => item.id !== action.payload);
       })
       .addCase(selectWorkoutsByIds, (state,ids) =>{
-        return state.workout.workouts.filter((workout) => ids.includes(workout.id))});
+        return state.workouts.filter((workout) => ids.includes(workout.id))});
   },
 });
 
@@ -172,6 +193,6 @@ export const selectWorkoutsStatus = (state) => state.workout.status;
 
 export const selectWorkoutsError = (state) => state.workout.error;
 
-export const{selectWorkoutsByIds, selectworkoutById } =workoutSlice.actions;
+export const{selectWorkoutsByIds, selectWorkoutById } =workoutSlice.actions;
 
 export default workoutSlice.reducer;

@@ -59,12 +59,16 @@ const ExerciseGetAll = ()=>{
     const handleAdd = ()=>{
         navigate('/exercise/add');
     }
+    const handleSome = ()=>{
+        navigate('/exercise/select')
+    }
 
     const date = String(new Date());
     return(
         <>
         <button onClick={handleGetAll}>Show All Exercises</button>
         <button onClick={handleAdd}>Add an exercise</button>
+        <button onClick={handleSome}>Get some exercises</button>
         <table>
             <thead>
                 <tr>
