@@ -18,6 +18,9 @@ import ExerciseSelect from './forms/exercise/ExerciseSelect';
 import WorkoutFormAdd from './forms/workout/WorkoutFormAdd';
 import WorkoutGetAll from './forms/workout/WorkoutGetAll';
 import WorkoutEdit from './forms/workout/WorkoutEdit';
+import ProgramFormAdd from './forms/program/ProgramFormAdd';
+import ProgramGetAll from './forms/program/ProgramGetAll';
+import ProgramEdit from './forms/program/ProgramEdit';
 
 
 
@@ -43,6 +46,9 @@ function App() {
         <Route path="/workouts" element={<WorkoutGetAll/>}/>
         <Route path="/workout/add" element={<WorkoutFormAdd/>}/>
         <Route path="/workout/update/:id" element={<WorkoutEdit/>}/>
+        <Route path="/programs" element={<ProgramGetAll/>}/>
+        <Route path="/program/add" element={<ProgramFormAdd/>}/>
+        <Route path="/program/update/:id" element={<ProgramEdit/>}/>
         
         {/* <Route path="/exerciseAdd" element={<ExerciseFormAdd/>}/>
         <Route path="/exercise/update" element={<ExerciseListFormUpdate/>}/>
