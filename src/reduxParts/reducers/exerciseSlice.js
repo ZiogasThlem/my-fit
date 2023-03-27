@@ -3,7 +3,7 @@ import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 import { removeObjectsById } from "../../helpers/removeObjectsByid";
 import keycloak from "../../keycloak";
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
+
 
 const exercisesAdapter = createEntityAdapter();
 
@@ -36,6 +36,8 @@ const exercisesAdapter = createEntityAdapter();
 
 export const fetchExercises = createAsyncThunk("exercise/fetchExercises", async () => {
   const response = await fetch(`${apiUrl}exercise`);
+  console.log(apiUrl);
+  console.log(response);
   const data = await response.json();
   return data;
 });
@@ -47,7 +49,9 @@ export const addExercise = createAsyncThunk("exercise/addExercise", async (exerc
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+
       'Authorization': 'Bearer ' + keycloak.token
+
     },
     body: JSON.stringify(exercise),
   });
@@ -60,7 +64,9 @@ export const updateExercise = createAsyncThunk("exercise/updateExercise", async 
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+
       'Authorization': 'Bearer ' + keycloak.token
+
     },
     body: JSON.stringify(exercise),
   });
@@ -73,7 +79,9 @@ export const deleteExercise = createAsyncThunk("exercise/deleteExercise", async 
     method: "DELETE",
     headers:{
         "Content-Type": "application/json",
+
         'Authorization': 'Bearer ' + keycloak.token
+
     }
   });
   const data = await response.json();
