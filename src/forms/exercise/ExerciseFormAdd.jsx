@@ -7,7 +7,7 @@ import { addExercise } from "../../reduxParts/reducers/exerciseSlice";
 const ExerciseFormAdd=(exerciseStructure)=>{
   const navigate= useNavigate()
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: '' });
+    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: ''});
     const handleSubmit =(event)=>{
         // event.preventDefault();
         console.log(formData);
