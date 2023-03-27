@@ -30,6 +30,7 @@ function App() {
 
     <BrowserRouter>
     <div className="App">
+    
     <Navbar /> {/* Add Navbar component here */}
       <Routes>
        

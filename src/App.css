@@ -53,3 +53,11 @@
 .App nav a:hover {
   color: grey;
 }
+
+.App .logo{
+display: block;
+align-items: left;
+justify-content: left;
+position:relative;
+padding: 20px;
+}

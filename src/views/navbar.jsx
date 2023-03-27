@@ -4,8 +4,9 @@ import { NavLink } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav>
+      
       <ul>
-      <img src="../public/mefit logo.png" alt="logo" />
+      <img className='logo' src="../mefitlogo.png" alt="logo" width={50} height={50} />
         <li>
         
           <NavLink to="/profile">Profile</NavLink>
