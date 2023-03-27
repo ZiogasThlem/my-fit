@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/too
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 import { removeObjectsById } from "../../helpers/removeObjectsByid";
 
-const apiUrl = 'http://localhost:8080/api/v1/';
+const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 
 
 const exercisesAdapter = createEntityAdapter();
