@@ -5,7 +5,9 @@ const Navbar = () => {
   return (
     <nav>
       <ul>
+      <img src="../public/mefit logo.png" alt="logo" />
         <li>
+        
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
