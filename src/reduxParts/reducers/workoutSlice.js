@@ -184,7 +184,7 @@ const workoutSlice = createSlice({
   },
 });
 
-// export const selectworkoutById = (state, id) => state.workout.workout.find((item) => item.id === id);
+export const selectworkoutById = (state, id) => state.workout.workout.find((item) => item.id === id);
 
 // export const selectworkoutsByIds = (state, ids) =>
 //   state.workout.workout.filter((workout) => ids.includes(workout.id));
