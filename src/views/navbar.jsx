@@ -23,15 +23,6 @@ const Navbar = () => {
         <li>
           <NavLink to="/programs">Manage Programs</NavLink>
         </li>
-        <li>
-          <NavLink to="/goal/:id/workouts">My Workouts</NavLink>
-        </li>
-        <li>
-          <NavLink to="goal/:id/exercises">My Exercises</NavLink>
-        </li>
-        <li>
-          <NavLink to="/goal/:id/programs">My Programs</NavLink>
-        </li>
       </ul>
     </nav>
   );

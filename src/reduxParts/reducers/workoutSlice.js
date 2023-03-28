@@ -125,6 +125,7 @@ const workoutSlice = createSlice({
         state.selectedWorkouts = filterArrayByIds(workoutsToHandle,selectedIds)
       }else if(selectedIds==undefined){
         state.selectedWorkouts = []
+      
       }
     //    return state.workout.workouts.filter((workout) => action.payload.includes(workout.id))
       return state;
