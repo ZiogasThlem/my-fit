@@ -1,0 +1,73 @@
+{
+    "profile":[
+        {
+            "id":1,
+            "age":25,
+            "weight":90,
+            "height":190,
+            "goal":1
+            }
+        ],
+    "goal":[
+        {
+            "id":1,
+            "name":"Get Fit",
+            "start_date":"2023-12-31T23:59:59.999+00:00",
+            "end_date":"2023-01-01T00:00:00.000+00:00",
+            "total_programs":12,
+            "completed_programs":3,
+            "complete":false, 
+            "program":[1],
+            "profile":[1]
+            }
+        ],
+    "program":[
+        {
+            "id":1,
+            "name":"Biceps",
+            "category":"Strengthen",
+            "complete":false,
+            "workout":[1,2],
+            "goal":[1]
+            }
+        ],
+    "workout":[
+        {
+            "id":1,
+            "name":"SKULL CRUSHERS",
+            "type":"BICEPS",
+            "complete":false,
+            "program":[1],
+            "exercise":[1,2]
+            },
+            {
+                "id":2,
+                "name":"SKULL CRUSHERS",
+                "type":"BICEPS",
+                "complete":false,
+                "program":[1],
+                "exercise":[]
+                }
+            ],
+    "exercise":[
+        {
+            "id":1,
+            "name":"Push-ups",
+            "desc":"Push-ups work your chest and arms.",
+            "tmg":"Chest and Arms",
+            "repetitions":10,
+            "img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg",
+            "vid":"https://www.youtube.com/watch?v=IODxDxX7oi4",
+            "complete":false,
+            "workout":1
+        },
+            {"id":2,"name":"Push-ups2","desc":"Push-ups work your chest and arms.2","tmg":"Chest and Arms2","repetitions":12,"img":"https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg","vid":"https://www.youtube.com/watch?v=IODxDxX7oi4",
+            "complete":true,
+            "workout":1
+            }
+        ]
+
+
+
+
+}

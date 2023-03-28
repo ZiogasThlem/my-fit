@@ -95,11 +95,11 @@ const Profile = () =>{
     const handleRegisteredPrograms = ()=>{
         
     }
-    const handleRegisteredWorkouts = ()=>{
-
+    const handleRegisteredWorkouts = (id)=>{
+        navigate(`/goal/${id}/workouts`)
     }
-    const handleRegisteredExercises = ()=>{
-
+    const handleRegisteredExercises = (id)=>{
+        navigate(`/goal/${id}/exercises`)
     }
     return(
     <>
@@ -107,8 +107,8 @@ const Profile = () =>{
         showLoadedGoal&& workoutsLoaded && exercisesLoaded && programsLoaded &&
         <>
             <button onClick={handleRegisteredPrograms}>My programs</button>
-            <button onClick={handleRegisteredWorkouts}>My workouts</button>
-            <button onClick={handleRegisteredExercises}>My exercises</button>
+            <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My workouts</button>
+            <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My exercises</button>
             <table>
                 <thead>
                     <tr>

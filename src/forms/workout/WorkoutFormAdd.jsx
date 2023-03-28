@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeElementFromArray } from "../../helpers/removeElementFromArray";
@@ -15,6 +15,7 @@ const WorkoutFormAdd = ()=>{
     const [isChecked,setIsChecked]=useState(false);
     const [idTohandle,setIdTohandle] = useState();
     const [eventCapture, setEventCapture] = useState();
+    const [selectedExercisesIds,setSelectedExercisesIds]=useState([]);
     const {exercises, status} = useSelector((state)=>{
         console.log(state.exercise);
         return state.exercise});
@@ -123,6 +124,7 @@ const WorkoutFormAdd = ()=>{
                                 
                                     </tbody>
                             </table>
+                            <button onClick={handleSubmit}>Submit</button>
                             <table>
                                 <thead>
                                     <tr>                
@@ -143,12 +145,23 @@ const WorkoutFormAdd = ()=>{
                                     exercisesToSelect.map((exercise,index)=>{
                                         // console.log(index);
                                         return(
+                                            <React.Fragment key={`${date}_${index}`}>
                                             <tr key={`${date}_${index}`}>
                                                 <ExerciseItem exercise={exercise}/>
                                                 <td>
                                                     <input  type={'checkbox'}
-                                                            onChange={()=>{setIdTohandle(exercise.id)}}
-                                                            onClick={(event)=>{handleAddExercise(event,exercise.id)}}
+                                                            onChange={()=>{setSelectedExercisesIds(
+                                                                (prevIds)=>{
+                                                                    const newIds =[...new Set(prevIds),exercise.id];   
+                                                                    if(newIds!=undefined){
+                                                                       return [...new Set(newIds)];
+                                                                        
+                                                                    }else{
+                                                                        return;
+                                                                    }
+                                                                }
+                                                                )}}
+                                                            // onClick={(event)=>{handleAddExercise(event,exercise.id)}}
                                                             
                                                             // on
                                                             // onClickCapture={(event)=>{setIsChecked(event.target.checked)}} 
@@ -161,13 +174,13 @@ const WorkoutFormAdd = ()=>{
                                                     </input>
                                                 </td>
                                             </tr>
+                                            </React.Fragment>
                                             )
                                         }
                                     )  
                                 }
                                 </tbody>
                                 </table>                                                                                                
-                            <button onClick={handleSubmit}>Submit</button>
                         </form>
                             <button onClick={handleShowExercises}>Show exercises</button>
                         </>

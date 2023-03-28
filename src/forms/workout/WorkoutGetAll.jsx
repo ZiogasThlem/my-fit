@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import { fetchExercises } from "../../reduxParts/reducers/exerciseSlice";
 import { deleteWorkout, fetchWorkouts } from "../../reduxParts/reducers/workoutSlice";
 import WorkoutItem from "./WorkoutItem";
+import './workout-style.css'
 
 const WorkoutGetAll = ()=>{
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router"
 import ProgramItem from "../forms/program/ProgramItem";
@@ -6,6 +6,7 @@ import WorkoutItem from "../forms/workout/WorkoutItem";
 import { selectGoalById } from "../reduxParts/reducers/goalSlice";
 import { selectProgramsByIds } from "../reduxParts/reducers/programSlice";
 import { selectWorkoutsByIds } from "../reduxParts/reducers/workoutSlice";
+import ToggleableWorkouts from "../toggles/ToggleableWorkouts";
 
 
 const Programs = ()=>{
@@ -32,6 +33,7 @@ const Programs = ()=>{
     const [workoutsLoaded,setWorkoutsLoaded] = useState(false);
     const [workoutsToShow,setWorkoutsToShow]=useState(false);
     const [showWorkouts,setShowWorkouts] = useState([])
+    const [programWorkout,setProgramWorkout]=useState();
     useEffect(()=>{
         dispatch(selectGoalById(id))
     },[dispatch])
@@ -100,10 +102,13 @@ const Programs = ()=>{
         dispatch(selectWorkoutsByIds())
     }
     const date=String(new Date());
-    
+    // WE MUST RETURN THE FALSE BOOLEANS TO WORK THIS
     if(!programsLoaded){
         return (<div>Loading programs...</div>)
     }
+    // if(!workoutsToShow){
+    //     return
+    // }
     return(
         <>
         {
@@ -122,50 +127,33 @@ const Programs = ()=>{
                         <th>Actions</th>
                     </tr>
                 </thead>
+                
                 <tbody>
-
-                    { programs.map((program,index)=>{
-                            return (
-                            
-                                    <tr key={`${date}_${index}`}>
-                                        <ProgramItem program={program}/>
-                                        <td>{program.workout.length}</td>
-                                        {!showWorkouts[index]?         <td><button onClickCapture={()=>handleShowWorkouts(program.workout,index)}>Show workouts</button></td> :
-                                            <td><button onClickCapture={()=>handleHideWorkouts(index)}>Hide workouts</button></td>}
-                                    </tr>
-                                    )
-                                    }
-                                    )
+                    {programsLoaded&& programs
+                        .map((program,index,programs)=>{
+                                            return (
+                                                <React.Fragment key={`${date}_${index}`}>
+                                                        <tr >
+                                                            <ProgramItem program={program} key={`${date}_${index}`}/>
+                                                            <td>{program.workout.length}</td>
+                                                            {!showWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>handleShowWorkouts(program.workout,index)}>Show workouts</button></td> :
+                                                                <td><button key={`${date}_${index}_button`} onClickCapture={()=>handleHideWorkouts(index)}>Hide workouts</button></td>}
+                                                        </tr>
+                                                        
+                                                                <ToggleableWorkouts  key={`${date}_${index}_toggle`} workoutIds={program.workout} programIndex={index} toggle={showWorkouts}/>
+                                                </React.Fragment>  
+                                                    
+                                                
+                                                    )
+                                }
+                            )
                     }
-                     {workoutsToShow&&       <tr>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th colSpan={3}>Workouts</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Total exercises</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {workoutsToShow && workouts.map((workout,index)=>{
-                                        <tr key={`${date}_${index}_${index}`}>
-                                            <WorkoutItem workout={workout}/>
-                                        </tr>
-                                        }
-                                    )}
-                                </tbody>
-                            </table>
-                            
-                            </tr>
-}
-                            
-                            
-                        
                     
-                </tbody>
+                            
+                            
+                        </tbody>
+                    
+               
             </table>        
         }
         </>
