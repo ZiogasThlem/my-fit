@@ -5,9 +5,12 @@ const ExerciseItem = ({exercise})=>{
         <td>{`${exercise.desc}`}</td>
         <td>{`${exercise.tmg}`}</td>
         <td>{`${exercise.repetitions}`}</td>
-        <td>{`${exercise.img}`}</td>
-        <td>{`${exercise.vid}`}</td>
-        
+        <td>
+        <img src={exercise.img} alt="exercise.img" width={200} />
+        </td>
+        <td>
+        <a href={exercise.vid}>Watch Now</a>
+        </td>
         </>
     )
 }
