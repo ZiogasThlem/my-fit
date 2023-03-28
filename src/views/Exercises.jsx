@@ -113,9 +113,11 @@ const Exercises = ()=>{
     },[dispatch,wIdPool])
     useEffect(()=>{
         console.log(workoutsSelected);
-        if(workoutsSelected){
-            setWorkouts(workoutsSelected)
-            console.log(workoutsSelected);
+        if(workoutsSelected!=undefined){
+            if(workoutsSelected[0]!=undefined){
+                setWorkouts(workoutsSelected)
+                console.log(workoutsSelected);
+        }
         }
     },[workoutsSelected])
     useEffect(()=>{
@@ -145,11 +147,11 @@ const Exercises = ()=>{
     },[workoutsLoaded])
     useEffect(()=>{
         if(exIdPool.length>0 && exIdPool[0]!=undefined){
-                setExIdPool((prevIds)=>[...new Set(prevIds)])
+                // setExIdPool((prevIds)=>[...new Set(prevIds)])
                 console.log(exIdPool);
                 dispatch(selectExercisesByIds(exIdPool))
         }
-    },[dispatch])
+    },[dispatch,exIdPool])
     useEffect(()=>{
         if(exercisesSelected.length>0 && exercisesSelected[0]!=undefined){
             console.log(exercisesSelected);
@@ -165,7 +167,7 @@ const Exercises = ()=>{
         if(exercisesLoadedCompleted){
             setExercisesLoaded(true)
         }
-    },[exercisesLoaded,exercisesLoadedCompleted])
+    },[exercisesLoadedCompleted])
     // useEffect(()=>{
     //     if(workoutsSelected){
     //         setWorkouts(workoutsSelected)
