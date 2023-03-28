@@ -111,7 +111,6 @@ const programSlice = createSlice({
         programs:[],
         selectedPrograms:[],
         status:'idle',
-        statusSelectedPrograms:'idle',
         error:null
         }
     
@@ -125,11 +124,9 @@ const programSlice = createSlice({
       if(programsToHandle!=undefined && selectedIds!=undefined){
         if(Array.isArray(selectedIds)){
           state.selectedPrograms = filterArrayByIds(programsToHandle,selectedIds)
-          state.statusSelectedPrograms='succeeded'
         }
         else{
           state.selectedPrograms = [state.programs.find((item) => item.id === Number(selectedIds))]
-          state.statusSelectedPrograms='succeeded'
         }
 
       }
@@ -193,7 +190,6 @@ const programSlice = createSlice({
         state.programs = state.programs.filter((item) => item.id !== action.payload);
       })
       .addCase(selectProgramsByIds, (state,ids) =>{
-        console.log('mpika ston builder');
         return state.programs.filter((program) => ids.includes(program.id))});
   },
 });

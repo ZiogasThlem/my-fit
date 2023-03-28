@@ -61,7 +61,6 @@ function App() {
         <Route path="/goal/:id/exercises" element={<Exercises/>}/> */}
           <Route path='goal/:id/workouts' element={<Workouts/>}/>
           <Route path='goal/:id/programs' element={<Programs/>}/>
-          <Route path='goal/:id/exercises' element={<Exercises/>}/>
         {/* <Route path="/exerciseAdd" element={<ExerciseFormAdd/>}/>
         <Route path="/exercise/update" element={<ExerciseListFormUpdate/>}/>
         <Route path="/exercise/update/:id" element={<ExerciseItemUpdate/>}/>
