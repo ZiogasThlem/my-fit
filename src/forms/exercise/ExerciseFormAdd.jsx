@@ -28,69 +28,70 @@ const ExerciseFormAdd = (exerciseStructure) => {
   return (
     <>
       <form onSubmit={handleSubmit} className="exercise-form">
-        <label>
-          Name:
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(event) =>
-              setFormData({ ...formData, name: event.target.value })
-            }
-          />
-        </label>
-
-        <label>
-          Description:
-          <textarea
-            value={formData.desc}
-            onChange={(event) =>
-              setFormData({ ...formData, desc: event.target.value })
-            }
-          />
-        </label>
-        <label>
-          Repetitions:
-          <input
-            type="text"
-            value={formData.repetitions}
-            onChange={(event) =>
-              setFormData({ ...formData, repetitions: event.target.value })
-            }
-          />
-        </label>
-        <label>
-          Target Muscle Group:
-          <input
-            type="text"
-            value={formData.tmg}
-            onChange={(event) =>
-              setFormData({ ...formData, tmg: event.target.value })
-            }
-          />
-        </label>
-        <label>
-          Image:
-          <input
-            type="text"
-            value={formData.img}
-            onChange={(event) =>
-              setFormData({ ...formData, img: event.target.value })
-            }
-          />
-        </label>
-        <label>
-          Video:
-          <input
-            type="text"
-            value={formData.vid}
-            onChange={(event) =>
-              setFormData({ ...formData, vid: event.target.value })
-            }
-          />
-        </label>
-        <button type="submit">Add Exercise</button>
+        <ul className="input-grp">
+          <li>
+            <span>Name: </span>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(event) =>
+                setFormData({ ...formData, name: event.target.value })
+              }
+            />
+          </li>
+          <li>
+          <span>Description: </span>
+            <textarea
+              value={formData.desc}
+              onChange={(event) =>
+                setFormData({ ...formData, desc: event.target.value })
+              }
+            />
+          </li>
+          <li>
+          <span>Repetitions: </span>
+            <input
+              type="text"
+              value={formData.repetitions}
+              onChange={(event) =>
+                setFormData({ ...formData, repetitions: event.target.value })
+              }
+            />
+          </li>
+          <li>
+            <span>Target Muscle Group: </span>
+            <input
+              type="text"
+              value={formData.tmg}
+              onChange={(event) =>
+                setFormData({ ...formData, tmg: event.target.value })
+              }
+            />
+          </li>
+          <li>
+            <span>Image: </span>
+            <input
+              type="text"
+              value={formData.img}
+              onChange={(event) =>
+                setFormData({ ...formData, img: event.target.value })
+              }
+            />
+          </li>
+          <li>
+            <span>Video: </span>
+            <input
+              type="text"
+              value={formData.vid}
+              onChange={(event) =>
+                setFormData({ ...formData, vid: event.target.value })
+              }
+            />
+          </li>
+          <button type="submit">Add Exercise</button>
+          <button onClick={handleBack}>Back</button> 
+        </ul>
       </form>
-      <button onClick={handleBack}>Back</button>
     </>
   );
 };

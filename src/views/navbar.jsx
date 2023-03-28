@@ -40,7 +40,7 @@ const Navbar = () => {
           <NavLink to="/programs">Programs</NavLink>
         </li>
         <li>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className='btn btn-danger'>Logout</button>
         </li>
       </ul>}
     </nav>
