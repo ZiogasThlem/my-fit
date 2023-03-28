@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router"
+import ExerciseItem from "../forms/exercise/ExerciseItem";
 import { selectExercisesByIds } from "../reduxParts/reducers/exerciseSlice";
 import { selectGoalById } from "../reduxParts/reducers/goalSlice";
 import { selectProgramsByIds } from "../reduxParts/reducers/programSlice";
@@ -31,8 +32,8 @@ const Exercises = ()=>{
     })
     const exercisesSelected = useSelector((state)=>{
         console.log(state.exercise);
+        console.log(state.exercise.selectedExercises);
         return(
-            
             state.exercise.selectedExercises    
         )
     })
@@ -40,6 +41,7 @@ const Exercises = ()=>{
     const [programsLoaded,setProgramsLoaded]=useState(false);
     const [workoutsLoaded,setworkoutsLoaded]=useState(false);
     const [exercisesLoaded,setExercisesLoaded]=useState(false);
+    const [exercisesLoadedCompleted,setExercisesLoadedCompleted]=useState(false);
     const [programs,setPrograms]=useState();
     const [workouts,setWorkouts]=useState();
     const [exercises,setExercises]=useState();
@@ -87,7 +89,15 @@ const Exercises = ()=>{
         if(programsLoaded){
             programs.forEach(program => {
                 
-                setwIdPool((prevIds)=>[...new Set(prevIds),...program.workout])
+                setwIdPool((prevIds)=>{
+                    const newIds =[...new Set(prevIds),...program.workout];
+                    if(newIds!=undefined){
+                        return newIds
+                    }
+                    else{
+                        return
+                    }
+                })
             });
            
         }
@@ -116,30 +126,46 @@ const Exercises = ()=>{
     useEffect(()=>{
         if(workoutsLoaded){
             workouts.forEach(workout=>{
-                setExIdPool((prevIds)=>[...new Set(prevIds),...workout.exercise])
+                setExIdPool((prevIds)=>{
+                    console.log(workout.exercise);
+
+                    const newIds = [...new Set(prevIds),...workout.exercise]
+                    if(newIds!=undefined){
+                        return newIds
+                    }
+                    else{
+                        return
+                    }
+                    
+                })
                 console.log(exIdPool);
             })
            
         }
-    },[workoutsLoaded,workouts])
+    },[workoutsLoaded])
     useEffect(()=>{
-        if(exIdPool.length>1){
+        if(exIdPool.length>0 && exIdPool[0]!=undefined){
                 setExIdPool((prevIds)=>[...new Set(prevIds)])
                 console.log(exIdPool);
                 dispatch(selectExercisesByIds(exIdPool))
         }
     },[dispatch])
     useEffect(()=>{
-        if(exercisesSelected){
+        if(exercisesSelected.length>0 && exercisesSelected[0]!=undefined){
             console.log(exercisesSelected);
             setExercises(exercisesSelected)
         }
     },[exercisesSelected])
     useEffect(()=>{
         if(exercises){
-            setExercisesLoaded(true)
+            setExercisesLoadedCompleted(true)
         }
     },[exercises])
+    useEffect(()=>{
+        if(exercisesLoadedCompleted){
+            setExercisesLoaded(true)
+        }
+    },[exercisesLoaded,exercisesLoadedCompleted])
     // useEffect(()=>{
     //     if(workoutsSelected){
     //         setWorkouts(workoutsSelected)
@@ -152,7 +178,34 @@ const Exercises = ()=>{
     const date = String(new Date())
     return(
         <>
-
+            <table>
+                <thead>
+                    <tr>
+                        <th colSpan={6}>My Exercises</th>
+                    </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Muscle Group</th>
+                    <th>Repetitions</th>
+                    <th>Image</th>
+                    <th>Video</th>
+                </tr>
+                </thead>
+                <tbody>
+            {exercisesLoaded && exercises.map(
+                (exercise,index)=>{
+                    return(
+                        <React.Fragment key={`${date}_${index}_frag`}>
+                    <tr>
+                        <ExerciseItem exercise={exercise} key={`${date}_${index}_ex`}/>
+                    </tr>
+                    </React.Fragment>
+                    )
+                }
+            )}
+            </tbody>
+            </table>
         </>
     )
 }
