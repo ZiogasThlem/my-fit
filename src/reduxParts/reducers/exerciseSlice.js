@@ -51,7 +51,7 @@ export const addExercise = createAsyncThunk("exercise/addExercise", async (exerc
     // headers: HeadersApi,
     headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(exercise),
   });
@@ -65,7 +65,7 @@ export const updateExercise = createAsyncThunk("exercise/updateExercise", async 
     // headers: HeadersApi,
     headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(exercise),
   });
@@ -79,7 +79,7 @@ export const deleteExercise = createAsyncThunk("exercise/deleteExercise", async 
     // headers: HeadersApi,
     headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     }
   });
   const data = await response.json();
