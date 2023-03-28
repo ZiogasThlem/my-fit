@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router"
-import { selectProgramById } from "../../reduxParts/reducers/programSlice";
+import { selectProgramById, updateProgram } from "../../reduxParts/reducers/programSlice";
 import { selectWorkoutsByIds } from "../../reduxParts/reducers/workoutSlice";
 import WorkoutItem from "../workout/WorkoutItem";
 
@@ -15,6 +15,7 @@ const ProgramEdit = ()=>{
     const program = useSelector((state)=>state.program.program);
     const [programLoaded,setProgramLoaded] = useState(false);
     const [workoutsLoaded,setWorkoutsLoaded] = useState(false);
+    const [workoutIds,setWorkoutIds]=useState([])
     useEffect(()=>{
         dispatch(selectProgramById(id));
         setProgramLoaded(true)
@@ -31,8 +32,16 @@ const ProgramEdit = ()=>{
             setFormData(program)
         }
     },[workoutsLoaded])
+    useEffect(()=>{
+        if(programLoaded){
+            setWorkoutIds([...program.workout]);
+        }
+    },[programLoaded,workoutIds])
     const handleSubmit = (event)=>{
         event.preventDefault();
+        const itemPayload = {id:program.id, name:formData.name, category:formData.category, workout:workoutIds, goal:program.goal, complete:false}
+        console.log(itemPayload);
+        dispatch(updateProgram(itemPayload));
     }
     const handleBack = ()=>{
         navigate('/programs');

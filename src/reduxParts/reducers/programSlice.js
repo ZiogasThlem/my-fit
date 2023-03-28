@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { HeadersApi } from "../../api/HeadersApi";
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
+import keycloak from "../../keycloak";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-
+const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 
 const programsAdapter = createEntityAdapter();
 
@@ -44,9 +46,10 @@ export const addProgram = createAsyncThunk("program/addProgram", async (program)
   
   const response = await fetch(`${apiUrl}program`, {
     method: "POST",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-      
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(program),
   });
@@ -57,9 +60,10 @@ export const addProgram = createAsyncThunk("program/addProgram", async (program)
 export const updateProgram = createAsyncThunk("program/updateProgram", async (program) => {
   const response = await fetch(`${apiUrl}program/${program.id}`, {
     method: "PATCH",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-      
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(program),
   });
@@ -70,9 +74,10 @@ export const updateProgram = createAsyncThunk("program/updateProgram", async (pr
 export const deleteProgram = createAsyncThunk("program/deleteProgram", async (id) => {
   const response = await fetch(`${apiUrl}program/${id}`, {
     method: "DELETE",
-    headers: {
+    // headers: HeadersApi,
+        headers:{
       "Content-Type": "application/json",
-      
+      'Authorization': 'Bearer ' + keycloak.token
     },
   });
   const data = await response.json();
@@ -107,6 +112,7 @@ const programSlice = createSlice({
         programs:[],
         selectedPrograms:[],
         status:'idle',
+        statusSelectedPrograms:'idle',
         error:null
         }
     
@@ -117,8 +123,16 @@ const programSlice = createSlice({
       console.log(state.program);
       const selectedIds = action.payload;
       const programsToHandle = state.programs;
-      if(programsToHandle!=undefined){
-        state.selectedPrograms = filterArrayByIds(programsToHandle,selectedIds)
+      if(programsToHandle!=undefined && selectedIds!=undefined){
+        if(Array.isArray(selectedIds)){
+          state.selectedPrograms = filterArrayByIds(programsToHandle,selectedIds)
+          state.statusSelectedPrograms='succeeded'
+        }
+        else{
+          state.selectedPrograms = [state.programs.find((item) => item.id === Number(selectedIds))]
+          state.statusSelectedPrograms='succeeded'
+        }
+
       }
     //    return state.program.programs.filter((program) => action.payload.includes(program.id))
       return state;
@@ -180,6 +194,7 @@ const programSlice = createSlice({
         state.programs = state.programs.filter((item) => item.id !== action.payload);
       })
       .addCase(selectProgramsByIds, (state,ids) =>{
+        console.log('mpika ston builder');
         return state.programs.filter((program) => ids.includes(program.id))});
   },
 });

@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { HeadersApi } from "../../api/HeadersApi";
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
+import keycloak from "../../keycloak";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-
+const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 
 const workoutsAdapter = createEntityAdapter();
 
@@ -44,9 +46,10 @@ export const addWorkout = createAsyncThunk("workout/addWorkout", async (workout)
   
   const response = await fetch(`${apiUrl}workout`, {
     method: "POST",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-   
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(workout),
   });
@@ -57,9 +60,10 @@ export const addWorkout = createAsyncThunk("workout/addWorkout", async (workout)
 export const updateWorkout = createAsyncThunk("workout/updateWorkout", async (workout) => {
   const response = await fetch(`${apiUrl}workout/${workout.id}`, {
     method: "PATCH",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-      
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(workout),
   });
@@ -70,9 +74,10 @@ export const updateWorkout = createAsyncThunk("workout/updateWorkout", async (wo
 export const deleteWorkout = createAsyncThunk("workout/deleteWorkout", async (id) => {
   const response = await fetch(`${apiUrl}workout/${id}`, {
     method: "DELETE",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-  
+      'Authorization': 'Bearer ' + keycloak.token
     },
   });
   const data = await response.json();
@@ -117,8 +122,11 @@ const workoutSlice = createSlice({
       console.log(state.workout);
       const selectedIds = action.payload;
       const workoutsToHandle = state.workouts;
-      if(workoutsToHandle!=undefined){
+      if(workoutsToHandle!=undefined && selectedIds!=undefined){
         state.selectedWorkouts = filterArrayByIds(workoutsToHandle,selectedIds)
+      }else if(selectedIds==undefined){
+        state.selectedWorkouts = []
+      
       }
     //    return state.workout.workouts.filter((workout) => action.payload.includes(workout.id))
       return state;

@@ -10,7 +10,7 @@ const ProgramFormAdd = ()=>{
     const dispatch = useDispatch();
     const [showWorkouts, setShowWorkouts] = useState();
     const [workoutsToSelect,setWorkoutsToSelect] = useState();
-    const [workoutIds,setWorkoutIds]=useState();
+    const [workoutIds,setWorkoutIds]=useState([]);
     const [checkedItems,setCheckedItems] = useState({});
     const [formData,setFormData] = useState({name:'', category:'', workout:[]})
     const {workouts} = useSelector((state)=>{
@@ -31,7 +31,7 @@ const ProgramFormAdd = ()=>{
 
     const handleSubmit = (event)=>{
         event.preventDefault();
-        const itemPayload = {name:formData.name, category:formData.category, workout:workoutIds}
+        const itemPayload = {name:formData.name, category:formData.category, workout:workoutIds, goal:[1], complete:false}
         dispatch(addProgram(itemPayload))
     }
     const handleBack = ()=>{
