@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import { HeadersApi } from "../../api/HeadersApi";
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
+import keycloak from "../../keycloak";
 
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
 const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
@@ -48,7 +49,7 @@ export const addProgram = createAsyncThunk("program/addProgram", async (program)
     // headers: HeadersApi,
     headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(program),
   });
@@ -62,7 +63,7 @@ export const updateProgram = createAsyncThunk("program/updateProgram", async (pr
     // headers: HeadersApi,
     headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     },
     body: JSON.stringify(program),
   });
@@ -76,7 +77,7 @@ export const deleteProgram = createAsyncThunk("program/deleteProgram", async (id
     // headers: HeadersApi,
         headers:{
       "Content-Type": "application/json",
-      'x-api-key':apiKey
+      'Authorization': 'Bearer ' + keycloak.token
     },
   });
   const data = await response.json();
