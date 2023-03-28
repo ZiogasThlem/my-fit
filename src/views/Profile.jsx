@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import GoalItem from "../forms/goal/GoalItem";
+import keycloak from "../keycloak";
 import { fetchExercises } from "../reduxParts/reducers/exerciseSlice";
 import { fetchGoals, selectGoalById } from "../reduxParts/reducers/goalSlice";
 import { fetchPrograms } from "../reduxParts/reducers/programSlice";
@@ -106,13 +107,14 @@ const Profile = () =>{
         {
         showLoadedGoal&& workoutsLoaded && exercisesLoaded && programsLoaded &&
         <>
+        <h1>Welcome, {keycloak.tokenParsed.name}</h1>
             <button onClick={handleRegisteredPrograms}>My programs</button>
             <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My workouts</button>
             <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My exercises</button>
             <table>
                 <thead>
                     <tr>
-                        <th colSpan={5}>My Goal</th>
+                        <th colSpan={5}>My Goals</th>
                     </tr>
                     <tr>
                         <th>Name</th>
