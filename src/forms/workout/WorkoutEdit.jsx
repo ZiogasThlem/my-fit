@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router";
 import { selectExercisesByIds, selectTheRestErxercises } from "../../reduxParts/reducers/exerciseSlice";
-import { selectWorkoutById } from "../../reduxParts/reducers/workoutSlice";
+import { selectWorkoutById, updateWorkout } from "../../reduxParts/reducers/workoutSlice";
 import ExerciseItem from "../exercise/ExerciseItem";
 
 const WorkoutEdit = ()=>{
@@ -12,7 +12,7 @@ const WorkoutEdit = ()=>{
     const [workoutLoaded,setWorkoutLoaded]=useState(false);
     const [exercisesLoaded,setExercisesLoaded]=useState(false);
     const [formData,setFormData]= useState({name: '', type:'', exercise:[]})
-
+    const [exerciseIds, setExerciseIds] = useState([]);
     const exercises = useSelector((state)=>{
         return state.exercise.selectedExercises;
     })
@@ -37,7 +37,9 @@ const WorkoutEdit = ()=>{
         }
     },[exercisesLoaded])
     const handleSubmit = (event)=>{
+        const itemPayload = {id:workout.id, name: formData.name, type:formData.type, exercise:exerciseIds, program:workout.program, complete:false}
         event.preventDefault();
+        dispatch(updateWorkout(itemPayload));
     }
     const handleBack = ()=>{
         navigate('/workouts');

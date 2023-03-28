@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Goals from './views/Goals'
 import Login from './views/Login'
 import Profile from './views/Profile'
-import Workout from './views/Workout';
-import Program from './views/Program';
+import Workout from './views/Workouts';
+import Program from './views/Programs';
 import { Provider} from 'react-redux';
 // import { Store } from '@reduxjs/toolkit';
 import store from './reduxParts/store';
@@ -21,6 +21,9 @@ import ProgramFormAdd from './forms/program/ProgramFormAdd';
 import ProgramGetAll from './forms/program/ProgramGetAll';
 import ProgramEdit from './forms/program/ProgramEdit';
 import Navbar from './views/navbar';
+import Workouts from './views/Workouts';
+import Programs from './views/Programs';
+import Exercises from './views/Exercises';
 
 
 
@@ -33,7 +36,7 @@ function App() {
     
     <Navbar /> {/* Add Navbar component here */}
       <Routes>
-       
+       {/* CONTRIBUTOR */}
         <Route path="/" element={<Login/>}/>
         <Route path="/goals" element={<Goals/>}/>
         <Route path="/login" element={<Login/>}/>
@@ -52,6 +55,12 @@ function App() {
         <Route path="/program/add" element={<ProgramFormAdd/>}/>
         <Route path="/program/update/:id" element={<ProgramEdit/>}/>
         
+      {/* USER */}
+        {/* <Route path="/goal/:id/programs" element={<Programs/>}/>
+        <Route path="/goal/:id/workouts" element={<Workouts/>}/>
+        <Route path="/goal/:id/exercises" element={<Exercises/>}/> */}
+          <Route path='goal/:id/workouts' element={<Workouts/>}/>
+          <Route path='goal/:id/programs' element={<Programs/>}/>
         {/* <Route path="/exerciseAdd" element={<ExerciseFormAdd/>}/>
         <Route path="/exercise/update" element={<ExerciseListFormUpdate/>}/>
         <Route path="/exercise/update/:id" element={<ExerciseItemUpdate/>}/>

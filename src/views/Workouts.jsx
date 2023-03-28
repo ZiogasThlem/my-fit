@@ -1,6 +1,6 @@
 
 
-const Workout = () =>{
+const Workouts = () =>{
     return(
         <>
         <h1>Workout</h1>
@@ -10,4 +10,4 @@ const Workout = () =>{
     )
 }
 
-export default Workout
+export default Workouts

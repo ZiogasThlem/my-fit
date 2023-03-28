@@ -45,7 +45,9 @@ const ExerciseEdit = ()=>{
         event.preventDefault();
         console.log('Submit button Clicked');
         // setFormData(formData)
-        const itemPayload= {id:exercise.id,name: formData.name, desc: formData.desc, repetitions: formData.repetitions, tmg: formData.tmg, img: formData.img, vid: formData.vid, workout: exercise.workout };
+        
+        const itemPayload= {id:exercise.id,name: formData.name, desc: formData.desc, repetitions: formData.repetitions, tmg: formData.tmg, img: formData.img, vid: formData.vid, workout: exercise.workout, complete:false };
+        console.log(itemPayload);
         dispatch(updateExercise(itemPayload));
     }
 

@@ -7,10 +7,11 @@ import { addExercise } from "../../reduxParts/reducers/exerciseSlice";
 const ExerciseFormAdd=(exerciseStructure)=>{
   const navigate= useNavigate()
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: ''});
+    const [formData, setFormData] = useState({ name: '', desc: '', repetitions: 0, tmg: '', img: '', vid: '', workout:[1]});
     const handleSubmit =(event)=>{
         // event.preventDefault();
         console.log(formData);
+        
         dispatch(addExercise(formData))
         // setFormData({ name: '', desc: '', repetitions: '', tmg: '', img: '', vid: '' });
     }
@@ -46,7 +47,7 @@ const ExerciseFormAdd=(exerciseStructure)=>{
       <label>
         Repetitions:
         <input
-        type="text"
+        type="number"
           value={formData.repetitions}
           onChange={(event) =>
             setFormData({ ...formData, repetitions: event.target.value })

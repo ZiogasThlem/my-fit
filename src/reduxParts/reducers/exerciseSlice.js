@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import { filterArrayByIds } from "../../helpers/filterArrayByIds";
 import { removeObjectsById } from "../../helpers/removeObjectsByid";
+import { HeadersApi } from "../../api/HeadersApi";
 import keycloak from "../../keycloak";
 const apiUrl = process.env.REACT_APP_API_LOCAL_URL;
-
+const apiKey = process.env.REACT_APP_API_LOCAL_KEY;
 
 const exercisesAdapter = createEntityAdapter();
 
@@ -47,11 +48,10 @@ export const addExercise = createAsyncThunk("exercise/addExercise", async (exerc
   
   const response = await fetch(`${apiUrl}exercise`, {
     method: "POST",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-
-      'Authorization': 'Bearer ' + keycloak.token
-
+      'x-api-key':apiKey
     },
     body: JSON.stringify(exercise),
   });
@@ -62,11 +62,10 @@ export const addExercise = createAsyncThunk("exercise/addExercise", async (exerc
 export const updateExercise = createAsyncThunk("exercise/updateExercise", async (exercise) => {
   const response = await fetch(`${apiUrl}exercise/${exercise.id}`, {
     method: "PATCH",
-    headers: {
+    // headers: HeadersApi,
+    headers:{
       "Content-Type": "application/json",
-
-      'Authorization': 'Bearer ' + keycloak.token
-
+      'x-api-key':apiKey
     },
     body: JSON.stringify(exercise),
   });
@@ -77,11 +76,10 @@ export const updateExercise = createAsyncThunk("exercise/updateExercise", async 
 export const deleteExercise = createAsyncThunk("exercise/deleteExercise", async (id) => {
   const response = await fetch(`${apiUrl}exercise/${id}`, {
     method: "DELETE",
+    // headers: HeadersApi,
     headers:{
-        "Content-Type": "application/json",
-
-        'Authorization': 'Bearer ' + keycloak.token
-
+      "Content-Type": "application/json",
+      'x-api-key':apiKey
     }
   });
   const data = await response.json();
@@ -142,6 +140,7 @@ const exerciseSlice = createSlice({
         const exercisesToHandle = state.exercises;
         if(exercisesToHandle!==undefined){
           state.selectedExercises = filterArrayByIds(exercisesToHandle,selectedIds);
+          exercisesToHandle.length=0;
       }
       console.log(state.selectedExercises);
         return state;
