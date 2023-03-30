@@ -11,7 +11,7 @@ const Login = () => {
   useEffect(() => {
     if (keycloak.authenticated) {
       setUsername(keycloak.tokenParsed.preferred_username);
-      navigate('./profile');
+      navigate('/profile');
     }
   }, [username]);
 
