@@ -136,8 +136,8 @@ const Programs = ()=>{
                                                         <tr >
                                                             <ProgramItem program={program} key={`${date}_${index}`}/>
                                                             <td>{program.workout.length}</td>
-                                                            {!showWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>handleShowWorkouts(program.workout,index)}>Show workouts</button></td> :
-                                                                <td><button key={`${date}_${index}_button`} onClickCapture={()=>handleHideWorkouts(index)}>Hide workouts</button></td>}
+                                                            {!showWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>handleShowWorkouts(program.workout,index)}>Show Workouts</button></td> :
+                                                                <td><button key={`${date}_${index}_button`} onClickCapture={()=>handleHideWorkouts(index)}>Hide Workouts</button></td>}
                                                         </tr>
                                                         
                                                                 <ToggleableWorkouts  key={`${date}_${index}_toggle`} workoutIds={program.workout} programIndex={index} toggle={showWorkouts}/>

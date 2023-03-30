@@ -182,7 +182,7 @@ const WorkoutFormAdd = ()=>{
                                 </tbody>
                                 </table>                                                                                                
                         </form>
-                            <button onClick={handleShowExercises}>Show exercises</button>
+                            <button onClick={handleShowExercises}>Show Exercises</button>
                         </>
                     }
                 <button onClick={handleBack}>Back</button>
