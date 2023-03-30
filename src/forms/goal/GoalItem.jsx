@@ -1,12 +1,17 @@
-const GoalItem = ({goal})=>{
-
-    return(
-    <>
+const GoalItem = ({ goal }) => {
+    // Format the start date and end date as strings in the desired date format
+    const startDateString = new Date(goal.start_date).toLocaleDateString();
+    const endDateString = new Date(goal.end_date).toLocaleDateString();
+  
+    return (
+      <>
         <td>{goal.name}</td>
-        <td>{goal.start_date}</td>
-        <td>{goal.end_date}</td>
+        <td>{startDateString}</td>
+        <td>{endDateString}</td>
         <td>{goal.total_programs}</td>
-    </>
-    )
-}
-export default GoalItem
+      </>
+    );
+  };
+  
+  export default GoalItem;
+  
