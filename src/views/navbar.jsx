@@ -17,7 +17,7 @@ const Navbar = () => {
     }
 },[username])
 
-  const handleLogout = () => keycloak.logout({ redirectUri: [ 'https://*.vercel.app/login' ,'http://localhost:3000/login','https://my-fit-one.vercel.app/login' ]})
+  const handleLogout = () => keycloak.logout({ redirectUri: ['https://my-fit-one.vercel.app/login', 'https://*.vercel.app/login' ,'http://localhost:3000/login' ]})
 
 
   return (

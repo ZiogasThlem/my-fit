@@ -16,7 +16,7 @@ const Login = () => {
   }, [username]);
 
   const handleLogin = async () => {
-    keycloak.login({ redirectUri: ['https://*.vercel.app/profile','/profile','https://my-fit-one.vercel.app/profile']});
+    keycloak.login({ redirectUri: ['https://my-fit-one.vercel.app/profile','https://*.vercel.app/profile','/profile']});
   };
 
   const handleRegister = () => {
