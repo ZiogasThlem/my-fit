@@ -1,3 +1,4 @@
+
 import { configureStore} from "@reduxjs/toolkit";
 import exerciseReducer from './reducers/exerciseSlice.js';
 import thunkMiddleWare from "redux-thunk";
@@ -23,3 +24,4 @@ export default configureStore({
     // middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(logger),
     // composedEnhancer
 })
+
