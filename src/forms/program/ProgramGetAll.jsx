@@ -60,7 +60,7 @@ const ProgramGetAll =()=>{
     const date = String(new Date())
     return(
         <>
-            <button onClick={handleAdd}>Add a program</button>
+            <button onClick={handleAdd}>Add a Program</button>
             <table>
                 <thead>
                     <tr>

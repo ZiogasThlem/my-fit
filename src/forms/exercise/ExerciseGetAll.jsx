@@ -67,8 +67,8 @@ const ExerciseGetAll = ()=>{
     return(
         <main className='GetAll'>
         <button onClick={handleGetAll}>Show All Exercises</button>
-        <button onClick={handleAdd}>Add an exercise</button>
-        <button onClick={handleSome}>Get some exercises</button>
+        <button onClick={handleAdd}>Add An Exercise</button>
+        <button onClick={handleSome}>Get Some Exercises</button>
         <table>
             <thead>
                 <tr>

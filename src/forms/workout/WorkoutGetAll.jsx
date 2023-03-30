@@ -58,7 +58,7 @@ const WorkoutGetAll = ()=>{
     const date = String(new Date());
     return(
         <>
-        <button onClick={handleAdd}>Add a workout</button>
+        <button onClick={handleAdd}>Add a Workout</button>
             <table>
                 <thead>
                     <tr>

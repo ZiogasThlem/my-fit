@@ -108,9 +108,9 @@ const Profile = () =>{
         showLoadedGoal&& workoutsLoaded && exercisesLoaded && programsLoaded &&
         <>
         <h1>Welcome, {keycloak.tokenParsed.name}</h1>
-            <button onClick={handleRegisteredPrograms}>My programs</button>
-            <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My workouts</button>
-            <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My exercises</button>
+            <button onClick={handleRegisteredPrograms}>My Programs</button>
+            <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My Workouts</button>
+            <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My Exercises</button>
             <table>
                 <thead>
                     <tr>
