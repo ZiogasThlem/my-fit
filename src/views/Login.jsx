@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import keycloak from "../keycloak"
+import { Redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -12,7 +13,8 @@ import { useState } from "react";
 const Login = () =>{
     
       const handleLogin = async () => {
-        keycloak.login()
+        keycloak.login()        	
+      
       }
 
       const navigate = useNavigate()
@@ -40,7 +42,7 @@ const Login = () =>{
       return (
         <div className="login-btn-grp">
           <h1>Welcome!</h1>
-          <button onClick={handleLogin}  className="login-btn">Login</button>
+          <button onClick={handleLogin}  className="login-btn">Login</button>          
           <button onClick={handleRegister} className="login-btn">Register</button>
           <button onClick={handleToken} className="login-btn">Test</button>
         </div>
