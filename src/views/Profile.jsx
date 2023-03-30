@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import GoalItem from "../forms/goal/GoalItem";
 import { fetchExercises } from "../reduxParts/reducers/exerciseSlice";
 import { fetchGoals, selectGoalById } from "../reduxParts/reducers/goalSlice";
+import { fetchProfiles, selectProfileById } from "../reduxParts/reducers/profileSlice";
 import { fetchPrograms } from "../reduxParts/reducers/programSlice";
 import { fetchWorkouts } from "../reduxParts/reducers/workoutSlice";
 
@@ -17,6 +18,7 @@ const Profile = () =>{
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const profileId = 1;
     const goalId=1;
     const {goal:goalSelected,status:statusGoal,goals} = useSelector(state=>{
         console.log(state.goal);
@@ -24,32 +26,47 @@ const Profile = () =>{
     const {exercises:exercisesFetched, status:statusExercises} = useSelector((state)=>state.exercise);
     const {workouts:workoutsFetched, status:statusWorkouts} = useSelector((state)=>state.workout);
     const {programs:programsFetched, status:statusPrograms} = useSelector((state)=>state.program);
+    const {profiles:profilesFetched,profile:selectedProfile, status:statusProfiles}=useSelector((state)=>state.profile);
     const [goalLoaded,setGoalLoaded] = useState(false)
     const [showLoadedGoal,setShowLoadedGoal] = useState(false)
     const [goal,setGoal]=useState();
     const [exercises,setExercises] = useState();
     const [workouts,setWorkouts] = useState();
     const [programs,setPrograms] = useState();
+    const [profile,setProfile]=useState();
     const [exercisesLoaded,setExercisesLoaded] = useState(false);
     const [workoutsLoaded,setWorkoutsLoaded] = useState(false);
     const [programsLoaded,setProgramsLoaded] = useState(false);
+    const [profileLoaded,setProfileLoaded]=useState(false)
     
     useEffect(()=>{
+        dispatch(fetchProfiles());
         dispatch(fetchExercises());
         dispatch(fetchWorkouts());
         dispatch(fetchPrograms());
         dispatch(fetchGoals());
     },[dispatch])
     useEffect(()=>{
-        if(statusGoal==='succeeded'){
-            dispatch(selectGoalById(goalId))
+        if(statusProfiles==='succeeded'){
+            dispatch(selectProfileById(profileId))
+        }
+        
+    },[dispatch,statusProfiles])
+    useEffect(()=>{
+        if(selectedProfile){
+            setProfile(selectedProfile);
+        }
+    },[selectedProfile])
+    useEffect(()=>{
+        if(statusGoal==='succeeded' && profile){
+            dispatch(selectGoalById(profile.goal))
             setGoalLoaded(true)
         }
         if(goalLoaded){
             setGoal(goalSelected)
             setShowLoadedGoal(true)
         }
-    },[statusGoal,goalLoaded,showLoadedGoal,statusExercises,statusWorkouts,statusPrograms])
+    },[statusGoal,goalLoaded,showLoadedGoal,statusExercises,statusWorkouts,statusPrograms, profile])
     useEffect(()=>{
         if(statusExercises ==='succeeded'){
             setExercises(exercisesFetched);

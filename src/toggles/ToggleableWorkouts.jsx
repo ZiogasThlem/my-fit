@@ -3,15 +3,20 @@ import { useDispatch, useSelector } from "react-redux"
 import WorkoutItem from "../forms/workout/WorkoutItem"
 import { fetchWorkouts, selectWorkoutsByIds } from "../reduxParts/reducers/workoutSlice";
 
-const ToggleableWorkouts = ({workoutIds, programIndex, toggle})=>{
+const ToggleableWorkouts = ({workoutIds, toggle, index, workoutsPerProgram})=>{
     const [ids,setIds]=useState();
     const dispatch = useDispatch();
     const [toggleWorkouts,setToggleWorkouts]=useState(false)
-    const{workouts:fetchedWorkouts, status, selectedWorkouts:selectedWorkouts}=useSelector(state=>state.workout);
+    const selectedWorkouts=useSelector(state=>selectWorkoutsByIds (state.workout.workouts))
+    //     {
+    //         console.log(state.workout.selectedWorkouts);
+    //      selectWorkoutsByIds (state.workout, workoutIds);
+    //     }
+    //     );
     const [fetchedWorkoutsLoaded, setFetchedWorkoutsLoaded]=useState(false);
     const [workouts,setWorkouts]=useState();
     const [workoutsLoaded,setWorkoutsLoaded]=useState(false)
-
+    
     // useEffect(()=>{
     //     dispatch(fetchWorkouts())
     // },[dispatch])
@@ -37,8 +42,34 @@ const ToggleableWorkouts = ({workoutIds, programIndex, toggle})=>{
     //     }
     // },[selectedWorkouts,workouts])
     
+    // useEffect(()=>{
+    //     if(workoutIds){
+    //         console.log(workoutIds);
+    //         dispatch((selectWorkoutsByIds(workoutIds)))
+    //     }
+    // },[workoutIds,dispatch])
+
+    // useEffect(()=>{
+    //     if(selectedWorkouts){
+    //         console.log(workouts);
+    //         setWorkouts(selectedWorkouts)
+    //     }
+    // },[selectedWorkouts])
+    // useEffect(()=>{
+    //     if(selectedWorkouts){
+    //         setWorkoutsLoaded(true)
+    //         // console.log(workoutsPerProgram[index]);
+    //     }
+
+    // },[])
+    // useEffect(()=>{
+    //     if(selectedWorkouts){
+    //         setWorkoutsLoaded(true)
+    //     }
+    // },[workoutsLoaded,selectedWorkouts])
+    
     const date=String(new Date())
-    if(!workoutsLoaded && toggle[programIndex]){
+    if(!workoutsLoaded){
         return <tr><td>Loading...</td></tr>
     }
     return(
@@ -50,7 +81,7 @@ const ToggleableWorkouts = ({workoutIds, programIndex, toggle})=>{
         </td>
         </tr> */}
         
-       {toggle[programIndex]&& workoutsLoaded&&
+       {toggle[index]&& workoutsLoaded &&
                             <>
                                 
                                     <tr>
@@ -62,7 +93,7 @@ const ToggleableWorkouts = ({workoutIds, programIndex, toggle})=>{
                                         <td>Total exercises</td>
                                     </tr>
                                 
-                                    {workouts.map((workout,index)=>{
+                                    {selectedWorkouts && selectedWorkouts.map((workout,index)=>{
                                         <tr key={`${date}_${index}_${index}`}>
                                             <WorkoutItem workout={workout}/>
                                         </tr>

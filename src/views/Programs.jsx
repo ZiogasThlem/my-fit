@@ -32,8 +32,9 @@ const Programs = ()=>{
     const [workouts,setWorkouts]=useState()
     const [workoutsLoaded,setWorkoutsLoaded] = useState(false);
     const [workoutsToShow,setWorkoutsToShow]=useState(false);
-    const [showWorkouts,setShowWorkouts] = useState([])
+    const [toggleWorkouts,settoggleWorkouts] = useState([])
     const [programWorkout,setProgramWorkout]=useState();
+    const [workoutsPerProgram,setWorkoutsPerProgram]=useState([]);
     useEffect(()=>{
         dispatch(selectGoalById(id))
     },[dispatch])
@@ -47,6 +48,8 @@ const Programs = ()=>{
         if(goalLoaded){
             dispatch(selectProgramsByIds(goal.program));
             // dispatch(selectProgramsByIds(id));
+            const newToggledWorkouts = goal.program.map(()=>false)
+            settoggleWorkouts(newToggledWorkouts)
         }
     },[goal,goalSelected,goalLoaded])
     useEffect(()=>{
@@ -64,42 +67,47 @@ const Programs = ()=>{
         }
     },[programs,programsLoaded])
     useEffect(()=>{
+        if(programs){
+            
+            console.log(workoutsPerProgram);
+        }
+    },[programs])
+    useEffect(()=>{
         if(workoutsLoaded){
             setWorkouts(selectedWorkouts);
             setWorkoutsToShow(true);
         }
     },[selectedWorkouts,workoutsLoaded])
-    useEffect(()=>{
-
-    },[])
+   
     // useEffect(()=>{
     //     if(!showWorkouts){
     //         setWorkouts();
     //     }
     // },[showWorkouts])
-    const handleShowWorkouts=(workoutIds,index)=>{    
-        dispatch(selectWorkoutsByIds(workoutIds));
-        setWorkoutsLoaded(true);
-        if(index>=showWorkouts.length){
-            setShowWorkouts((prevShowWorkouts)=>{
-                const updatedShowWorkouts = [...prevShowWorkouts];
-                updatedShowWorkouts.push(true);
-                return updatedShowWorkouts;
-            })
-        }else{
-            setShowWorkouts([true]);
-        }
-        console.log(showWorkouts);
-    }
-    const handleHideWorkouts=(index)=>{
-       setWorkoutsToShow(false)
-        console.log('mpika');
-        setShowWorkouts((prevShowWorkouts) => {
-            let updatedShowWorkouts = Array.isArray(prevShowWorkouts)?[...prevShowWorkouts]:prevShowWorkouts
-            Array.isArray(prevShowWorkouts)?updatedShowWorkouts[index]=false:updatedShowWorkouts=false
-            return updatedShowWorkouts;
-        });
-        dispatch(selectWorkoutsByIds())
+   
+    const toggleWorkoutsHandler=(workoutsIds,index)=>{
+        setWorkoutsPerProgram ((prevWorkouts)=>{
+            if(!Array.isArray(prevWorkouts)){
+                const newWorkouts = [...programs.map((program)=>program)]
+                return newWorkouts;
+            }
+            else{
+
+                const newWorkouts = [...prevWorkouts,...programs.map((program)=>program)]
+                return newWorkouts
+            }
+            
+        })
+        settoggleWorkouts((prevValues)=>{
+            const newValues = [...prevValues]
+            newValues[index]=!prevValues[index]
+            if(prevValues[index]==false){
+                
+            }
+            return newValues
+        })
+        console.log(toggleWorkouts);
+        
     }
     const date=String(new Date());
     // WE MUST RETURN THE FALSE BOOLEANS TO WORK THIS
@@ -129,18 +137,18 @@ const Programs = ()=>{
                 </thead>
                 
                 <tbody>
-                    {programsLoaded&& programs
+                    {programsLoaded&& programs && workoutsPerProgram && programs
                         .map((program,index,programs)=>{
                                             return (
                                                 <React.Fragment key={`${date}_${index}`}>
                                                         <tr >
                                                             <ProgramItem program={program} key={`${date}_${index}`}/>
                                                             <td>{program.workout.length}</td>
-                                                            {!showWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>handleShowWorkouts(program.workout,index)}>Show workouts</button></td> :
-                                                                <td><button key={`${date}_${index}_button`} onClickCapture={()=>handleHideWorkouts(index)}>Hide workouts</button></td>}
+                                                            {!toggleWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Show workouts</button></td> :
+                                                                <td><button key={`${date}_${index}_button`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Hide workouts</button></td>}
                                                         </tr>
                                                         
-                                                                <ToggleableWorkouts  key={`${date}_${index}_toggle`} workoutIds={program.workout} programIndex={index} toggle={showWorkouts}/>
+                                                    {toggleWorkouts[index] && workoutsPerProgram[index] &&  <ToggleableWorkouts  key={`${date}_${index}_toggle`} workoutIds={program.workout}  toggle={toggleWorkouts} workoutsPerProgram={workoutsPerProgram}/>}
                                                 </React.Fragment>  
                                                     
                                                 
