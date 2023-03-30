@@ -11,12 +11,12 @@ const Login = () => {
   useEffect(() => {
     if (keycloak.authenticated) {
       setUsername(keycloak.tokenParsed.preferred_username);
-      navigate('./profile');
+      navigate('/profile');
     }
   }, [username]);
 
   const handleLogin = async () => {
-    keycloak.login({ redirectUri: '/profile' });
+    keycloak.login({ redirectUri: ['https://*.vercel.app/profile','/profile','https://my-fit-one.vercel.app/profile']});
   };
 
   const handleRegister = () => {
