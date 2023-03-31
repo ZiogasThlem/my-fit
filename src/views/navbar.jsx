@@ -17,9 +17,11 @@ const Navbar = () => {
     }
 },[username])
 
+
 const handleLogout = () => keycloak.logout({ 
   redirectUri: 'https://my-fit-one.vercel.app/login'   
 });
+
 
 
   return (
