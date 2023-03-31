@@ -41,17 +41,18 @@ const Programs = ()=>{
     useEffect(()=>{
         if(goalSelected){
             setGoal(goalSelected);
+            dispatch(selectProgramsByIds(goalSelected.program));
+            settoggleWorkouts([...goalSelected.program.map(()=>false)])
         }
-        if(goal!=undefined){
+        if(goalSelected){
             setGoalLoaded(true)
+             
         }
         if(goalLoaded){
-            dispatch(selectProgramsByIds(goal.program));
+            
             // dispatch(selectProgramsByIds(id));
-            const newToggledWorkouts = goal.program.map(()=>false)
-            settoggleWorkouts(newToggledWorkouts)
         }
-    },[goal,goalSelected,goalLoaded])
+    },[goal,goalSelected,goalLoaded,dispatch])
     useEffect(()=>{
         if(selectedPrograms){
             setSelectedProgramsLoaded(true);
@@ -137,13 +138,13 @@ const Programs = ()=>{
                 </thead>
                 
                 <tbody>
-                    {programsLoaded&& programs && workoutsPerProgram && programs
+                    {programsLoaded&&  workoutsPerProgram && programs
                         .map((program,index,programs)=>{
                                             return (
                                                 <React.Fragment key={`${date}_${index}`}>
                                                         <tr >
                                                             <ProgramItem program={program} key={`${date}_${index}`}/>
-                                                            <td>{program.workout.length}</td>
+                                                            <td>{Array.isArray(program.workout)?program.workout.length:0}</td>
                                                             {!toggleWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Show workouts</button></td> :
                                                                 <td><button key={`${date}_${index}_button`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Hide workouts</button></td>}
                                                         </tr>

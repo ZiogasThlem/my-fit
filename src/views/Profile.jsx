@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import GoalFormAdd from "../forms/goal/GoalFormAdd";
 import GoalItem from "../forms/goal/GoalItem";
 import { fetchExercises } from "../reduxParts/reducers/exerciseSlice";
 import { fetchGoals, selectGoalById } from "../reduxParts/reducers/goalSlice";
@@ -118,6 +119,12 @@ const Profile = () =>{
     const handleRegisteredExercises = (id)=>{
         navigate(`/goal/${id}/exercises`)
     }
+    const handleGoalEdit = (id)=>{
+        navigate(`/goal/update/${id}`)
+    }
+    const handleGoalAdd = ()=>{
+        navigate('/goal/add');
+    }
     return(
     <>
         {
@@ -126,6 +133,9 @@ const Profile = () =>{
             <button onClick={handleRegisteredPrograms}>My programs</button>
             <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My workouts</button>
             <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My exercises</button>
+            <button onClick={()=>{handleGoalEdit(goal.id)}}>My goal</button>
+            <button onClick={()=>{handleGoalAdd()}}>Set a Goal</button>
+
             <table>
                 <thead>
                     <tr>

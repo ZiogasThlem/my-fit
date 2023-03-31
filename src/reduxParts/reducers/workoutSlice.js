@@ -121,11 +121,11 @@ const workoutSlice = createSlice({
   ,
   reducers:{
     selectWorkoutsByIds :(state, action) =>{
-      console.log(action.payload);
+      console.log(action);
       console.log(state.workout);
       const selectedIds = action.payload;
       const workoutsToHandle = state.workouts;
-      if(workoutsToHandle!=undefined && selectedIds!=undefined){
+      if(Array.isArray(workoutsToHandle) && selectedIds!=undefined){
         state.selectedWorkouts = filterArrayByIds(workoutsToHandle,selectedIds)
       }else if(selectedIds==undefined){
         state.selectedWorkouts = []
