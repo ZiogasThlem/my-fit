@@ -13,11 +13,13 @@ const GoalEdit = ()=>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {id}=useParams();
-    const goal = useSelector((state)=>state.goal.goal);
-    const [formData,setFormData]=useState({name:goal.name || '', start_date:new Date(), end_date:new Date(), total_programs:goal.total_programs || [], completed_programs:goal.completed_programs?goal.completed_programs.length:0, program:[]})
+    const selectedGoal = useSelector((state)=>state.goal.goal);
+    const [goal,setGoal]=useState();
+    const [formData,setFormData]=useState({name:selectedGoal.name || '', start_date:new Date(), end_date:new Date(), total_programs:selectedGoal.total_programs || [], completed_programs:selectedGoal.completed_programs?selectedGoal.completed_programs.length:0, program:[]})
     //set checked items and program ids to update
     const [checkedItems,setCheckedItems] = useState([]);
     const [programIds,setProgramIds]=useState([])
+    const [goalProgramIds, setGoalProgramIds] = useState([])
 
     const programsSelected = useSelector((state)=>state.program.programs);
     //goal( from state, then set the goal usnig useState, and goalloaded boolean)
@@ -29,22 +31,51 @@ const GoalEdit = ()=>{
         dispatch(selectGoalById(id))
     },[dispatch])
     useEffect(()=>{
+        if(selectedGoal){
+            setGoal(selectedGoal);
+        }
+    },[selectedGoal])
+    useEffect(()=>{
        if(goal){
+        setGoalProgramIds([...goal.program]);
         dispatch(selectAllPrograms())
        } 
     },[goal,dispatch])
     useEffect(()=>{
         if(programsSelected){
+            
             setPrograms([...programsSelected]);
         }
     },[programsSelected])
     useEffect(()=>{
         if(programs){
-            setProgramIds([...programs.map(()=>0)]);
-            setCheckedItems([...programs.map(()=>false)]);
-            setProgramsLoaded(true)
+            setProgramIds([...programs.map((item,index)=>{
+                if(isInArray(goalProgramIds,item.id)){
+                    console.log(goalProgramIds);
+                    console.log(item.id);
+                    return item.id;
+                }
+                return 0;
+            })]);
+            
+            // setProgramsLoaded(true)
         }
-    },[programs])
+    },[programs,goalProgramIds])
+
+    useEffect(()=>{
+        if(programIds){
+            setCheckedItems([...programs.map((item,index)=>{
+                if(Array.isArray(programIds) && programIds.length>0 ){
+                    if(programIds[index]!=0){
+                        console.log(programIds);
+                        return true;
+                    }
+                }
+                return false;
+            })]);
+        }
+    },[])
+    
     useEffect(()=>{
         setProgramIds([...checkedItems.map((item,index)=>{
             if(item){
@@ -52,7 +83,12 @@ const GoalEdit = ()=>{
             }
             return 0;
         })])
+        console.log(programIds);
+        if(checkedItems){
+            setProgramsLoaded(true)
+        }
     },[checkedItems])
+    
     const handleSubmit = (event)=>{
         event.preventDefault();
         const programIdPool = programIds.filter((item)=>item!==0)
@@ -76,10 +112,11 @@ const GoalEdit = ()=>{
         })
     }
     const date = (new Date())
-    if(!programs && !checkedItems){
+    if(!programs && !checkedItems && !goal && !programIds){
         return(<div>Goal Loading...</div>)
     }
     return(
+        goal&& checkedItems && programIds&&
     <>
         
 

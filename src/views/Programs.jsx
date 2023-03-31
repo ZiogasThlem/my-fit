@@ -41,6 +41,7 @@ const Programs = ()=>{
     useEffect(()=>{
         if(goalSelected){
             setGoal(goalSelected);
+            setWorkoutsPerProgram([...new Array(goalSelected.program)])
             dispatch(selectProgramsByIds(goalSelected.program));
             settoggleWorkouts([...goalSelected.program.map(()=>false)])
         }
@@ -58,28 +59,62 @@ const Programs = ()=>{
             setSelectedProgramsLoaded(true);
         }
         if(selectedProgramsLoaded){
-            setPrograms(selectedPrograms);
+            setPrograms([...selectedPrograms]);
             
         }
     },[selectedPrograms, selectedProgramsLoaded])
-    useEffect(()=>{
-        if(programs){
-            setProgramsLoaded(true);
-        }
-    },[programs,programsLoaded])
-    useEffect(()=>{
-        if(programs){
-            
-            console.log(workoutsPerProgram);
-        }
-    },[programs])
+    
+   
     useEffect(()=>{
         if(workoutsLoaded){
             setWorkouts(selectedWorkouts);
             setWorkoutsToShow(true);
         }
     },[selectedWorkouts,workoutsLoaded])
-   
+    useEffect(()=>{
+        if(programs){
+            programs
+            .map((program,programIndex)=>{
+                    setWorkoutsPerProgram ((prevWorkouts)=>{
+                                                if(Array.isArray(program.workout)){                        
+                                                    if(!Array.isArray(prevWorkouts)){
+                                                        // const newWorkouts = [...programs.map((program)=>program)]
+                                                        
+                                                        const newWorkoutsArray = new Array(program.workout.length)
+                                                        for(let newArrayIndex in newWorkoutsArray){
+                                                            newWorkoutsArray[newArrayIndex]=programs[newArrayIndex].workout;
+                                                        }
+                                                        console.log(newWorkoutsArray);
+                                                        return [...newWorkoutsArray];
+                                                    }
+                                                    else{
+
+                                                // const newWorkouts = [...prevWorkouts,...programs.map((program)=>program)]
+                                                
+                                                            const newWorkoutsArray = new Array(program.workout.length)
+                                                            
+                                                            
+                                                            for(let newArrayIndex in newWorkoutsArray){
+                                                                newWorkoutsArray[newArrayIndex]=programs[newArrayIndex].workout;
+                                                            }
+                                                            console.log(workoutsPerProgram);
+                                                            return [...newWorkoutsArray];
+                                                            
+                                                        }
+                                                }
+                                                if(!Array.isArray(prevWorkouts)){
+                                                    return
+                                                }
+                                                return [...prevWorkouts]
+                                        
+                                            }
+                                        )
+                    }
+            )
+            if(workoutsPerProgram.length>0)
+                setProgramsLoaded(true);
+        }
+    },[programs])
     // useEffect(()=>{
     //     if(!showWorkouts){
     //         setWorkouts();
@@ -87,26 +122,13 @@ const Programs = ()=>{
     // },[showWorkouts])
    
     const toggleWorkoutsHandler=(workoutsIds,index)=>{
-        setWorkoutsPerProgram ((prevWorkouts)=>{
-            if(!Array.isArray(prevWorkouts)){
-                const newWorkouts = [...programs.map((program)=>program)]
-                return newWorkouts;
-            }
-            else{
-
-                const newWorkouts = [...prevWorkouts,...programs.map((program)=>program)]
-                return newWorkouts
-            }
-            
-        })
+        
         settoggleWorkouts((prevValues)=>{
             const newValues = [...prevValues]
             newValues[index]=!prevValues[index]
-            if(prevValues[index]==false){
-                
-            }
             return newValues
         })
+        console.log(workoutsPerProgram);
         console.log(toggleWorkouts);
         
     }
@@ -138,7 +160,7 @@ const Programs = ()=>{
                 </thead>
                 
                 <tbody>
-                    {programsLoaded&&  workoutsPerProgram && programs
+                    {programs
                         .map((program,index,programs)=>{
                                             return (
                                                 <React.Fragment key={`${date}_${index}`}>

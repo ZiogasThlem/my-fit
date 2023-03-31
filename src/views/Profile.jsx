@@ -133,7 +133,7 @@ const Profile = () =>{
             <button onClick={handleRegisteredPrograms}>My programs</button>
             <button onClick={()=>{handleRegisteredWorkouts(goal.id)}}>My workouts</button>
             <button onClick={()=>{handleRegisteredExercises(goal.id)}}>My exercises</button>
-            <button onClick={()=>{handleGoalEdit(goal.id)}}>My goal</button>
+            <button onClick={()=>{handleGoalEdit(goal.id)}}>Change My goal</button>
             <button onClick={()=>{handleGoalAdd()}}>Set a Goal</button>
 
             <table>

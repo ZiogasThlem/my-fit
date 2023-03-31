@@ -7,69 +7,34 @@ const ToggleableWorkouts = ({workoutIds, toggle, index, workoutsPerProgram})=>{
     const [ids,setIds]=useState();
     const dispatch = useDispatch();
     const [toggleWorkouts,setToggleWorkouts]=useState(false)
-    const selectedWorkouts=useSelector(state=>selectWorkoutsByIds (state.workout.workouts))
+    // const selectedWorkouts=useSelector(state=>selectWorkoutsByIds (state.workout.workouts))
     //     {
     //         console.log(state.workout.selectedWorkouts);
     //      selectWorkoutsByIds (state.workout, workoutIds);
     //     }
     //     );
-    const [fetchedWorkoutsLoaded, setFetchedWorkoutsLoaded]=useState(false);
+    const selectedWorkouts = useSelector(state=>state.workout.selectedWorkouts);
     const [workouts,setWorkouts]=useState();
-    const [workoutsLoaded,setWorkoutsLoaded]=useState(false)
+    const [workoutsLoaded,setWorkoutsLoaded]=useState(false);
     
-    // useEffect(()=>{
-    //     dispatch(fetchWorkouts())
-    // },[dispatch])
-    // useEffect(()=>{
-    //     if(status==='succeeded'){
-    //         setFetchedWorkoutsLoaded(true)
-    //     }
-    // },[status])
-    // useEffect(()=>{
-    //     if(workoutIds){
-    //         setIds([...workoutIds])
-    //     }
-    //     if(fetchedWorkoutsLoaded && ids){
-    //         dispatch(selectWorkoutsByIds(ids))        
-    //     }
-    // },[fetchedWorkoutsLoaded,workoutIds,dispatch,ids])
-    // useEffect(()=>{
-    //     if(selectedWorkouts){
-    //         setWorkouts(selectedWorkouts)
-    //     }
-    //     if(workouts){
-    //         setWorkoutsLoaded(true)
-    //     }
-    // },[selectedWorkouts,workouts])
-    
-    // useEffect(()=>{
-    //     if(workoutIds){
-    //         console.log(workoutIds);
-    //         dispatch((selectWorkoutsByIds(workoutIds)))
-    //     }
-    // },[workoutIds,dispatch])
+    console.log(workoutIds);
+    useEffect(()=>{
+            console.log(workoutIds);
+            console.log(workoutsPerProgram[index]);
+            dispatch(selectWorkoutsByIds(workoutsPerProgram[index]))
+            dispatch(selectWorkoutsByIds(workoutIds))
+        
+    },[workoutsPerProgram,dispatch,workoutIds])
 
-    // useEffect(()=>{
-    //     if(selectedWorkouts){
-    //         console.log(workouts);
-    //         setWorkouts(selectedWorkouts)
-    //     }
-    // },[selectedWorkouts])
-    // useEffect(()=>{
-    //     if(selectedWorkouts){
-    //         setWorkoutsLoaded(true)
-    //         // console.log(workoutsPerProgram[index]);
-    //     }
-
-    // },[])
-    // useEffect(()=>{
-    //     if(selectedWorkouts){
-    //         setWorkoutsLoaded(true)
-    //     }
-    // },[workoutsLoaded,selectedWorkouts])
+    useEffect(()=>{
+        console.log(toggle);
+        if(toggle[index]){
+            setWorkouts ([...selectedWorkouts]);
+        }
+    },[toggle[index]])
     
     const date=String(new Date())
-    if(!workoutsLoaded){
+    if(!workouts){
         return <tr><td>Loading...</td></tr>
     }
     return(
@@ -81,7 +46,7 @@ const ToggleableWorkouts = ({workoutIds, toggle, index, workoutsPerProgram})=>{
         </td>
         </tr> */}
         
-       {toggle[index]&& workoutsLoaded &&
+       {
                             <>
                                 
                                     <tr>
@@ -93,10 +58,11 @@ const ToggleableWorkouts = ({workoutIds, toggle, index, workoutsPerProgram})=>{
                                         <td>Total exercises</td>
                                     </tr>
                                 
-                                    {selectedWorkouts && selectedWorkouts.map((workout,index)=>{
+                                    {workouts && workouts.map((workout,index)=>{
+                                        return(
                                         <tr key={`${date}_${index}_${index}`}>
                                             <WorkoutItem workout={workout}/>
-                                        </tr>
+                                        </tr>)
                                         }
                                     )}
                                 
