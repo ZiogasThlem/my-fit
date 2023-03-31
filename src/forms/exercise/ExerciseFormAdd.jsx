@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addExercise } from "../../reduxParts/reducers/exerciseSlice";
@@ -21,10 +21,11 @@ const ExerciseFormAdd=(exerciseStructure)=>{
     }
     return(
         <>
-        
+        <h1>Add a new Exercise</h1>
+        <h3>FIll the details</h3>
             <form onSubmit={handleSubmit}>
                            
-      <label>
+      <label >
         Name:
         <input
           type="text"

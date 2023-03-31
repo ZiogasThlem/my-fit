@@ -166,9 +166,11 @@ const Programs = ()=>{
                                                 <React.Fragment key={`${date}_${index}`}>
                                                         <tr >
                                                             <ProgramItem program={program} key={`${date}_${index}`}/>
+
                                                             <td>{Array.isArray(program.workout)?program.workout.length:0}</td>
                                                             {!toggleWorkouts[index]?         <td><button key={`${date}_${index}_${index}`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Show workouts</button></td> :
                                                                 <td><button key={`${date}_${index}_button`} onClickCapture={()=>toggleWorkoutsHandler(program.workout,index)}>Hide workouts</button></td>}
+
                                                         </tr>
                                                         
                                                     {toggleWorkouts[index] && workoutsPerProgram[index] &&  <ToggleableWorkouts  key={`${date}_${index}_toggle`} workoutIds={program.workout}  toggle={toggleWorkouts} workoutsPerProgram={workoutsPerProgram}/>}

@@ -122,6 +122,7 @@ const WorkoutFormAdd = ()=>{
                                 
                                     </tbody>
                             </table>
+                            <button onClick={handleSubmit}>Submit</button>
                             <table>
                                 <thead>
                                     <tr>                
@@ -168,9 +169,8 @@ const WorkoutFormAdd = ()=>{
                                 }
                                 </tbody>
                                 </table>                                                                                                
-                            <button onClick={handleSubmit}>Submit</button>
                         </form>
-                            <button onClick={handleShowExercises}>Show exercises</button>
+                            <button onClick={handleShowExercises}>Show Exercises</button>
                         </>
                     }
                 <button onClick={handleBack}>Back</button>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import { fetchExercises } from "../../reduxParts/reducers/exerciseSlice";
 import { deleteWorkout, fetchWorkouts } from "../../reduxParts/reducers/workoutSlice";
 import WorkoutItem from "./WorkoutItem";
+import './workout-style.css'
 
 const WorkoutGetAll = ()=>{
     const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const WorkoutGetAll = ()=>{
     const date = String(new Date());
     return(
         <>
-        <button onClick={handleAdd}>Add a workout</button>
+        <button onClick={handleAdd}>Add a Workout</button>
             <table>
                 <thead>
                     <tr>

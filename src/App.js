@@ -43,6 +43,7 @@ function App() {
         <Route path="/" element={<Login/>}/>
         <Route path="/goals" element={<Goals/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/login/profile" element={<Profile/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/workout" element={<Workout/>}/>
         <Route path="/program" element={<Program/>}/>

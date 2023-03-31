@@ -182,7 +182,7 @@ const Workouts = () =>{
         <>
         <table>
             <thead>
-                <tr><th colSpan={3}>My workouts</th></tr>
+                <tr><th colSpan={3}>My Workouts</th></tr>
                 <tr>
                     <th>Name</th>
                     <th>Type</th>
@@ -197,8 +197,10 @@ const Workouts = () =>{
             return    <React.Fragment key={`${date}_frag_${index}`}>
                     <tr key={`${date}_${index}_tr`}>
                         <WorkoutItem workout={workout}/>
+
                     {!toggleExercises[index] ?  <td><button onClick={()=>toggleExercisesHandler(workout.exercise,index)}>Show exercises</button></td>
                         :<td><button onClick={()=>toggleExercisesHandler(workout.exercise,index)}>Hide exercises</button></td>}
+
                     </tr>
                     
                     <tr></tr>
